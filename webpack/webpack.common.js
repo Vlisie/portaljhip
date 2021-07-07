@@ -4,7 +4,7 @@ const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+//const ESLintPlugin = require('eslint-webpack-plugin');
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const utils = require('./utils.js');
 
@@ -114,9 +114,9 @@ module.exports = options =>
             SERVER_API_URL: `''`,
           },
         }),
-        new ESLintPlugin({
-          extensions: ['js', 'ts', 'jsx', 'tsx'],
-        }),
+       // new ESLintPlugin({
+     //     extensions: ['js', 'ts', 'jsx', 'tsx'],
+     //   }),
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin({
           patterns: [
