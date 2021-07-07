@@ -48,6 +48,10 @@ public class CacheConfiguration {
             createCache(cm, com.lekstreek.portal.domain.User.class.getName());
             createCache(cm, com.lekstreek.portal.domain.Authority.class.getName());
             createCache(cm, com.lekstreek.portal.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.lekstreek.portal.domain.Relatie.class.getName());
+            createCache(cm, com.lekstreek.portal.domain.Relatie.class.getName() + ".rols");
+            createCache(cm, com.lekstreek.portal.domain.Rol.class.getName());
+            createCache(cm, com.lekstreek.portal.domain.Rol.class.getName() + ".relaties");
             // jhipster-needle-ehcache-add-entry
         };
     }

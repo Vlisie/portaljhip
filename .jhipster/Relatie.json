@@ -1,0 +1,121 @@
+{
+  "name": "Relatie",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "voorNaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "achterNaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "initialen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "weergaveNaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "geslacht",
+      "fieldType": "Geslacht",
+      "fieldValues": "MAN,VROUW,X"
+    },
+    {
+      "fieldName": "geboorteDatum",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "relatieType",
+      "fieldType": "RelatieType",
+      "fieldValues": "LID,JEUGDSCHAATSLID,DONATEUR"
+    },
+    {
+      "fieldName": "inschrijvingsDatum",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "straatNaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "huisNummer",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "postCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "woonPlaats",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "land",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telefoonNummer",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "telefoonNummer2",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "telefoonNummer3",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ibanCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "knsbRelatieNummer",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "pasfoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "privacyVerklaring",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "rol",
+      "otherEntityRelationshipName": "relatie",
+      "relationshipName": "rol",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "relatie",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210707213757"
+}

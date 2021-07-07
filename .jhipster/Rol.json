@@ -1,0 +1,45 @@
+{
+  "name": "Rol",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "rolNaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "jeugdschaatsen",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "startDatumRol",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "eindDatumRol",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "relatie",
+      "otherEntityRelationshipName": "rol",
+      "relationshipName": "relatie",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "rol",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210707213758"
+}

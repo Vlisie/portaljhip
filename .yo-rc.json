@@ -43,6 +43,8 @@
     "devServerPort": 9060,
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Relatie", "Rol"],
+    "lastLiquibaseTimestamp": 1625693878000
   }
 }
