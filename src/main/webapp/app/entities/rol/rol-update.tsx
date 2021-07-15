@@ -44,8 +44,8 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
-    values.startDatumRol = convertDateTimeToServer(values.startDatumRol);
-    values.eindDatumRol = convertDateTimeToServer(values.eindDatumRol);
+    values.startdatumRol = convertDateTimeToServer(values.startdatumRol);
+    values.einddatumRol = convertDateTimeToServer(values.einddatumRol);
 
     const entity = {
       ...rolEntity,
@@ -62,13 +62,13 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const defaultValues = () =>
     isNew
       ? {
-          startDatumRol: displayDefaultDateTime(),
-          eindDatumRol: displayDefaultDateTime(),
+          startdatumRol: displayDefaultDateTime(),
+          einddatumRol: displayDefaultDateTime(),
         }
       : {
           ...rolEntity,
-          startDatumRol: convertDateTimeFromServer(rolEntity.startDatumRol),
-          eindDatumRol: convertDateTimeFromServer(rolEntity.eindDatumRol),
+          startdatumRol: convertDateTimeFromServer(rolEntity.startdatumRol),
+          einddatumRol: convertDateTimeFromServer(rolEntity.einddatumRol),
         };
 
   return (
@@ -97,10 +97,10 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('portaljhipApp.rol.rolNaam')}
-                id="rol-rolNaam"
-                name="rolNaam"
-                data-cy="rolNaam"
+                label={translate('portaljhipApp.rol.rolnaam')}
+                id="rol-rolnaam"
+                name="rolnaam"
+                data-cy="rolnaam"
                 type="text"
               />
               <ValidatedField
@@ -112,18 +112,18 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="checkbox"
               />
               <ValidatedField
-                label={translate('portaljhipApp.rol.startDatumRol')}
-                id="rol-startDatumRol"
-                name="startDatumRol"
-                data-cy="startDatumRol"
+                label={translate('portaljhipApp.rol.startdatumRol')}
+                id="rol-startdatumRol"
+                name="startdatumRol"
+                data-cy="startdatumRol"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('portaljhipApp.rol.eindDatumRol')}
-                id="rol-eindDatumRol"
-                name="eindDatumRol"
-                data-cy="eindDatumRol"
+                label={translate('portaljhipApp.rol.einddatumRol')}
+                id="rol-einddatumRol"
+                name="einddatumRol"
+                data-cy="einddatumRol"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />

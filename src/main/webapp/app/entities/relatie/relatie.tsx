@@ -50,40 +50,40 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="portaljhipApp.relatie.id">Id</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.voorNaam">Voor Naam</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.voornaam">Voornaam</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.achterNaam">Achter Naam</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.achternaam">Achternaam</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.initialen">Initialen</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.weergaveNaam">Weergave Naam</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.weergavenaam">Weergavenaam</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.geslacht">Geslacht</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.geboorteDatum">Geboorte Datum</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.geboortedatum">Geboortedatum</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.relatieType">Relatie Type</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.relatietype">Relatietype</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.inschrijvingsDatum">Inschrijvings Datum</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.inschrijvingsdatum">Inschrijvingsdatum</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.straatNaam">Straat Naam</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.straatnaam">Straatnaam</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.huisNummer">Huis Nummer</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.huisnummer">Huisnummer</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.postCode">Post Code</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.postcode">Postcode</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.woonPlaats">Woon Plaats</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.woonplaats">Woonplaats</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.land">Land</Translate>
@@ -95,19 +95,19 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="portaljhipApp.relatie.email2">Email 2</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.telefoonNummer">Telefoon Nummer</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.telefoonnummer">Telefoonnummer</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.telefoonNummer2">Telefoon Nummer 2</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.telefoonnummer2">Telefoonnummer 2</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.telefoonNummer3">Telefoon Nummer 3</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.telefoonnummer3">Telefoonnummer 3</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.ibanCode">Iban Code</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.ibancode">Ibancode</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.knsbRelatieNummer">Knsb Relatie Nummer</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.knsbRelatienummer">Knsb Relatienummer</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.pasfoto">Pasfoto</Translate>
@@ -129,36 +129,36 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                       {relatie.id}
                     </Button>
                   </td>
-                  <td>{relatie.voorNaam}</td>
-                  <td>{relatie.achterNaam}</td>
+                  <td>{relatie.voornaam}</td>
+                  <td>{relatie.achternaam}</td>
                   <td>{relatie.initialen}</td>
-                  <td>{relatie.weergaveNaam}</td>
+                  <td>{relatie.weergavenaam}</td>
                   <td>
                     <Translate contentKey={`portaljhipApp.Geslacht.${relatie.geslacht}`} />
                   </td>
                   <td>
-                    {relatie.geboorteDatum ? <TextFormat type="date" value={relatie.geboorteDatum} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                    {relatie.geboortedatum ? <TextFormat type="date" value={relatie.geboortedatum} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
                   <td>
-                    <Translate contentKey={`portaljhipApp.RelatieType.${relatie.relatieType}`} />
+                    <Translate contentKey={`portaljhipApp.RelatieType.${relatie.relatietype}`} />
                   </td>
                   <td>
-                    {relatie.inschrijvingsDatum ? (
-                      <TextFormat type="date" value={relatie.inschrijvingsDatum} format={APP_DATE_FORMAT} />
+                    {relatie.inschrijvingsdatum ? (
+                      <TextFormat type="date" value={relatie.inschrijvingsdatum} format={APP_DATE_FORMAT} />
                     ) : null}
                   </td>
-                  <td>{relatie.straatNaam}</td>
-                  <td>{relatie.huisNummer}</td>
-                  <td>{relatie.postCode}</td>
-                  <td>{relatie.woonPlaats}</td>
+                  <td>{relatie.straatnaam}</td>
+                  <td>{relatie.huisnummer}</td>
+                  <td>{relatie.postcode}</td>
+                  <td>{relatie.woonplaats}</td>
                   <td>{relatie.land}</td>
                   <td>{relatie.email}</td>
                   <td>{relatie.email2}</td>
-                  <td>{relatie.telefoonNummer}</td>
-                  <td>{relatie.telefoonNummer2}</td>
-                  <td>{relatie.telefoonNummer3}</td>
-                  <td>{relatie.ibanCode}</td>
-                  <td>{relatie.knsbRelatieNummer}</td>
+                  <td>{relatie.telefoonnummer}</td>
+                  <td>{relatie.telefoonnummer2}</td>
+                  <td>{relatie.telefoonnummer3}</td>
+                  <td>{relatie.ibancode}</td>
+                  <td>{relatie.knsbRelatienummer}</td>
                   <td>
                     {relatie.pasfoto ? (
                       <div>

@@ -81,41 +81,41 @@ public class RelatieQueryService extends QueryService<Relatie> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Relatie_.id));
             }
-            if (criteria.getVoorNaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getVoorNaam(), Relatie_.voorNaam));
+            if (criteria.getVoornaam() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getVoornaam(), Relatie_.voornaam));
             }
-            if (criteria.getAchterNaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getAchterNaam(), Relatie_.achterNaam));
+            if (criteria.getAchternaam() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getAchternaam(), Relatie_.achternaam));
             }
             if (criteria.getInitialen() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getInitialen(), Relatie_.initialen));
             }
-            if (criteria.getWeergaveNaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWeergaveNaam(), Relatie_.weergaveNaam));
+            if (criteria.getWeergavenaam() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWeergavenaam(), Relatie_.weergavenaam));
             }
             if (criteria.getGeslacht() != null) {
                 specification = specification.and(buildSpecification(criteria.getGeslacht(), Relatie_.geslacht));
             }
-            if (criteria.getGeboorteDatum() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getGeboorteDatum(), Relatie_.geboorteDatum));
+            if (criteria.getGeboortedatum() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getGeboortedatum(), Relatie_.geboortedatum));
             }
-            if (criteria.getRelatieType() != null) {
-                specification = specification.and(buildSpecification(criteria.getRelatieType(), Relatie_.relatieType));
+            if (criteria.getRelatietype() != null) {
+                specification = specification.and(buildSpecification(criteria.getRelatietype(), Relatie_.relatietype));
             }
-            if (criteria.getInschrijvingsDatum() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getInschrijvingsDatum(), Relatie_.inschrijvingsDatum));
+            if (criteria.getInschrijvingsdatum() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getInschrijvingsdatum(), Relatie_.inschrijvingsdatum));
             }
-            if (criteria.getStraatNaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStraatNaam(), Relatie_.straatNaam));
+            if (criteria.getStraatnaam() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStraatnaam(), Relatie_.straatnaam));
             }
-            if (criteria.getHuisNummer() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHuisNummer(), Relatie_.huisNummer));
+            if (criteria.getHuisnummer() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getHuisnummer(), Relatie_.huisnummer));
             }
-            if (criteria.getPostCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPostCode(), Relatie_.postCode));
+            if (criteria.getPostcode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPostcode(), Relatie_.postcode));
             }
-            if (criteria.getWoonPlaats() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWoonPlaats(), Relatie_.woonPlaats));
+            if (criteria.getWoonplaats() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWoonplaats(), Relatie_.woonplaats));
             }
             if (criteria.getLand() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLand(), Relatie_.land));
@@ -126,20 +126,20 @@ public class RelatieQueryService extends QueryService<Relatie> {
             if (criteria.getEmail2() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEmail2(), Relatie_.email2));
             }
-            if (criteria.getTelefoonNummer() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTelefoonNummer(), Relatie_.telefoonNummer));
+            if (criteria.getTelefoonnummer() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTelefoonnummer(), Relatie_.telefoonnummer));
             }
-            if (criteria.getTelefoonNummer2() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTelefoonNummer2(), Relatie_.telefoonNummer2));
+            if (criteria.getTelefoonnummer2() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTelefoonnummer2(), Relatie_.telefoonnummer2));
             }
-            if (criteria.getTelefoonNummer3() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTelefoonNummer3(), Relatie_.telefoonNummer3));
+            if (criteria.getTelefoonnummer3() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTelefoonnummer3(), Relatie_.telefoonnummer3));
             }
-            if (criteria.getIbanCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getIbanCode(), Relatie_.ibanCode));
+            if (criteria.getIbancode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getIbancode(), Relatie_.ibancode));
             }
-            if (criteria.getKnsbRelatieNummer() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getKnsbRelatieNummer(), Relatie_.knsbRelatieNummer));
+            if (criteria.getKnsbRelatienummer() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getKnsbRelatienummer(), Relatie_.knsbRelatienummer));
             }
             if (criteria.getRolId() != null) {
                 specification =

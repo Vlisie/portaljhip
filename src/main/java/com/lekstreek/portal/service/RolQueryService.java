@@ -81,17 +81,17 @@ public class RolQueryService extends QueryService<Rol> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Rol_.id));
             }
-            if (criteria.getRolNaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRolNaam(), Rol_.rolNaam));
+            if (criteria.getRolnaam() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRolnaam(), Rol_.rolnaam));
             }
             if (criteria.getJeugdschaatsen() != null) {
                 specification = specification.and(buildSpecification(criteria.getJeugdschaatsen(), Rol_.jeugdschaatsen));
             }
-            if (criteria.getStartDatumRol() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getStartDatumRol(), Rol_.startDatumRol));
+            if (criteria.getStartdatumRol() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getStartdatumRol(), Rol_.startdatumRol));
             }
-            if (criteria.getEindDatumRol() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getEindDatumRol(), Rol_.eindDatumRol));
+            if (criteria.getEinddatumRol() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getEinddatumRol(), Rol_.einddatumRol));
             }
             if (criteria.getRelatieId() != null) {
                 specification =

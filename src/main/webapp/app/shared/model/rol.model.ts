@@ -3,10 +3,10 @@ import { IRelatie } from 'app/shared/model/relatie.model';
 
 export interface IRol {
   id?: string;
-  rolNaam?: string | null;
+  rolnaam?: string | null;
   jeugdschaatsen?: boolean | null;
-  startDatumRol?: string | null;
-  eindDatumRol?: string | null;
+  startdatumRol?: string | null;
+  einddatumRol?: string | null;
   relaties?: IRelatie[] | null;
 }
 

@@ -51,41 +51,41 @@ public class RelatieService {
             .findById(relatie.getId())
             .map(
                 existingRelatie -> {
-                    if (relatie.getVoorNaam() != null) {
-                        existingRelatie.setVoorNaam(relatie.getVoorNaam());
+                    if (relatie.getVoornaam() != null) {
+                        existingRelatie.setVoornaam(relatie.getVoornaam());
                     }
-                    if (relatie.getAchterNaam() != null) {
-                        existingRelatie.setAchterNaam(relatie.getAchterNaam());
+                    if (relatie.getAchternaam() != null) {
+                        existingRelatie.setAchternaam(relatie.getAchternaam());
                     }
                     if (relatie.getInitialen() != null) {
                         existingRelatie.setInitialen(relatie.getInitialen());
                     }
-                    if (relatie.getWeergaveNaam() != null) {
-                        existingRelatie.setWeergaveNaam(relatie.getWeergaveNaam());
+                    if (relatie.getWeergavenaam() != null) {
+                        existingRelatie.setWeergavenaam(relatie.getWeergavenaam());
                     }
                     if (relatie.getGeslacht() != null) {
                         existingRelatie.setGeslacht(relatie.getGeslacht());
                     }
-                    if (relatie.getGeboorteDatum() != null) {
-                        existingRelatie.setGeboorteDatum(relatie.getGeboorteDatum());
+                    if (relatie.getGeboortedatum() != null) {
+                        existingRelatie.setGeboortedatum(relatie.getGeboortedatum());
                     }
-                    if (relatie.getRelatieType() != null) {
-                        existingRelatie.setRelatieType(relatie.getRelatieType());
+                    if (relatie.getRelatietype() != null) {
+                        existingRelatie.setRelatietype(relatie.getRelatietype());
                     }
-                    if (relatie.getInschrijvingsDatum() != null) {
-                        existingRelatie.setInschrijvingsDatum(relatie.getInschrijvingsDatum());
+                    if (relatie.getInschrijvingsdatum() != null) {
+                        existingRelatie.setInschrijvingsdatum(relatie.getInschrijvingsdatum());
                     }
-                    if (relatie.getStraatNaam() != null) {
-                        existingRelatie.setStraatNaam(relatie.getStraatNaam());
+                    if (relatie.getStraatnaam() != null) {
+                        existingRelatie.setStraatnaam(relatie.getStraatnaam());
                     }
-                    if (relatie.getHuisNummer() != null) {
-                        existingRelatie.setHuisNummer(relatie.getHuisNummer());
+                    if (relatie.getHuisnummer() != null) {
+                        existingRelatie.setHuisnummer(relatie.getHuisnummer());
                     }
-                    if (relatie.getPostCode() != null) {
-                        existingRelatie.setPostCode(relatie.getPostCode());
+                    if (relatie.getPostcode() != null) {
+                        existingRelatie.setPostcode(relatie.getPostcode());
                     }
-                    if (relatie.getWoonPlaats() != null) {
-                        existingRelatie.setWoonPlaats(relatie.getWoonPlaats());
+                    if (relatie.getWoonplaats() != null) {
+                        existingRelatie.setWoonplaats(relatie.getWoonplaats());
                     }
                     if (relatie.getLand() != null) {
                         existingRelatie.setLand(relatie.getLand());
@@ -96,20 +96,20 @@ public class RelatieService {
                     if (relatie.getEmail2() != null) {
                         existingRelatie.setEmail2(relatie.getEmail2());
                     }
-                    if (relatie.getTelefoonNummer() != null) {
-                        existingRelatie.setTelefoonNummer(relatie.getTelefoonNummer());
+                    if (relatie.getTelefoonnummer() != null) {
+                        existingRelatie.setTelefoonnummer(relatie.getTelefoonnummer());
                     }
-                    if (relatie.getTelefoonNummer2() != null) {
-                        existingRelatie.setTelefoonNummer2(relatie.getTelefoonNummer2());
+                    if (relatie.getTelefoonnummer2() != null) {
+                        existingRelatie.setTelefoonnummer2(relatie.getTelefoonnummer2());
                     }
-                    if (relatie.getTelefoonNummer3() != null) {
-                        existingRelatie.setTelefoonNummer3(relatie.getTelefoonNummer3());
+                    if (relatie.getTelefoonnummer3() != null) {
+                        existingRelatie.setTelefoonnummer3(relatie.getTelefoonnummer3());
                     }
-                    if (relatie.getIbanCode() != null) {
-                        existingRelatie.setIbanCode(relatie.getIbanCode());
+                    if (relatie.getIbancode() != null) {
+                        existingRelatie.setIbancode(relatie.getIbancode());
                     }
-                    if (relatie.getKnsbRelatieNummer() != null) {
-                        existingRelatie.setKnsbRelatieNummer(relatie.getKnsbRelatieNummer());
+                    if (relatie.getKnsbRelatienummer() != null) {
+                        existingRelatie.setKnsbRelatienummer(relatie.getKnsbRelatienummer());
                     }
                     if (relatie.getPasfoto() != null) {
                         existingRelatie.setPasfoto(relatie.getPasfoto());

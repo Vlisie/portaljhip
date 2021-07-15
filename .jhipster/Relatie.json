@@ -6,11 +6,11 @@
       "fieldType": "UUID"
     },
     {
-      "fieldName": "voorNaam",
+      "fieldName": "voornaam",
       "fieldType": "String"
     },
     {
-      "fieldName": "achterNaam",
+      "fieldName": "achternaam",
       "fieldType": "String"
     },
     {
@@ -18,7 +18,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "weergaveNaam",
+      "fieldName": "weergavenaam",
       "fieldType": "String"
     },
     {
@@ -27,32 +27,32 @@
       "fieldValues": "MAN,VROUW,X"
     },
     {
-      "fieldName": "geboorteDatum",
+      "fieldName": "geboortedatum",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "relatieType",
+      "fieldName": "relatietype",
       "fieldType": "RelatieType",
       "fieldValues": "LID,JEUGDSCHAATSLID,DONATEUR"
     },
     {
-      "fieldName": "inschrijvingsDatum",
+      "fieldName": "inschrijvingsdatum",
       "fieldType": "Instant"
     },
     {
-      "fieldName": "straatNaam",
+      "fieldName": "straatnaam",
       "fieldType": "String"
     },
     {
-      "fieldName": "huisNummer",
+      "fieldName": "huisnummer",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "postCode",
+      "fieldName": "postcode",
       "fieldType": "String"
     },
     {
-      "fieldName": "woonPlaats",
+      "fieldName": "woonplaats",
       "fieldType": "String"
     },
     {
@@ -68,23 +68,23 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "telefoonNummer",
+      "fieldName": "telefoonnummer",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "telefoonNummer2",
+      "fieldName": "telefoonnummer2",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "telefoonNummer3",
+      "fieldName": "telefoonnummer3",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "ibanCode",
+      "fieldName": "ibancode",
       "fieldType": "String"
     },
     {
-      "fieldName": "knsbRelatieNummer",
+      "fieldName": "knsbRelatienummer",
       "fieldType": "Long"
     },
     {

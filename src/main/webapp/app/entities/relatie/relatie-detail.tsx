@@ -30,17 +30,17 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{relatieEntity.id}</dd>
           <dt>
-            <span id="voorNaam">
-              <Translate contentKey="portaljhipApp.relatie.voorNaam">Voor Naam</Translate>
+            <span id="voornaam">
+              <Translate contentKey="portaljhipApp.relatie.voornaam">Voornaam</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.voorNaam}</dd>
+          <dd>{relatieEntity.voornaam}</dd>
           <dt>
-            <span id="achterNaam">
-              <Translate contentKey="portaljhipApp.relatie.achterNaam">Achter Naam</Translate>
+            <span id="achternaam">
+              <Translate contentKey="portaljhipApp.relatie.achternaam">Achternaam</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.achterNaam}</dd>
+          <dd>{relatieEntity.achternaam}</dd>
           <dt>
             <span id="initialen">
               <Translate contentKey="portaljhipApp.relatie.initialen">Initialen</Translate>
@@ -48,11 +48,11 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{relatieEntity.initialen}</dd>
           <dt>
-            <span id="weergaveNaam">
-              <Translate contentKey="portaljhipApp.relatie.weergaveNaam">Weergave Naam</Translate>
+            <span id="weergavenaam">
+              <Translate contentKey="portaljhipApp.relatie.weergavenaam">Weergavenaam</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.weergaveNaam}</dd>
+          <dd>{relatieEntity.weergavenaam}</dd>
           <dt>
             <span id="geslacht">
               <Translate contentKey="portaljhipApp.relatie.geslacht">Geslacht</Translate>
@@ -60,55 +60,55 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{relatieEntity.geslacht}</dd>
           <dt>
-            <span id="geboorteDatum">
-              <Translate contentKey="portaljhipApp.relatie.geboorteDatum">Geboorte Datum</Translate>
+            <span id="geboortedatum">
+              <Translate contentKey="portaljhipApp.relatie.geboortedatum">Geboortedatum</Translate>
             </span>
           </dt>
           <dd>
-            {relatieEntity.geboorteDatum ? (
-              <TextFormat value={relatieEntity.geboorteDatum} type="date" format={APP_LOCAL_DATE_FORMAT} />
+            {relatieEntity.geboortedatum ? (
+              <TextFormat value={relatieEntity.geboortedatum} type="date" format={APP_LOCAL_DATE_FORMAT} />
             ) : null}
           </dd>
           <dt>
-            <span id="relatieType">
-              <Translate contentKey="portaljhipApp.relatie.relatieType">Relatie Type</Translate>
+            <span id="relatietype">
+              <Translate contentKey="portaljhipApp.relatie.relatietype">Relatietype</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.relatieType}</dd>
+          <dd>{relatieEntity.relatietype}</dd>
           <dt>
-            <span id="inschrijvingsDatum">
-              <Translate contentKey="portaljhipApp.relatie.inschrijvingsDatum">Inschrijvings Datum</Translate>
+            <span id="inschrijvingsdatum">
+              <Translate contentKey="portaljhipApp.relatie.inschrijvingsdatum">Inschrijvingsdatum</Translate>
             </span>
           </dt>
           <dd>
-            {relatieEntity.inschrijvingsDatum ? (
-              <TextFormat value={relatieEntity.inschrijvingsDatum} type="date" format={APP_DATE_FORMAT} />
+            {relatieEntity.inschrijvingsdatum ? (
+              <TextFormat value={relatieEntity.inschrijvingsdatum} type="date" format={APP_DATE_FORMAT} />
             ) : null}
           </dd>
           <dt>
-            <span id="straatNaam">
-              <Translate contentKey="portaljhipApp.relatie.straatNaam">Straat Naam</Translate>
+            <span id="straatnaam">
+              <Translate contentKey="portaljhipApp.relatie.straatnaam">Straatnaam</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.straatNaam}</dd>
+          <dd>{relatieEntity.straatnaam}</dd>
           <dt>
-            <span id="huisNummer">
-              <Translate contentKey="portaljhipApp.relatie.huisNummer">Huis Nummer</Translate>
+            <span id="huisnummer">
+              <Translate contentKey="portaljhipApp.relatie.huisnummer">Huisnummer</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.huisNummer}</dd>
+          <dd>{relatieEntity.huisnummer}</dd>
           <dt>
-            <span id="postCode">
-              <Translate contentKey="portaljhipApp.relatie.postCode">Post Code</Translate>
+            <span id="postcode">
+              <Translate contentKey="portaljhipApp.relatie.postcode">Postcode</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.postCode}</dd>
+          <dd>{relatieEntity.postcode}</dd>
           <dt>
-            <span id="woonPlaats">
-              <Translate contentKey="portaljhipApp.relatie.woonPlaats">Woon Plaats</Translate>
+            <span id="woonplaats">
+              <Translate contentKey="portaljhipApp.relatie.woonplaats">Woonplaats</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.woonPlaats}</dd>
+          <dd>{relatieEntity.woonplaats}</dd>
           <dt>
             <span id="land">
               <Translate contentKey="portaljhipApp.relatie.land">Land</Translate>
@@ -128,35 +128,35 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{relatieEntity.email2}</dd>
           <dt>
-            <span id="telefoonNummer">
-              <Translate contentKey="portaljhipApp.relatie.telefoonNummer">Telefoon Nummer</Translate>
+            <span id="telefoonnummer">
+              <Translate contentKey="portaljhipApp.relatie.telefoonnummer">Telefoonnummer</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.telefoonNummer}</dd>
+          <dd>{relatieEntity.telefoonnummer}</dd>
           <dt>
-            <span id="telefoonNummer2">
-              <Translate contentKey="portaljhipApp.relatie.telefoonNummer2">Telefoon Nummer 2</Translate>
+            <span id="telefoonnummer2">
+              <Translate contentKey="portaljhipApp.relatie.telefoonnummer2">Telefoonnummer 2</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.telefoonNummer2}</dd>
+          <dd>{relatieEntity.telefoonnummer2}</dd>
           <dt>
-            <span id="telefoonNummer3">
-              <Translate contentKey="portaljhipApp.relatie.telefoonNummer3">Telefoon Nummer 3</Translate>
+            <span id="telefoonnummer3">
+              <Translate contentKey="portaljhipApp.relatie.telefoonnummer3">Telefoonnummer 3</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.telefoonNummer3}</dd>
+          <dd>{relatieEntity.telefoonnummer3}</dd>
           <dt>
-            <span id="ibanCode">
-              <Translate contentKey="portaljhipApp.relatie.ibanCode">Iban Code</Translate>
+            <span id="ibancode">
+              <Translate contentKey="portaljhipApp.relatie.ibancode">Ibancode</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.ibanCode}</dd>
+          <dd>{relatieEntity.ibancode}</dd>
           <dt>
-            <span id="knsbRelatieNummer">
-              <Translate contentKey="portaljhipApp.relatie.knsbRelatieNummer">Knsb Relatie Nummer</Translate>
+            <span id="knsbRelatienummer">
+              <Translate contentKey="portaljhipApp.relatie.knsbRelatienummer">Knsb Relatienummer</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.knsbRelatieNummer}</dd>
+          <dd>{relatieEntity.knsbRelatienummer}</dd>
           <dt>
             <span id="pasfoto">
               <Translate contentKey="portaljhipApp.relatie.pasfoto">Pasfoto</Translate>

@@ -30,11 +30,11 @@ export const RolDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{rolEntity.id}</dd>
           <dt>
-            <span id="rolNaam">
-              <Translate contentKey="portaljhipApp.rol.rolNaam">Rol Naam</Translate>
+            <span id="rolnaam">
+              <Translate contentKey="portaljhipApp.rol.rolnaam">Rolnaam</Translate>
             </span>
           </dt>
-          <dd>{rolEntity.rolNaam}</dd>
+          <dd>{rolEntity.rolnaam}</dd>
           <dt>
             <span id="jeugdschaatsen">
               <Translate contentKey="portaljhipApp.rol.jeugdschaatsen">Jeugdschaatsen</Translate>
@@ -42,17 +42,17 @@ export const RolDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{rolEntity.jeugdschaatsen ? 'true' : 'false'}</dd>
           <dt>
-            <span id="startDatumRol">
-              <Translate contentKey="portaljhipApp.rol.startDatumRol">Start Datum Rol</Translate>
+            <span id="startdatumRol">
+              <Translate contentKey="portaljhipApp.rol.startdatumRol">Startdatum Rol</Translate>
             </span>
           </dt>
-          <dd>{rolEntity.startDatumRol ? <TextFormat value={rolEntity.startDatumRol} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dd>{rolEntity.startdatumRol ? <TextFormat value={rolEntity.startdatumRol} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <span id="eindDatumRol">
-              <Translate contentKey="portaljhipApp.rol.eindDatumRol">Eind Datum Rol</Translate>
+            <span id="einddatumRol">
+              <Translate contentKey="portaljhipApp.rol.einddatumRol">Einddatum Rol</Translate>
             </span>
           </dt>
-          <dd>{rolEntity.eindDatumRol ? <TextFormat value={rolEntity.eindDatumRol} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dd>{rolEntity.einddatumRol ? <TextFormat value={rolEntity.einddatumRol} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
         </dl>
         <Button tag={Link} to="/rol" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

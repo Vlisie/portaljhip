@@ -65,29 +65,29 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     private UUIDFilter id;
 
-    private StringFilter voorNaam;
+    private StringFilter voornaam;
 
-    private StringFilter achterNaam;
+    private StringFilter achternaam;
 
     private StringFilter initialen;
 
-    private StringFilter weergaveNaam;
+    private StringFilter weergavenaam;
 
     private GeslachtFilter geslacht;
 
-    private LocalDateFilter geboorteDatum;
+    private LocalDateFilter geboortedatum;
 
-    private RelatieTypeFilter relatieType;
+    private RelatieTypeFilter relatietype;
 
-    private InstantFilter inschrijvingsDatum;
+    private InstantFilter inschrijvingsdatum;
 
-    private StringFilter straatNaam;
+    private StringFilter straatnaam;
 
-    private IntegerFilter huisNummer;
+    private IntegerFilter huisnummer;
 
-    private StringFilter postCode;
+    private StringFilter postcode;
 
-    private StringFilter woonPlaats;
+    private StringFilter woonplaats;
 
     private StringFilter land;
 
@@ -95,15 +95,15 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     private StringFilter email2;
 
-    private IntegerFilter telefoonNummer;
+    private IntegerFilter telefoonnummer;
 
-    private IntegerFilter telefoonNummer2;
+    private IntegerFilter telefoonnummer2;
 
-    private IntegerFilter telefoonNummer3;
+    private IntegerFilter telefoonnummer3;
 
-    private StringFilter ibanCode;
+    private StringFilter ibancode;
 
-    private LongFilter knsbRelatieNummer;
+    private LongFilter knsbRelatienummer;
 
     private UUIDFilter rolId;
 
@@ -111,26 +111,26 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     public RelatieCriteria(RelatieCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.voorNaam = other.voorNaam == null ? null : other.voorNaam.copy();
-        this.achterNaam = other.achterNaam == null ? null : other.achterNaam.copy();
+        this.voornaam = other.voornaam == null ? null : other.voornaam.copy();
+        this.achternaam = other.achternaam == null ? null : other.achternaam.copy();
         this.initialen = other.initialen == null ? null : other.initialen.copy();
-        this.weergaveNaam = other.weergaveNaam == null ? null : other.weergaveNaam.copy();
+        this.weergavenaam = other.weergavenaam == null ? null : other.weergavenaam.copy();
         this.geslacht = other.geslacht == null ? null : other.geslacht.copy();
-        this.geboorteDatum = other.geboorteDatum == null ? null : other.geboorteDatum.copy();
-        this.relatieType = other.relatieType == null ? null : other.relatieType.copy();
-        this.inschrijvingsDatum = other.inschrijvingsDatum == null ? null : other.inschrijvingsDatum.copy();
-        this.straatNaam = other.straatNaam == null ? null : other.straatNaam.copy();
-        this.huisNummer = other.huisNummer == null ? null : other.huisNummer.copy();
-        this.postCode = other.postCode == null ? null : other.postCode.copy();
-        this.woonPlaats = other.woonPlaats == null ? null : other.woonPlaats.copy();
+        this.geboortedatum = other.geboortedatum == null ? null : other.geboortedatum.copy();
+        this.relatietype = other.relatietype == null ? null : other.relatietype.copy();
+        this.inschrijvingsdatum = other.inschrijvingsdatum == null ? null : other.inschrijvingsdatum.copy();
+        this.straatnaam = other.straatnaam == null ? null : other.straatnaam.copy();
+        this.huisnummer = other.huisnummer == null ? null : other.huisnummer.copy();
+        this.postcode = other.postcode == null ? null : other.postcode.copy();
+        this.woonplaats = other.woonplaats == null ? null : other.woonplaats.copy();
         this.land = other.land == null ? null : other.land.copy();
         this.email = other.email == null ? null : other.email.copy();
         this.email2 = other.email2 == null ? null : other.email2.copy();
-        this.telefoonNummer = other.telefoonNummer == null ? null : other.telefoonNummer.copy();
-        this.telefoonNummer2 = other.telefoonNummer2 == null ? null : other.telefoonNummer2.copy();
-        this.telefoonNummer3 = other.telefoonNummer3 == null ? null : other.telefoonNummer3.copy();
-        this.ibanCode = other.ibanCode == null ? null : other.ibanCode.copy();
-        this.knsbRelatieNummer = other.knsbRelatieNummer == null ? null : other.knsbRelatieNummer.copy();
+        this.telefoonnummer = other.telefoonnummer == null ? null : other.telefoonnummer.copy();
+        this.telefoonnummer2 = other.telefoonnummer2 == null ? null : other.telefoonnummer2.copy();
+        this.telefoonnummer3 = other.telefoonnummer3 == null ? null : other.telefoonnummer3.copy();
+        this.ibancode = other.ibancode == null ? null : other.ibancode.copy();
+        this.knsbRelatienummer = other.knsbRelatienummer == null ? null : other.knsbRelatienummer.copy();
         this.rolId = other.rolId == null ? null : other.rolId.copy();
     }
 
@@ -154,34 +154,34 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getVoorNaam() {
-        return voorNaam;
+    public StringFilter getVoornaam() {
+        return voornaam;
     }
 
-    public StringFilter voorNaam() {
-        if (voorNaam == null) {
-            voorNaam = new StringFilter();
+    public StringFilter voornaam() {
+        if (voornaam == null) {
+            voornaam = new StringFilter();
         }
-        return voorNaam;
+        return voornaam;
     }
 
-    public void setVoorNaam(StringFilter voorNaam) {
-        this.voorNaam = voorNaam;
+    public void setVoornaam(StringFilter voornaam) {
+        this.voornaam = voornaam;
     }
 
-    public StringFilter getAchterNaam() {
-        return achterNaam;
+    public StringFilter getAchternaam() {
+        return achternaam;
     }
 
-    public StringFilter achterNaam() {
-        if (achterNaam == null) {
-            achterNaam = new StringFilter();
+    public StringFilter achternaam() {
+        if (achternaam == null) {
+            achternaam = new StringFilter();
         }
-        return achterNaam;
+        return achternaam;
     }
 
-    public void setAchterNaam(StringFilter achterNaam) {
-        this.achterNaam = achterNaam;
+    public void setAchternaam(StringFilter achternaam) {
+        this.achternaam = achternaam;
     }
 
     public StringFilter getInitialen() {
@@ -199,19 +199,19 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.initialen = initialen;
     }
 
-    public StringFilter getWeergaveNaam() {
-        return weergaveNaam;
+    public StringFilter getWeergavenaam() {
+        return weergavenaam;
     }
 
-    public StringFilter weergaveNaam() {
-        if (weergaveNaam == null) {
-            weergaveNaam = new StringFilter();
+    public StringFilter weergavenaam() {
+        if (weergavenaam == null) {
+            weergavenaam = new StringFilter();
         }
-        return weergaveNaam;
+        return weergavenaam;
     }
 
-    public void setWeergaveNaam(StringFilter weergaveNaam) {
-        this.weergaveNaam = weergaveNaam;
+    public void setWeergavenaam(StringFilter weergavenaam) {
+        this.weergavenaam = weergavenaam;
     }
 
     public GeslachtFilter getGeslacht() {
@@ -229,109 +229,109 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.geslacht = geslacht;
     }
 
-    public LocalDateFilter getGeboorteDatum() {
-        return geboorteDatum;
+    public LocalDateFilter getGeboortedatum() {
+        return geboortedatum;
     }
 
-    public LocalDateFilter geboorteDatum() {
-        if (geboorteDatum == null) {
-            geboorteDatum = new LocalDateFilter();
+    public LocalDateFilter geboortedatum() {
+        if (geboortedatum == null) {
+            geboortedatum = new LocalDateFilter();
         }
-        return geboorteDatum;
+        return geboortedatum;
     }
 
-    public void setGeboorteDatum(LocalDateFilter geboorteDatum) {
-        this.geboorteDatum = geboorteDatum;
+    public void setGeboortedatum(LocalDateFilter geboortedatum) {
+        this.geboortedatum = geboortedatum;
     }
 
-    public RelatieTypeFilter getRelatieType() {
-        return relatieType;
+    public RelatieTypeFilter getRelatietype() {
+        return relatietype;
     }
 
-    public RelatieTypeFilter relatieType() {
-        if (relatieType == null) {
-            relatieType = new RelatieTypeFilter();
+    public RelatieTypeFilter relatietype() {
+        if (relatietype == null) {
+            relatietype = new RelatieTypeFilter();
         }
-        return relatieType;
+        return relatietype;
     }
 
-    public void setRelatieType(RelatieTypeFilter relatieType) {
-        this.relatieType = relatieType;
+    public void setRelatietype(RelatieTypeFilter relatietype) {
+        this.relatietype = relatietype;
     }
 
-    public InstantFilter getInschrijvingsDatum() {
-        return inschrijvingsDatum;
+    public InstantFilter getInschrijvingsdatum() {
+        return inschrijvingsdatum;
     }
 
-    public InstantFilter inschrijvingsDatum() {
-        if (inschrijvingsDatum == null) {
-            inschrijvingsDatum = new InstantFilter();
+    public InstantFilter inschrijvingsdatum() {
+        if (inschrijvingsdatum == null) {
+            inschrijvingsdatum = new InstantFilter();
         }
-        return inschrijvingsDatum;
+        return inschrijvingsdatum;
     }
 
-    public void setInschrijvingsDatum(InstantFilter inschrijvingsDatum) {
-        this.inschrijvingsDatum = inschrijvingsDatum;
+    public void setInschrijvingsdatum(InstantFilter inschrijvingsdatum) {
+        this.inschrijvingsdatum = inschrijvingsdatum;
     }
 
-    public StringFilter getStraatNaam() {
-        return straatNaam;
+    public StringFilter getStraatnaam() {
+        return straatnaam;
     }
 
-    public StringFilter straatNaam() {
-        if (straatNaam == null) {
-            straatNaam = new StringFilter();
+    public StringFilter straatnaam() {
+        if (straatnaam == null) {
+            straatnaam = new StringFilter();
         }
-        return straatNaam;
+        return straatnaam;
     }
 
-    public void setStraatNaam(StringFilter straatNaam) {
-        this.straatNaam = straatNaam;
+    public void setStraatnaam(StringFilter straatnaam) {
+        this.straatnaam = straatnaam;
     }
 
-    public IntegerFilter getHuisNummer() {
-        return huisNummer;
+    public IntegerFilter getHuisnummer() {
+        return huisnummer;
     }
 
-    public IntegerFilter huisNummer() {
-        if (huisNummer == null) {
-            huisNummer = new IntegerFilter();
+    public IntegerFilter huisnummer() {
+        if (huisnummer == null) {
+            huisnummer = new IntegerFilter();
         }
-        return huisNummer;
+        return huisnummer;
     }
 
-    public void setHuisNummer(IntegerFilter huisNummer) {
-        this.huisNummer = huisNummer;
+    public void setHuisnummer(IntegerFilter huisnummer) {
+        this.huisnummer = huisnummer;
     }
 
-    public StringFilter getPostCode() {
-        return postCode;
+    public StringFilter getPostcode() {
+        return postcode;
     }
 
-    public StringFilter postCode() {
-        if (postCode == null) {
-            postCode = new StringFilter();
+    public StringFilter postcode() {
+        if (postcode == null) {
+            postcode = new StringFilter();
         }
-        return postCode;
+        return postcode;
     }
 
-    public void setPostCode(StringFilter postCode) {
-        this.postCode = postCode;
+    public void setPostcode(StringFilter postcode) {
+        this.postcode = postcode;
     }
 
-    public StringFilter getWoonPlaats() {
-        return woonPlaats;
+    public StringFilter getWoonplaats() {
+        return woonplaats;
     }
 
-    public StringFilter woonPlaats() {
-        if (woonPlaats == null) {
-            woonPlaats = new StringFilter();
+    public StringFilter woonplaats() {
+        if (woonplaats == null) {
+            woonplaats = new StringFilter();
         }
-        return woonPlaats;
+        return woonplaats;
     }
 
-    public void setWoonPlaats(StringFilter woonPlaats) {
-        this.woonPlaats = woonPlaats;
+    public void setWoonplaats(StringFilter woonplaats) {
+        this.woonplaats = woonplaats;
     }
 
     public StringFilter getLand() {
@@ -379,79 +379,79 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.email2 = email2;
     }
 
-    public IntegerFilter getTelefoonNummer() {
-        return telefoonNummer;
+    public IntegerFilter getTelefoonnummer() {
+        return telefoonnummer;
     }
 
-    public IntegerFilter telefoonNummer() {
-        if (telefoonNummer == null) {
-            telefoonNummer = new IntegerFilter();
+    public IntegerFilter telefoonnummer() {
+        if (telefoonnummer == null) {
+            telefoonnummer = new IntegerFilter();
         }
-        return telefoonNummer;
+        return telefoonnummer;
     }
 
-    public void setTelefoonNummer(IntegerFilter telefoonNummer) {
-        this.telefoonNummer = telefoonNummer;
+    public void setTelefoonnummer(IntegerFilter telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
     }
 
-    public IntegerFilter getTelefoonNummer2() {
-        return telefoonNummer2;
+    public IntegerFilter getTelefoonnummer2() {
+        return telefoonnummer2;
     }
 
-    public IntegerFilter telefoonNummer2() {
-        if (telefoonNummer2 == null) {
-            telefoonNummer2 = new IntegerFilter();
+    public IntegerFilter telefoonnummer2() {
+        if (telefoonnummer2 == null) {
+            telefoonnummer2 = new IntegerFilter();
         }
-        return telefoonNummer2;
+        return telefoonnummer2;
     }
 
-    public void setTelefoonNummer2(IntegerFilter telefoonNummer2) {
-        this.telefoonNummer2 = telefoonNummer2;
+    public void setTelefoonnummer2(IntegerFilter telefoonnummer2) {
+        this.telefoonnummer2 = telefoonnummer2;
     }
 
-    public IntegerFilter getTelefoonNummer3() {
-        return telefoonNummer3;
+    public IntegerFilter getTelefoonnummer3() {
+        return telefoonnummer3;
     }
 
-    public IntegerFilter telefoonNummer3() {
-        if (telefoonNummer3 == null) {
-            telefoonNummer3 = new IntegerFilter();
+    public IntegerFilter telefoonnummer3() {
+        if (telefoonnummer3 == null) {
+            telefoonnummer3 = new IntegerFilter();
         }
-        return telefoonNummer3;
+        return telefoonnummer3;
     }
 
-    public void setTelefoonNummer3(IntegerFilter telefoonNummer3) {
-        this.telefoonNummer3 = telefoonNummer3;
+    public void setTelefoonnummer3(IntegerFilter telefoonnummer3) {
+        this.telefoonnummer3 = telefoonnummer3;
     }
 
-    public StringFilter getIbanCode() {
-        return ibanCode;
+    public StringFilter getIbancode() {
+        return ibancode;
     }
 
-    public StringFilter ibanCode() {
-        if (ibanCode == null) {
-            ibanCode = new StringFilter();
+    public StringFilter ibancode() {
+        if (ibancode == null) {
+            ibancode = new StringFilter();
         }
-        return ibanCode;
+        return ibancode;
     }
 
-    public void setIbanCode(StringFilter ibanCode) {
-        this.ibanCode = ibanCode;
+    public void setIbancode(StringFilter ibancode) {
+        this.ibancode = ibancode;
     }
 
-    public LongFilter getKnsbRelatieNummer() {
-        return knsbRelatieNummer;
+    public LongFilter getKnsbRelatienummer() {
+        return knsbRelatienummer;
     }
 
-    public LongFilter knsbRelatieNummer() {
-        if (knsbRelatieNummer == null) {
-            knsbRelatieNummer = new LongFilter();
+    public LongFilter knsbRelatienummer() {
+        if (knsbRelatienummer == null) {
+            knsbRelatienummer = new LongFilter();
         }
-        return knsbRelatieNummer;
+        return knsbRelatienummer;
     }
 
-    public void setKnsbRelatieNummer(LongFilter knsbRelatieNummer) {
-        this.knsbRelatieNummer = knsbRelatieNummer;
+    public void setKnsbRelatienummer(LongFilter knsbRelatienummer) {
+        this.knsbRelatienummer = knsbRelatienummer;
     }
 
     public UUIDFilter getRolId() {
@@ -480,26 +480,26 @@ public class RelatieCriteria implements Serializable, Criteria {
         final RelatieCriteria that = (RelatieCriteria) o;
         return (
             Objects.equals(id, that.id) &&
-            Objects.equals(voorNaam, that.voorNaam) &&
-            Objects.equals(achterNaam, that.achterNaam) &&
+            Objects.equals(voornaam, that.voornaam) &&
+            Objects.equals(achternaam, that.achternaam) &&
             Objects.equals(initialen, that.initialen) &&
-            Objects.equals(weergaveNaam, that.weergaveNaam) &&
+            Objects.equals(weergavenaam, that.weergavenaam) &&
             Objects.equals(geslacht, that.geslacht) &&
-            Objects.equals(geboorteDatum, that.geboorteDatum) &&
-            Objects.equals(relatieType, that.relatieType) &&
-            Objects.equals(inschrijvingsDatum, that.inschrijvingsDatum) &&
-            Objects.equals(straatNaam, that.straatNaam) &&
-            Objects.equals(huisNummer, that.huisNummer) &&
-            Objects.equals(postCode, that.postCode) &&
-            Objects.equals(woonPlaats, that.woonPlaats) &&
+            Objects.equals(geboortedatum, that.geboortedatum) &&
+            Objects.equals(relatietype, that.relatietype) &&
+            Objects.equals(inschrijvingsdatum, that.inschrijvingsdatum) &&
+            Objects.equals(straatnaam, that.straatnaam) &&
+            Objects.equals(huisnummer, that.huisnummer) &&
+            Objects.equals(postcode, that.postcode) &&
+            Objects.equals(woonplaats, that.woonplaats) &&
             Objects.equals(land, that.land) &&
             Objects.equals(email, that.email) &&
             Objects.equals(email2, that.email2) &&
-            Objects.equals(telefoonNummer, that.telefoonNummer) &&
-            Objects.equals(telefoonNummer2, that.telefoonNummer2) &&
-            Objects.equals(telefoonNummer3, that.telefoonNummer3) &&
-            Objects.equals(ibanCode, that.ibanCode) &&
-            Objects.equals(knsbRelatieNummer, that.knsbRelatieNummer) &&
+            Objects.equals(telefoonnummer, that.telefoonnummer) &&
+            Objects.equals(telefoonnummer2, that.telefoonnummer2) &&
+            Objects.equals(telefoonnummer3, that.telefoonnummer3) &&
+            Objects.equals(ibancode, that.ibancode) &&
+            Objects.equals(knsbRelatienummer, that.knsbRelatienummer) &&
             Objects.equals(rolId, that.rolId)
         );
     }
@@ -508,26 +508,26 @@ public class RelatieCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
             id,
-            voorNaam,
-            achterNaam,
+            voornaam,
+            achternaam,
             initialen,
-            weergaveNaam,
+            weergavenaam,
             geslacht,
-            geboorteDatum,
-            relatieType,
-            inschrijvingsDatum,
-            straatNaam,
-            huisNummer,
-            postCode,
-            woonPlaats,
+            geboortedatum,
+            relatietype,
+            inschrijvingsdatum,
+            straatnaam,
+            huisnummer,
+            postcode,
+            woonplaats,
             land,
             email,
             email2,
-            telefoonNummer,
-            telefoonNummer2,
-            telefoonNummer3,
-            ibanCode,
-            knsbRelatieNummer,
+            telefoonnummer,
+            telefoonnummer2,
+            telefoonnummer3,
+            ibancode,
+            knsbRelatienummer,
             rolId
         );
     }
@@ -537,26 +537,26 @@ public class RelatieCriteria implements Serializable, Criteria {
     public String toString() {
         return "RelatieCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
-            (voorNaam != null ? "voorNaam=" + voorNaam + ", " : "") +
-            (achterNaam != null ? "achterNaam=" + achterNaam + ", " : "") +
+            (voornaam != null ? "voornaam=" + voornaam + ", " : "") +
+            (achternaam != null ? "achternaam=" + achternaam + ", " : "") +
             (initialen != null ? "initialen=" + initialen + ", " : "") +
-            (weergaveNaam != null ? "weergaveNaam=" + weergaveNaam + ", " : "") +
+            (weergavenaam != null ? "weergavenaam=" + weergavenaam + ", " : "") +
             (geslacht != null ? "geslacht=" + geslacht + ", " : "") +
-            (geboorteDatum != null ? "geboorteDatum=" + geboorteDatum + ", " : "") +
-            (relatieType != null ? "relatieType=" + relatieType + ", " : "") +
-            (inschrijvingsDatum != null ? "inschrijvingsDatum=" + inschrijvingsDatum + ", " : "") +
-            (straatNaam != null ? "straatNaam=" + straatNaam + ", " : "") +
-            (huisNummer != null ? "huisNummer=" + huisNummer + ", " : "") +
-            (postCode != null ? "postCode=" + postCode + ", " : "") +
-            (woonPlaats != null ? "woonPlaats=" + woonPlaats + ", " : "") +
+            (geboortedatum != null ? "geboortedatum=" + geboortedatum + ", " : "") +
+            (relatietype != null ? "relatietype=" + relatietype + ", " : "") +
+            (inschrijvingsdatum != null ? "inschrijvingsdatum=" + inschrijvingsdatum + ", " : "") +
+            (straatnaam != null ? "straatnaam=" + straatnaam + ", " : "") +
+            (huisnummer != null ? "huisnummer=" + huisnummer + ", " : "") +
+            (postcode != null ? "postcode=" + postcode + ", " : "") +
+            (woonplaats != null ? "woonplaats=" + woonplaats + ", " : "") +
             (land != null ? "land=" + land + ", " : "") +
             (email != null ? "email=" + email + ", " : "") +
             (email2 != null ? "email2=" + email2 + ", " : "") +
-            (telefoonNummer != null ? "telefoonNummer=" + telefoonNummer + ", " : "") +
-            (telefoonNummer2 != null ? "telefoonNummer2=" + telefoonNummer2 + ", " : "") +
-            (telefoonNummer3 != null ? "telefoonNummer3=" + telefoonNummer3 + ", " : "") +
-            (ibanCode != null ? "ibanCode=" + ibanCode + ", " : "") +
-            (knsbRelatieNummer != null ? "knsbRelatieNummer=" + knsbRelatieNummer + ", " : "") +
+            (telefoonnummer != null ? "telefoonnummer=" + telefoonnummer + ", " : "") +
+            (telefoonnummer2 != null ? "telefoonnummer2=" + telefoonnummer2 + ", " : "") +
+            (telefoonnummer3 != null ? "telefoonnummer3=" + telefoonnummer3 + ", " : "") +
+            (ibancode != null ? "ibancode=" + ibancode + ", " : "") +
+            (knsbRelatienummer != null ? "knsbRelatienummer=" + knsbRelatienummer + ", " : "") +
             (rolId != null ? "rolId=" + rolId + ", " : "") +
             "}";
     }
