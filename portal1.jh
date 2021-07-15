@@ -1,26 +1,26 @@
 
 entity Relatie {
 	id UUID,
-	voorNaam String,
-    achterNaam String,
+	voornaam String,
+    achternaam String,
     initialen String,
-    weergaveNaam String,
+    weergavenaam String,
     geslacht Geslacht,
-    geboorteDatum LocalDate,
-    relatieType RelatieType,
-    inschrijvingsDatum Instant,
-    straatNaam String,
-    huisNummer Integer,
-    postCode String,
-    woonPlaats String,
+    geboortedatum LocalDate,
+    relatietype RelatieType,
+    inschrijvingsdatum Instant,
+    straatnaam String,
+    huisnummer Integer,
+    postcode String,
+    woonplaats String,
     land String,
     email String,
     email2 String,
-    telefoonNummer Integer,
-    telefoonNummer2 Integer,
-    telefoonNummer3 Integer,
-    ibanCode String,
-    knsbRelatieNummer Long,
+    telefoonnummer Integer,
+    telefoonnummer2 Integer,
+    telefoonnummer3 Integer,
+    ibancode String,
+    knsbRelatienummer Long,
     pasfoto Blob,
     privacyVerklaring Blob
 }
@@ -35,10 +35,10 @@ enum Geslacht {
 
 entity Rol {
 	id UUID,
-	rolNaam String,
+	rolnaam String,
 	jeugdschaatsen Boolean,
-	startDatumRol Instant,
-    eindDatumRol Instant
+	startdatumRol Instant,
+    einddatumRol Instant
 }
 
 relationship ManyToMany {
