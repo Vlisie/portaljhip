@@ -14,22 +14,22 @@
             <column name="id" type="${uuidType}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="rol_naam" type="varchar(255)">
+            <column name="rolnaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="jeugdschaatsen" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="start_datum_rol" type="${datetimeType}">
+            <column name="startdatum_rol" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="eind_datum_rol" type="${datetimeType}">
+            <column name="einddatum_rol" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="rol" columnName="start_datum_rol" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="rol" columnName="eind_datum_rol" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="rol" columnName="startdatum_rol" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="rol" columnName="einddatum_rol" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -48,10 +48,10 @@
                   separator=";"
                   tableName="rol">
             <column name="id" type="${uuidType}"/>
-            <column name="rol_naam" type="string"/>
+            <column name="rolnaam" type="string"/>
             <column name="jeugdschaatsen" type="boolean"/>
-            <column name="start_datum_rol" type="${datetimeType}"/>
-            <column name="eind_datum_rol" type="${datetimeType}"/>
+            <column name="startdatum_rol" type="${datetimeType}"/>
+            <column name="einddatum_rol" type="${datetimeType}"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

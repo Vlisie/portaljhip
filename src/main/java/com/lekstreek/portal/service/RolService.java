@@ -49,17 +49,17 @@ public class RolService {
             .findById(rol.getId())
             .map(
                 existingRol -> {
-                    if (rol.getRolNaam() != null) {
-                        existingRol.setRolNaam(rol.getRolNaam());
+                    if (rol.getRolnaam() != null) {
+                        existingRol.setRolnaam(rol.getRolnaam());
                     }
                     if (rol.getJeugdschaatsen() != null) {
                         existingRol.setJeugdschaatsen(rol.getJeugdschaatsen());
                     }
-                    if (rol.getStartDatumRol() != null) {
-                        existingRol.setStartDatumRol(rol.getStartDatumRol());
+                    if (rol.getStartdatumRol() != null) {
+                        existingRol.setStartdatumRol(rol.getStartdatumRol());
                     }
-                    if (rol.getEindDatumRol() != null) {
-                        existingRol.setEindDatumRol(rol.getEindDatumRol());
+                    if (rol.getEinddatumRol() != null) {
+                        existingRol.setEinddatumRol(rol.getEinddatumRol());
                     }
 
                     return existingRol;

@@ -18,10 +18,10 @@
         "title": "Rol"
       },
       "id": "Id",
-      "rolNaam": "Rol Naam",
+      "rolnaam": "Rolnaam",
       "jeugdschaatsen": "Jeugdschaatsen",
-      "startDatumRol": "Start Datum Rol",
-      "eindDatumRol": "Eind Datum Rol",
+      "startdatumRol": "Startdatum Rol",
+      "einddatumRol": "Einddatum Rol",
       "relatie": "Relatie"
     }
   }

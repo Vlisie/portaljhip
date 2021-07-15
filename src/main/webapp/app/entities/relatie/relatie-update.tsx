@@ -44,7 +44,7 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
-    values.inschrijvingsDatum = convertDateTimeToServer(values.inschrijvingsDatum);
+    values.inschrijvingsdatum = convertDateTimeToServer(values.inschrijvingsdatum);
 
     const entity = {
       ...relatieEntity,
@@ -62,13 +62,13 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const defaultValues = () =>
     isNew
       ? {
-          inschrijvingsDatum: displayDefaultDateTime(),
+          inschrijvingsdatum: displayDefaultDateTime(),
         }
       : {
           ...relatieEntity,
           geslacht: 'MAN',
-          relatieType: 'LID',
-          inschrijvingsDatum: convertDateTimeFromServer(relatieEntity.inschrijvingsDatum),
+          relatietype: 'LID',
+          inschrijvingsdatum: convertDateTimeFromServer(relatieEntity.inschrijvingsdatum),
           rols: relatieEntity?.rols?.map(e => e.id.toString()),
         };
 
@@ -98,17 +98,17 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('portaljhipApp.relatie.voorNaam')}
-                id="relatie-voorNaam"
-                name="voorNaam"
-                data-cy="voorNaam"
+                label={translate('portaljhipApp.relatie.voornaam')}
+                id="relatie-voornaam"
+                name="voornaam"
+                data-cy="voornaam"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.achterNaam')}
-                id="relatie-achterNaam"
-                name="achterNaam"
-                data-cy="achterNaam"
+                label={translate('portaljhipApp.relatie.achternaam')}
+                id="relatie-achternaam"
+                name="achternaam"
+                data-cy="achternaam"
                 type="text"
               />
               <ValidatedField
@@ -119,10 +119,10 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.weergaveNaam')}
-                id="relatie-weergaveNaam"
-                name="weergaveNaam"
-                data-cy="weergaveNaam"
+                label={translate('portaljhipApp.relatie.weergavenaam')}
+                id="relatie-weergavenaam"
+                name="weergavenaam"
+                data-cy="weergavenaam"
                 type="text"
               />
               <ValidatedField
@@ -137,17 +137,17 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="X">{translate('portaljhipApp.Geslacht.X')}</option>
               </ValidatedField>
               <ValidatedField
-                label={translate('portaljhipApp.relatie.geboorteDatum')}
-                id="relatie-geboorteDatum"
-                name="geboorteDatum"
-                data-cy="geboorteDatum"
+                label={translate('portaljhipApp.relatie.geboortedatum')}
+                id="relatie-geboortedatum"
+                name="geboortedatum"
+                data-cy="geboortedatum"
                 type="date"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.relatieType')}
-                id="relatie-relatieType"
-                name="relatieType"
-                data-cy="relatieType"
+                label={translate('portaljhipApp.relatie.relatietype')}
+                id="relatie-relatietype"
+                name="relatietype"
+                data-cy="relatietype"
                 type="select"
               >
                 <option value="LID">{translate('portaljhipApp.RelatieType.LID')}</option>
@@ -155,39 +155,39 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="DONATEUR">{translate('portaljhipApp.RelatieType.DONATEUR')}</option>
               </ValidatedField>
               <ValidatedField
-                label={translate('portaljhipApp.relatie.inschrijvingsDatum')}
-                id="relatie-inschrijvingsDatum"
-                name="inschrijvingsDatum"
-                data-cy="inschrijvingsDatum"
+                label={translate('portaljhipApp.relatie.inschrijvingsdatum')}
+                id="relatie-inschrijvingsdatum"
+                name="inschrijvingsdatum"
+                data-cy="inschrijvingsdatum"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.straatNaam')}
-                id="relatie-straatNaam"
-                name="straatNaam"
-                data-cy="straatNaam"
+                label={translate('portaljhipApp.relatie.straatnaam')}
+                id="relatie-straatnaam"
+                name="straatnaam"
+                data-cy="straatnaam"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.huisNummer')}
-                id="relatie-huisNummer"
-                name="huisNummer"
-                data-cy="huisNummer"
+                label={translate('portaljhipApp.relatie.huisnummer')}
+                id="relatie-huisnummer"
+                name="huisnummer"
+                data-cy="huisnummer"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.postCode')}
-                id="relatie-postCode"
-                name="postCode"
-                data-cy="postCode"
+                label={translate('portaljhipApp.relatie.postcode')}
+                id="relatie-postcode"
+                name="postcode"
+                data-cy="postcode"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.woonPlaats')}
-                id="relatie-woonPlaats"
-                name="woonPlaats"
-                data-cy="woonPlaats"
+                label={translate('portaljhipApp.relatie.woonplaats')}
+                id="relatie-woonplaats"
+                name="woonplaats"
+                data-cy="woonplaats"
                 type="text"
               />
               <ValidatedField label={translate('portaljhipApp.relatie.land')} id="relatie-land" name="land" data-cy="land" type="text" />
@@ -206,38 +206,38 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.telefoonNummer')}
-                id="relatie-telefoonNummer"
-                name="telefoonNummer"
-                data-cy="telefoonNummer"
+                label={translate('portaljhipApp.relatie.telefoonnummer')}
+                id="relatie-telefoonnummer"
+                name="telefoonnummer"
+                data-cy="telefoonnummer"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.telefoonNummer2')}
-                id="relatie-telefoonNummer2"
-                name="telefoonNummer2"
-                data-cy="telefoonNummer2"
+                label={translate('portaljhipApp.relatie.telefoonnummer2')}
+                id="relatie-telefoonnummer2"
+                name="telefoonnummer2"
+                data-cy="telefoonnummer2"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.telefoonNummer3')}
-                id="relatie-telefoonNummer3"
-                name="telefoonNummer3"
-                data-cy="telefoonNummer3"
+                label={translate('portaljhipApp.relatie.telefoonnummer3')}
+                id="relatie-telefoonnummer3"
+                name="telefoonnummer3"
+                data-cy="telefoonnummer3"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.ibanCode')}
-                id="relatie-ibanCode"
-                name="ibanCode"
-                data-cy="ibanCode"
+                label={translate('portaljhipApp.relatie.ibancode')}
+                id="relatie-ibancode"
+                name="ibancode"
+                data-cy="ibancode"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.knsbRelatieNummer')}
-                id="relatie-knsbRelatieNummer"
-                name="knsbRelatieNummer"
-                data-cy="knsbRelatieNummer"
+                label={translate('portaljhipApp.relatie.knsbRelatienummer')}
+                id="relatie-knsbRelatienummer"
+                name="knsbRelatienummer"
+                data-cy="knsbRelatienummer"
                 type="text"
               />
               <ValidatedBlobField

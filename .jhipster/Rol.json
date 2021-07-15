@@ -6,7 +6,7 @@
       "fieldType": "UUID"
     },
     {
-      "fieldName": "rolNaam",
+      "fieldName": "rolnaam",
       "fieldType": "String"
     },
     {
@@ -14,11 +14,11 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "startDatumRol",
+      "fieldName": "startdatumRol",
       "fieldType": "Instant"
     },
     {
-      "fieldName": "eindDatumRol",
+      "fieldName": "einddatumRol",
       "fieldType": "Instant"
     }
   ],

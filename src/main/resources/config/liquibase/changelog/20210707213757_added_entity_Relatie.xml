@@ -14,40 +14,40 @@
             <column name="id" type="${uuidType}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="voor_naam" type="varchar(255)">
+            <column name="voornaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="achter_naam" type="varchar(255)">
+            <column name="achternaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="initialen" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="weergave_naam" type="varchar(255)">
+            <column name="weergavenaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="geslacht" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="geboorte_datum" type="date">
+            <column name="geboortedatum" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="relatie_type" type="varchar(255)">
+            <column name="relatietype" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="inschrijvings_datum" type="${datetimeType}">
+            <column name="inschrijvingsdatum" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="straat_naam" type="varchar(255)">
+            <column name="straatnaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="huis_nummer" type="integer">
+            <column name="huisnummer" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="post_code" type="varchar(255)">
+            <column name="postcode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="woon_plaats" type="varchar(255)">
+            <column name="woonplaats" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="land" type="varchar(255)">
@@ -59,19 +59,19 @@
             <column name="email_2" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="telefoon_nummer" type="integer">
+            <column name="telefoonnummer" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="telefoon_nummer_2" type="integer">
+            <column name="telefoonnummer_2" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="telefoon_nummer_3" type="integer">
+            <column name="telefoonnummer_3" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="iban_code" type="varchar(255)">
+            <column name="ibancode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="knsb_relatie_nummer" type="bigint">
+            <column name="knsb_relatienummer" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="pasfoto" type="longblob">
@@ -88,7 +88,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="relatie" columnName="inschrijvings_datum" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="relatie" columnName="inschrijvingsdatum" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <changeSet id="20210707213757-1-relations" author="jhipster">
@@ -121,26 +121,26 @@
                   separator=";"
                   tableName="relatie">
             <column name="id" type="${uuidType}"/>
-            <column name="voor_naam" type="string"/>
-            <column name="achter_naam" type="string"/>
+            <column name="voornaam" type="string"/>
+            <column name="achternaam" type="string"/>
             <column name="initialen" type="string"/>
-            <column name="weergave_naam" type="string"/>
+            <column name="weergavenaam" type="string"/>
             <column name="geslacht" type="string"/>
-            <column name="geboorte_datum" type="date"/>
-            <column name="relatie_type" type="string"/>
-            <column name="inschrijvings_datum" type="${datetimeType}"/>
-            <column name="straat_naam" type="string"/>
-            <column name="huis_nummer" type="numeric"/>
-            <column name="post_code" type="string"/>
-            <column name="woon_plaats" type="string"/>
+            <column name="geboortedatum" type="date"/>
+            <column name="relatietype" type="string"/>
+            <column name="inschrijvingsdatum" type="${datetimeType}"/>
+            <column name="straatnaam" type="string"/>
+            <column name="huisnummer" type="numeric"/>
+            <column name="postcode" type="string"/>
+            <column name="woonplaats" type="string"/>
             <column name="land" type="string"/>
             <column name="email" type="string"/>
             <column name="email_2" type="string"/>
-            <column name="telefoon_nummer" type="numeric"/>
-            <column name="telefoon_nummer_2" type="numeric"/>
-            <column name="telefoon_nummer_3" type="numeric"/>
-            <column name="iban_code" type="string"/>
-            <column name="knsb_relatie_nummer" type="numeric"/>
+            <column name="telefoonnummer" type="numeric"/>
+            <column name="telefoonnummer_2" type="numeric"/>
+            <column name="telefoonnummer_3" type="numeric"/>
+            <column name="ibancode" type="string"/>
+            <column name="knsb_relatienummer" type="numeric"/>
             <column name="pasfoto" type="blob"/>
             <column name="pasfoto_content_type" type="string"/>
             <column name="privacy_verklaring" type="blob"/>

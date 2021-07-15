@@ -50,16 +50,16 @@ export const Rol = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="portaljhipApp.rol.id">Id</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.rolNaam">Rol Naam</Translate>
+                  <Translate contentKey="portaljhipApp.rol.rolnaam">Rolnaam</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.rol.jeugdschaatsen">Jeugdschaatsen</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.startDatumRol">Start Datum Rol</Translate>
+                  <Translate contentKey="portaljhipApp.rol.startdatumRol">Startdatum Rol</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.eindDatumRol">Eind Datum Rol</Translate>
+                  <Translate contentKey="portaljhipApp.rol.einddatumRol">Einddatum Rol</Translate>
                 </th>
                 <th />
               </tr>
@@ -72,10 +72,10 @@ export const Rol = (props: RouteComponentProps<{ url: string }>) => {
                       {rol.id}
                     </Button>
                   </td>
-                  <td>{rol.rolNaam}</td>
+                  <td>{rol.rolnaam}</td>
                   <td>{rol.jeugdschaatsen ? 'true' : 'false'}</td>
-                  <td>{rol.startDatumRol ? <TextFormat type="date" value={rol.startDatumRol} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{rol.eindDatumRol ? <TextFormat type="date" value={rol.eindDatumRol} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{rol.startdatumRol ? <TextFormat type="date" value={rol.startdatumRol} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{rol.einddatumRol ? <TextFormat type="date" value={rol.einddatumRol} format={APP_DATE_FORMAT} /> : null}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${rol.id}`} color="info" size="sm" data-cy="entityDetailsButton">

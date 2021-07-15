@@ -32,17 +32,17 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RolResourceIT {
 
-    private static final String DEFAULT_ROL_NAAM = "AAAAAAAAAA";
-    private static final String UPDATED_ROL_NAAM = "BBBBBBBBBB";
+    private static final String DEFAULT_ROLNAAM = "AAAAAAAAAA";
+    private static final String UPDATED_ROLNAAM = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_JEUGDSCHAATSEN = false;
     private static final Boolean UPDATED_JEUGDSCHAATSEN = true;
 
-    private static final Instant DEFAULT_START_DATUM_ROL = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATUM_ROL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_STARTDATUM_ROL = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_STARTDATUM_ROL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_EIND_DATUM_ROL = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_EIND_DATUM_ROL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_EINDDATUM_ROL = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_EINDDATUM_ROL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String ENTITY_API_URL = "/api/rols";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -66,10 +66,10 @@ class RolResourceIT {
      */
     public static Rol createEntity(EntityManager em) {
         Rol rol = new Rol()
-            .rolNaam(DEFAULT_ROL_NAAM)
+            .rolnaam(DEFAULT_ROLNAAM)
             .jeugdschaatsen(DEFAULT_JEUGDSCHAATSEN)
-            .startDatumRol(DEFAULT_START_DATUM_ROL)
-            .eindDatumRol(DEFAULT_EIND_DATUM_ROL);
+            .startdatumRol(DEFAULT_STARTDATUM_ROL)
+            .einddatumRol(DEFAULT_EINDDATUM_ROL);
         return rol;
     }
 
@@ -81,10 +81,10 @@ class RolResourceIT {
      */
     public static Rol createUpdatedEntity(EntityManager em) {
         Rol rol = new Rol()
-            .rolNaam(UPDATED_ROL_NAAM)
+            .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
-            .startDatumRol(UPDATED_START_DATUM_ROL)
-            .eindDatumRol(UPDATED_EIND_DATUM_ROL);
+            .startdatumRol(UPDATED_STARTDATUM_ROL)
+            .einddatumRol(UPDATED_EINDDATUM_ROL);
         return rol;
     }
 
@@ -106,10 +106,10 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeCreate + 1);
         Rol testRol = rolList.get(rolList.size() - 1);
-        assertThat(testRol.getRolNaam()).isEqualTo(DEFAULT_ROL_NAAM);
+        assertThat(testRol.getRolnaam()).isEqualTo(DEFAULT_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(DEFAULT_JEUGDSCHAATSEN);
-        assertThat(testRol.getStartDatumRol()).isEqualTo(DEFAULT_START_DATUM_ROL);
-        assertThat(testRol.getEindDatumRol()).isEqualTo(DEFAULT_EIND_DATUM_ROL);
+        assertThat(testRol.getStartdatumRol()).isEqualTo(DEFAULT_STARTDATUM_ROL);
+        assertThat(testRol.getEinddatumRol()).isEqualTo(DEFAULT_EINDDATUM_ROL);
     }
 
     @Test
@@ -142,10 +142,10 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(rol.getId().toString())))
-            .andExpect(jsonPath("$.[*].rolNaam").value(hasItem(DEFAULT_ROL_NAAM)))
+            .andExpect(jsonPath("$.[*].rolnaam").value(hasItem(DEFAULT_ROLNAAM)))
             .andExpect(jsonPath("$.[*].jeugdschaatsen").value(hasItem(DEFAULT_JEUGDSCHAATSEN.booleanValue())))
-            .andExpect(jsonPath("$.[*].startDatumRol").value(hasItem(DEFAULT_START_DATUM_ROL.toString())))
-            .andExpect(jsonPath("$.[*].eindDatumRol").value(hasItem(DEFAULT_EIND_DATUM_ROL.toString())));
+            .andExpect(jsonPath("$.[*].startdatumRol").value(hasItem(DEFAULT_STARTDATUM_ROL.toString())))
+            .andExpect(jsonPath("$.[*].einddatumRol").value(hasItem(DEFAULT_EINDDATUM_ROL.toString())));
     }
 
     @Test
@@ -160,10 +160,10 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(rol.getId().toString()))
-            .andExpect(jsonPath("$.rolNaam").value(DEFAULT_ROL_NAAM))
+            .andExpect(jsonPath("$.rolnaam").value(DEFAULT_ROLNAAM))
             .andExpect(jsonPath("$.jeugdschaatsen").value(DEFAULT_JEUGDSCHAATSEN.booleanValue()))
-            .andExpect(jsonPath("$.startDatumRol").value(DEFAULT_START_DATUM_ROL.toString()))
-            .andExpect(jsonPath("$.eindDatumRol").value(DEFAULT_EIND_DATUM_ROL.toString()));
+            .andExpect(jsonPath("$.startdatumRol").value(DEFAULT_STARTDATUM_ROL.toString()))
+            .andExpect(jsonPath("$.einddatumRol").value(DEFAULT_EINDDATUM_ROL.toString()));
     }
 
     @Test
@@ -180,80 +180,80 @@ class RolResourceIT {
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamIsEqualToSomething() throws Exception {
+    void getAllRolsByRolnaamIsEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam equals to DEFAULT_ROL_NAAM
-        defaultRolShouldBeFound("rolNaam.equals=" + DEFAULT_ROL_NAAM);
+        // Get all the rolList where rolnaam equals to DEFAULT_ROLNAAM
+        defaultRolShouldBeFound("rolnaam.equals=" + DEFAULT_ROLNAAM);
 
-        // Get all the rolList where rolNaam equals to UPDATED_ROL_NAAM
-        defaultRolShouldNotBeFound("rolNaam.equals=" + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam equals to UPDATED_ROLNAAM
+        defaultRolShouldNotBeFound("rolnaam.equals=" + UPDATED_ROLNAAM);
     }
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamIsNotEqualToSomething() throws Exception {
+    void getAllRolsByRolnaamIsNotEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam not equals to DEFAULT_ROL_NAAM
-        defaultRolShouldNotBeFound("rolNaam.notEquals=" + DEFAULT_ROL_NAAM);
+        // Get all the rolList where rolnaam not equals to DEFAULT_ROLNAAM
+        defaultRolShouldNotBeFound("rolnaam.notEquals=" + DEFAULT_ROLNAAM);
 
-        // Get all the rolList where rolNaam not equals to UPDATED_ROL_NAAM
-        defaultRolShouldBeFound("rolNaam.notEquals=" + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam not equals to UPDATED_ROLNAAM
+        defaultRolShouldBeFound("rolnaam.notEquals=" + UPDATED_ROLNAAM);
     }
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamIsInShouldWork() throws Exception {
+    void getAllRolsByRolnaamIsInShouldWork() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam in DEFAULT_ROL_NAAM or UPDATED_ROL_NAAM
-        defaultRolShouldBeFound("rolNaam.in=" + DEFAULT_ROL_NAAM + "," + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam in DEFAULT_ROLNAAM or UPDATED_ROLNAAM
+        defaultRolShouldBeFound("rolnaam.in=" + DEFAULT_ROLNAAM + "," + UPDATED_ROLNAAM);
 
-        // Get all the rolList where rolNaam equals to UPDATED_ROL_NAAM
-        defaultRolShouldNotBeFound("rolNaam.in=" + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam equals to UPDATED_ROLNAAM
+        defaultRolShouldNotBeFound("rolnaam.in=" + UPDATED_ROLNAAM);
     }
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamIsNullOrNotNull() throws Exception {
+    void getAllRolsByRolnaamIsNullOrNotNull() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam is not null
-        defaultRolShouldBeFound("rolNaam.specified=true");
+        // Get all the rolList where rolnaam is not null
+        defaultRolShouldBeFound("rolnaam.specified=true");
 
-        // Get all the rolList where rolNaam is null
-        defaultRolShouldNotBeFound("rolNaam.specified=false");
+        // Get all the rolList where rolnaam is null
+        defaultRolShouldNotBeFound("rolnaam.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamContainsSomething() throws Exception {
+    void getAllRolsByRolnaamContainsSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam contains DEFAULT_ROL_NAAM
-        defaultRolShouldBeFound("rolNaam.contains=" + DEFAULT_ROL_NAAM);
+        // Get all the rolList where rolnaam contains DEFAULT_ROLNAAM
+        defaultRolShouldBeFound("rolnaam.contains=" + DEFAULT_ROLNAAM);
 
-        // Get all the rolList where rolNaam contains UPDATED_ROL_NAAM
-        defaultRolShouldNotBeFound("rolNaam.contains=" + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam contains UPDATED_ROLNAAM
+        defaultRolShouldNotBeFound("rolnaam.contains=" + UPDATED_ROLNAAM);
     }
 
     @Test
     @Transactional
-    void getAllRolsByRolNaamNotContainsSomething() throws Exception {
+    void getAllRolsByRolnaamNotContainsSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where rolNaam does not contain DEFAULT_ROL_NAAM
-        defaultRolShouldNotBeFound("rolNaam.doesNotContain=" + DEFAULT_ROL_NAAM);
+        // Get all the rolList where rolnaam does not contain DEFAULT_ROLNAAM
+        defaultRolShouldNotBeFound("rolnaam.doesNotContain=" + DEFAULT_ROLNAAM);
 
-        // Get all the rolList where rolNaam does not contain UPDATED_ROL_NAAM
-        defaultRolShouldBeFound("rolNaam.doesNotContain=" + UPDATED_ROL_NAAM);
+        // Get all the rolList where rolnaam does not contain UPDATED_ROLNAAM
+        defaultRolShouldBeFound("rolnaam.doesNotContain=" + UPDATED_ROLNAAM);
     }
 
     @Test
@@ -310,106 +310,106 @@ class RolResourceIT {
 
     @Test
     @Transactional
-    void getAllRolsByStartDatumRolIsEqualToSomething() throws Exception {
+    void getAllRolsByStartdatumRolIsEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where startDatumRol equals to DEFAULT_START_DATUM_ROL
-        defaultRolShouldBeFound("startDatumRol.equals=" + DEFAULT_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol equals to DEFAULT_STARTDATUM_ROL
+        defaultRolShouldBeFound("startdatumRol.equals=" + DEFAULT_STARTDATUM_ROL);
 
-        // Get all the rolList where startDatumRol equals to UPDATED_START_DATUM_ROL
-        defaultRolShouldNotBeFound("startDatumRol.equals=" + UPDATED_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol equals to UPDATED_STARTDATUM_ROL
+        defaultRolShouldNotBeFound("startdatumRol.equals=" + UPDATED_STARTDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByStartDatumRolIsNotEqualToSomething() throws Exception {
+    void getAllRolsByStartdatumRolIsNotEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where startDatumRol not equals to DEFAULT_START_DATUM_ROL
-        defaultRolShouldNotBeFound("startDatumRol.notEquals=" + DEFAULT_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol not equals to DEFAULT_STARTDATUM_ROL
+        defaultRolShouldNotBeFound("startdatumRol.notEquals=" + DEFAULT_STARTDATUM_ROL);
 
-        // Get all the rolList where startDatumRol not equals to UPDATED_START_DATUM_ROL
-        defaultRolShouldBeFound("startDatumRol.notEquals=" + UPDATED_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol not equals to UPDATED_STARTDATUM_ROL
+        defaultRolShouldBeFound("startdatumRol.notEquals=" + UPDATED_STARTDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByStartDatumRolIsInShouldWork() throws Exception {
+    void getAllRolsByStartdatumRolIsInShouldWork() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where startDatumRol in DEFAULT_START_DATUM_ROL or UPDATED_START_DATUM_ROL
-        defaultRolShouldBeFound("startDatumRol.in=" + DEFAULT_START_DATUM_ROL + "," + UPDATED_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol in DEFAULT_STARTDATUM_ROL or UPDATED_STARTDATUM_ROL
+        defaultRolShouldBeFound("startdatumRol.in=" + DEFAULT_STARTDATUM_ROL + "," + UPDATED_STARTDATUM_ROL);
 
-        // Get all the rolList where startDatumRol equals to UPDATED_START_DATUM_ROL
-        defaultRolShouldNotBeFound("startDatumRol.in=" + UPDATED_START_DATUM_ROL);
+        // Get all the rolList where startdatumRol equals to UPDATED_STARTDATUM_ROL
+        defaultRolShouldNotBeFound("startdatumRol.in=" + UPDATED_STARTDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByStartDatumRolIsNullOrNotNull() throws Exception {
+    void getAllRolsByStartdatumRolIsNullOrNotNull() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where startDatumRol is not null
-        defaultRolShouldBeFound("startDatumRol.specified=true");
+        // Get all the rolList where startdatumRol is not null
+        defaultRolShouldBeFound("startdatumRol.specified=true");
 
-        // Get all the rolList where startDatumRol is null
-        defaultRolShouldNotBeFound("startDatumRol.specified=false");
+        // Get all the rolList where startdatumRol is null
+        defaultRolShouldNotBeFound("startdatumRol.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllRolsByEindDatumRolIsEqualToSomething() throws Exception {
+    void getAllRolsByEinddatumRolIsEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where eindDatumRol equals to DEFAULT_EIND_DATUM_ROL
-        defaultRolShouldBeFound("eindDatumRol.equals=" + DEFAULT_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol equals to DEFAULT_EINDDATUM_ROL
+        defaultRolShouldBeFound("einddatumRol.equals=" + DEFAULT_EINDDATUM_ROL);
 
-        // Get all the rolList where eindDatumRol equals to UPDATED_EIND_DATUM_ROL
-        defaultRolShouldNotBeFound("eindDatumRol.equals=" + UPDATED_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol equals to UPDATED_EINDDATUM_ROL
+        defaultRolShouldNotBeFound("einddatumRol.equals=" + UPDATED_EINDDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByEindDatumRolIsNotEqualToSomething() throws Exception {
+    void getAllRolsByEinddatumRolIsNotEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where eindDatumRol not equals to DEFAULT_EIND_DATUM_ROL
-        defaultRolShouldNotBeFound("eindDatumRol.notEquals=" + DEFAULT_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol not equals to DEFAULT_EINDDATUM_ROL
+        defaultRolShouldNotBeFound("einddatumRol.notEquals=" + DEFAULT_EINDDATUM_ROL);
 
-        // Get all the rolList where eindDatumRol not equals to UPDATED_EIND_DATUM_ROL
-        defaultRolShouldBeFound("eindDatumRol.notEquals=" + UPDATED_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol not equals to UPDATED_EINDDATUM_ROL
+        defaultRolShouldBeFound("einddatumRol.notEquals=" + UPDATED_EINDDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByEindDatumRolIsInShouldWork() throws Exception {
+    void getAllRolsByEinddatumRolIsInShouldWork() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where eindDatumRol in DEFAULT_EIND_DATUM_ROL or UPDATED_EIND_DATUM_ROL
-        defaultRolShouldBeFound("eindDatumRol.in=" + DEFAULT_EIND_DATUM_ROL + "," + UPDATED_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol in DEFAULT_EINDDATUM_ROL or UPDATED_EINDDATUM_ROL
+        defaultRolShouldBeFound("einddatumRol.in=" + DEFAULT_EINDDATUM_ROL + "," + UPDATED_EINDDATUM_ROL);
 
-        // Get all the rolList where eindDatumRol equals to UPDATED_EIND_DATUM_ROL
-        defaultRolShouldNotBeFound("eindDatumRol.in=" + UPDATED_EIND_DATUM_ROL);
+        // Get all the rolList where einddatumRol equals to UPDATED_EINDDATUM_ROL
+        defaultRolShouldNotBeFound("einddatumRol.in=" + UPDATED_EINDDATUM_ROL);
     }
 
     @Test
     @Transactional
-    void getAllRolsByEindDatumRolIsNullOrNotNull() throws Exception {
+    void getAllRolsByEinddatumRolIsNullOrNotNull() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
 
-        // Get all the rolList where eindDatumRol is not null
-        defaultRolShouldBeFound("eindDatumRol.specified=true");
+        // Get all the rolList where einddatumRol is not null
+        defaultRolShouldBeFound("einddatumRol.specified=true");
 
-        // Get all the rolList where eindDatumRol is null
-        defaultRolShouldNotBeFound("eindDatumRol.specified=false");
+        // Get all the rolList where einddatumRol is null
+        defaultRolShouldNotBeFound("einddatumRol.specified=false");
     }
 
     @Test
@@ -440,10 +440,10 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(rol.getId().toString())))
-            .andExpect(jsonPath("$.[*].rolNaam").value(hasItem(DEFAULT_ROL_NAAM)))
+            .andExpect(jsonPath("$.[*].rolnaam").value(hasItem(DEFAULT_ROLNAAM)))
             .andExpect(jsonPath("$.[*].jeugdschaatsen").value(hasItem(DEFAULT_JEUGDSCHAATSEN.booleanValue())))
-            .andExpect(jsonPath("$.[*].startDatumRol").value(hasItem(DEFAULT_START_DATUM_ROL.toString())))
-            .andExpect(jsonPath("$.[*].eindDatumRol").value(hasItem(DEFAULT_EIND_DATUM_ROL.toString())));
+            .andExpect(jsonPath("$.[*].startdatumRol").value(hasItem(DEFAULT_STARTDATUM_ROL.toString())))
+            .andExpect(jsonPath("$.[*].einddatumRol").value(hasItem(DEFAULT_EINDDATUM_ROL.toString())));
 
         // Check, that the count call also returns 1
         restRolMockMvc
@@ -492,10 +492,10 @@ class RolResourceIT {
         // Disconnect from session so that the updates on updatedRol are not directly saved in db
         em.detach(updatedRol);
         updatedRol
-            .rolNaam(UPDATED_ROL_NAAM)
+            .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
-            .startDatumRol(UPDATED_START_DATUM_ROL)
-            .eindDatumRol(UPDATED_EIND_DATUM_ROL);
+            .startdatumRol(UPDATED_STARTDATUM_ROL)
+            .einddatumRol(UPDATED_EINDDATUM_ROL);
 
         restRolMockMvc
             .perform(
@@ -509,10 +509,10 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
-        assertThat(testRol.getRolNaam()).isEqualTo(UPDATED_ROL_NAAM);
+        assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(UPDATED_JEUGDSCHAATSEN);
-        assertThat(testRol.getStartDatumRol()).isEqualTo(UPDATED_START_DATUM_ROL);
-        assertThat(testRol.getEindDatumRol()).isEqualTo(UPDATED_EIND_DATUM_ROL);
+        assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);
+        assertThat(testRol.getEinddatumRol()).isEqualTo(UPDATED_EINDDATUM_ROL);
     }
 
     @Test
@@ -581,7 +581,7 @@ class RolResourceIT {
         Rol partialUpdatedRol = new Rol();
         partialUpdatedRol.setId(rol.getId());
 
-        partialUpdatedRol.rolNaam(UPDATED_ROL_NAAM).startDatumRol(UPDATED_START_DATUM_ROL);
+        partialUpdatedRol.rolnaam(UPDATED_ROLNAAM).startdatumRol(UPDATED_STARTDATUM_ROL);
 
         restRolMockMvc
             .perform(
@@ -595,10 +595,10 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
-        assertThat(testRol.getRolNaam()).isEqualTo(UPDATED_ROL_NAAM);
+        assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(DEFAULT_JEUGDSCHAATSEN);
-        assertThat(testRol.getStartDatumRol()).isEqualTo(UPDATED_START_DATUM_ROL);
-        assertThat(testRol.getEindDatumRol()).isEqualTo(DEFAULT_EIND_DATUM_ROL);
+        assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);
+        assertThat(testRol.getEinddatumRol()).isEqualTo(DEFAULT_EINDDATUM_ROL);
     }
 
     @Test
@@ -614,10 +614,10 @@ class RolResourceIT {
         partialUpdatedRol.setId(rol.getId());
 
         partialUpdatedRol
-            .rolNaam(UPDATED_ROL_NAAM)
+            .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
-            .startDatumRol(UPDATED_START_DATUM_ROL)
-            .eindDatumRol(UPDATED_EIND_DATUM_ROL);
+            .startdatumRol(UPDATED_STARTDATUM_ROL)
+            .einddatumRol(UPDATED_EINDDATUM_ROL);
 
         restRolMockMvc
             .perform(
@@ -631,10 +631,10 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
-        assertThat(testRol.getRolNaam()).isEqualTo(UPDATED_ROL_NAAM);
+        assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(UPDATED_JEUGDSCHAATSEN);
-        assertThat(testRol.getStartDatumRol()).isEqualTo(UPDATED_START_DATUM_ROL);
-        assertThat(testRol.getEindDatumRol()).isEqualTo(UPDATED_EIND_DATUM_ROL);
+        assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);
+        assertThat(testRol.getEinddatumRol()).isEqualTo(UPDATED_EINDDATUM_ROL);
     }
 
     @Test

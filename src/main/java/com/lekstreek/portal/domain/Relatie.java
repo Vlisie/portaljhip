@@ -27,43 +27,43 @@ public class Relatie implements Serializable {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "voor_naam")
-    private String voorNaam;
+    @Column(name = "voornaam")
+    private String voornaam;
 
-    @Column(name = "achter_naam")
-    private String achterNaam;
+    @Column(name = "achternaam")
+    private String achternaam;
 
     @Column(name = "initialen")
     private String initialen;
 
-    @Column(name = "weergave_naam")
-    private String weergaveNaam;
+    @Column(name = "weergavenaam")
+    private String weergavenaam;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "geslacht")
     private Geslacht geslacht;
 
-    @Column(name = "geboorte_datum")
-    private LocalDate geboorteDatum;
+    @Column(name = "geboortedatum")
+    private LocalDate geboortedatum;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "relatie_type")
-    private RelatieType relatieType;
+    @Column(name = "relatietype")
+    private RelatieType relatietype;
 
-    @Column(name = "inschrijvings_datum")
-    private Instant inschrijvingsDatum;
+    @Column(name = "inschrijvingsdatum")
+    private Instant inschrijvingsdatum;
 
-    @Column(name = "straat_naam")
-    private String straatNaam;
+    @Column(name = "straatnaam")
+    private String straatnaam;
 
-    @Column(name = "huis_nummer")
-    private Integer huisNummer;
+    @Column(name = "huisnummer")
+    private Integer huisnummer;
 
-    @Column(name = "post_code")
-    private String postCode;
+    @Column(name = "postcode")
+    private String postcode;
 
-    @Column(name = "woon_plaats")
-    private String woonPlaats;
+    @Column(name = "woonplaats")
+    private String woonplaats;
 
     @Column(name = "land")
     private String land;
@@ -74,20 +74,20 @@ public class Relatie implements Serializable {
     @Column(name = "email_2")
     private String email2;
 
-    @Column(name = "telefoon_nummer")
-    private Integer telefoonNummer;
+    @Column(name = "telefoonnummer")
+    private Integer telefoonnummer;
 
-    @Column(name = "telefoon_nummer_2")
-    private Integer telefoonNummer2;
+    @Column(name = "telefoonnummer_2")
+    private Integer telefoonnummer2;
 
-    @Column(name = "telefoon_nummer_3")
-    private Integer telefoonNummer3;
+    @Column(name = "telefoonnummer_3")
+    private Integer telefoonnummer3;
 
-    @Column(name = "iban_code")
-    private String ibanCode;
+    @Column(name = "ibancode")
+    private String ibancode;
 
-    @Column(name = "knsb_relatie_nummer")
-    private Long knsbRelatieNummer;
+    @Column(name = "knsb_relatienummer")
+    private Long knsbRelatienummer;
 
     @Lob
     @Column(name = "pasfoto")
@@ -123,30 +123,30 @@ public class Relatie implements Serializable {
         return this;
     }
 
-    public String getVoorNaam() {
-        return this.voorNaam;
+    public String getVoornaam() {
+        return this.voornaam;
     }
 
-    public Relatie voorNaam(String voorNaam) {
-        this.voorNaam = voorNaam;
+    public Relatie voornaam(String voornaam) {
+        this.voornaam = voornaam;
         return this;
     }
 
-    public void setVoorNaam(String voorNaam) {
-        this.voorNaam = voorNaam;
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
     }
 
-    public String getAchterNaam() {
-        return this.achterNaam;
+    public String getAchternaam() {
+        return this.achternaam;
     }
 
-    public Relatie achterNaam(String achterNaam) {
-        this.achterNaam = achterNaam;
+    public Relatie achternaam(String achternaam) {
+        this.achternaam = achternaam;
         return this;
     }
 
-    public void setAchterNaam(String achterNaam) {
-        this.achterNaam = achterNaam;
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
     }
 
     public String getInitialen() {
@@ -162,17 +162,17 @@ public class Relatie implements Serializable {
         this.initialen = initialen;
     }
 
-    public String getWeergaveNaam() {
-        return this.weergaveNaam;
+    public String getWeergavenaam() {
+        return this.weergavenaam;
     }
 
-    public Relatie weergaveNaam(String weergaveNaam) {
-        this.weergaveNaam = weergaveNaam;
+    public Relatie weergavenaam(String weergavenaam) {
+        this.weergavenaam = weergavenaam;
         return this;
     }
 
-    public void setWeergaveNaam(String weergaveNaam) {
-        this.weergaveNaam = weergaveNaam;
+    public void setWeergavenaam(String weergavenaam) {
+        this.weergavenaam = weergavenaam;
     }
 
     public Geslacht getGeslacht() {
@@ -188,95 +188,95 @@ public class Relatie implements Serializable {
         this.geslacht = geslacht;
     }
 
-    public LocalDate getGeboorteDatum() {
-        return this.geboorteDatum;
+    public LocalDate getGeboortedatum() {
+        return this.geboortedatum;
     }
 
-    public Relatie geboorteDatum(LocalDate geboorteDatum) {
-        this.geboorteDatum = geboorteDatum;
+    public Relatie geboortedatum(LocalDate geboortedatum) {
+        this.geboortedatum = geboortedatum;
         return this;
     }
 
-    public void setGeboorteDatum(LocalDate geboorteDatum) {
-        this.geboorteDatum = geboorteDatum;
+    public void setGeboortedatum(LocalDate geboortedatum) {
+        this.geboortedatum = geboortedatum;
     }
 
-    public RelatieType getRelatieType() {
-        return this.relatieType;
+    public RelatieType getRelatietype() {
+        return this.relatietype;
     }
 
-    public Relatie relatieType(RelatieType relatieType) {
-        this.relatieType = relatieType;
+    public Relatie relatietype(RelatieType relatietype) {
+        this.relatietype = relatietype;
         return this;
     }
 
-    public void setRelatieType(RelatieType relatieType) {
-        this.relatieType = relatieType;
+    public void setRelatietype(RelatieType relatietype) {
+        this.relatietype = relatietype;
     }
 
-    public Instant getInschrijvingsDatum() {
-        return this.inschrijvingsDatum;
+    public Instant getInschrijvingsdatum() {
+        return this.inschrijvingsdatum;
     }
 
-    public Relatie inschrijvingsDatum(Instant inschrijvingsDatum) {
-        this.inschrijvingsDatum = inschrijvingsDatum;
+    public Relatie inschrijvingsdatum(Instant inschrijvingsdatum) {
+        this.inschrijvingsdatum = inschrijvingsdatum;
         return this;
     }
 
-    public void setInschrijvingsDatum(Instant inschrijvingsDatum) {
-        this.inschrijvingsDatum = inschrijvingsDatum;
+    public void setInschrijvingsdatum(Instant inschrijvingsdatum) {
+        this.inschrijvingsdatum = inschrijvingsdatum;
     }
 
-    public String getStraatNaam() {
-        return this.straatNaam;
+    public String getStraatnaam() {
+        return this.straatnaam;
     }
 
-    public Relatie straatNaam(String straatNaam) {
-        this.straatNaam = straatNaam;
+    public Relatie straatnaam(String straatnaam) {
+        this.straatnaam = straatnaam;
         return this;
     }
 
-    public void setStraatNaam(String straatNaam) {
-        this.straatNaam = straatNaam;
+    public void setStraatnaam(String straatnaam) {
+        this.straatnaam = straatnaam;
     }
 
-    public Integer getHuisNummer() {
-        return this.huisNummer;
+    public Integer getHuisnummer() {
+        return this.huisnummer;
     }
 
-    public Relatie huisNummer(Integer huisNummer) {
-        this.huisNummer = huisNummer;
+    public Relatie huisnummer(Integer huisnummer) {
+        this.huisnummer = huisnummer;
         return this;
     }
 
-    public void setHuisNummer(Integer huisNummer) {
-        this.huisNummer = huisNummer;
+    public void setHuisnummer(Integer huisnummer) {
+        this.huisnummer = huisnummer;
     }
 
-    public String getPostCode() {
-        return this.postCode;
+    public String getPostcode() {
+        return this.postcode;
     }
 
-    public Relatie postCode(String postCode) {
-        this.postCode = postCode;
+    public Relatie postcode(String postcode) {
+        this.postcode = postcode;
         return this;
     }
 
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
-    public String getWoonPlaats() {
-        return this.woonPlaats;
+    public String getWoonplaats() {
+        return this.woonplaats;
     }
 
-    public Relatie woonPlaats(String woonPlaats) {
-        this.woonPlaats = woonPlaats;
+    public Relatie woonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
         return this;
     }
 
-    public void setWoonPlaats(String woonPlaats) {
-        this.woonPlaats = woonPlaats;
+    public void setWoonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
     }
 
     public String getLand() {
@@ -318,69 +318,69 @@ public class Relatie implements Serializable {
         this.email2 = email2;
     }
 
-    public Integer getTelefoonNummer() {
-        return this.telefoonNummer;
+    public Integer getTelefoonnummer() {
+        return this.telefoonnummer;
     }
 
-    public Relatie telefoonNummer(Integer telefoonNummer) {
-        this.telefoonNummer = telefoonNummer;
+    public Relatie telefoonnummer(Integer telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
         return this;
     }
 
-    public void setTelefoonNummer(Integer telefoonNummer) {
-        this.telefoonNummer = telefoonNummer;
+    public void setTelefoonnummer(Integer telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
     }
 
-    public Integer getTelefoonNummer2() {
-        return this.telefoonNummer2;
+    public Integer getTelefoonnummer2() {
+        return this.telefoonnummer2;
     }
 
-    public Relatie telefoonNummer2(Integer telefoonNummer2) {
-        this.telefoonNummer2 = telefoonNummer2;
+    public Relatie telefoonnummer2(Integer telefoonnummer2) {
+        this.telefoonnummer2 = telefoonnummer2;
         return this;
     }
 
-    public void setTelefoonNummer2(Integer telefoonNummer2) {
-        this.telefoonNummer2 = telefoonNummer2;
+    public void setTelefoonnummer2(Integer telefoonnummer2) {
+        this.telefoonnummer2 = telefoonnummer2;
     }
 
-    public Integer getTelefoonNummer3() {
-        return this.telefoonNummer3;
+    public Integer getTelefoonnummer3() {
+        return this.telefoonnummer3;
     }
 
-    public Relatie telefoonNummer3(Integer telefoonNummer3) {
-        this.telefoonNummer3 = telefoonNummer3;
+    public Relatie telefoonnummer3(Integer telefoonnummer3) {
+        this.telefoonnummer3 = telefoonnummer3;
         return this;
     }
 
-    public void setTelefoonNummer3(Integer telefoonNummer3) {
-        this.telefoonNummer3 = telefoonNummer3;
+    public void setTelefoonnummer3(Integer telefoonnummer3) {
+        this.telefoonnummer3 = telefoonnummer3;
     }
 
-    public String getIbanCode() {
-        return this.ibanCode;
+    public String getIbancode() {
+        return this.ibancode;
     }
 
-    public Relatie ibanCode(String ibanCode) {
-        this.ibanCode = ibanCode;
+    public Relatie ibancode(String ibancode) {
+        this.ibancode = ibancode;
         return this;
     }
 
-    public void setIbanCode(String ibanCode) {
-        this.ibanCode = ibanCode;
+    public void setIbancode(String ibancode) {
+        this.ibancode = ibancode;
     }
 
-    public Long getKnsbRelatieNummer() {
-        return this.knsbRelatieNummer;
+    public Long getKnsbRelatienummer() {
+        return this.knsbRelatienummer;
     }
 
-    public Relatie knsbRelatieNummer(Long knsbRelatieNummer) {
-        this.knsbRelatieNummer = knsbRelatieNummer;
+    public Relatie knsbRelatienummer(Long knsbRelatienummer) {
+        this.knsbRelatienummer = knsbRelatienummer;
         return this;
     }
 
-    public void setKnsbRelatieNummer(Long knsbRelatieNummer) {
-        this.knsbRelatieNummer = knsbRelatieNummer;
+    public void setKnsbRelatienummer(Long knsbRelatienummer) {
+        this.knsbRelatienummer = knsbRelatienummer;
     }
 
     public byte[] getPasfoto() {
@@ -484,26 +484,26 @@ public class Relatie implements Serializable {
     public String toString() {
         return "Relatie{" +
             "id=" + getId() +
-            ", voorNaam='" + getVoorNaam() + "'" +
-            ", achterNaam='" + getAchterNaam() + "'" +
+            ", voornaam='" + getVoornaam() + "'" +
+            ", achternaam='" + getAchternaam() + "'" +
             ", initialen='" + getInitialen() + "'" +
-            ", weergaveNaam='" + getWeergaveNaam() + "'" +
+            ", weergavenaam='" + getWeergavenaam() + "'" +
             ", geslacht='" + getGeslacht() + "'" +
-            ", geboorteDatum='" + getGeboorteDatum() + "'" +
-            ", relatieType='" + getRelatieType() + "'" +
-            ", inschrijvingsDatum='" + getInschrijvingsDatum() + "'" +
-            ", straatNaam='" + getStraatNaam() + "'" +
-            ", huisNummer=" + getHuisNummer() +
-            ", postCode='" + getPostCode() + "'" +
-            ", woonPlaats='" + getWoonPlaats() + "'" +
+            ", geboortedatum='" + getGeboortedatum() + "'" +
+            ", relatietype='" + getRelatietype() + "'" +
+            ", inschrijvingsdatum='" + getInschrijvingsdatum() + "'" +
+            ", straatnaam='" + getStraatnaam() + "'" +
+            ", huisnummer=" + getHuisnummer() +
+            ", postcode='" + getPostcode() + "'" +
+            ", woonplaats='" + getWoonplaats() + "'" +
             ", land='" + getLand() + "'" +
             ", email='" + getEmail() + "'" +
             ", email2='" + getEmail2() + "'" +
-            ", telefoonNummer=" + getTelefoonNummer() +
-            ", telefoonNummer2=" + getTelefoonNummer2() +
-            ", telefoonNummer3=" + getTelefoonNummer3() +
-            ", ibanCode='" + getIbanCode() + "'" +
-            ", knsbRelatieNummer=" + getKnsbRelatieNummer() +
+            ", telefoonnummer=" + getTelefoonnummer() +
+            ", telefoonnummer2=" + getTelefoonnummer2() +
+            ", telefoonnummer3=" + getTelefoonnummer3() +
+            ", ibancode='" + getIbancode() + "'" +
+            ", knsbRelatienummer=" + getKnsbRelatienummer() +
             ", pasfoto='" + getPasfoto() + "'" +
             ", pasfotoContentType='" + getPasfotoContentType() + "'" +
             ", privacyVerklaring='" + getPrivacyVerklaring() + "'" +

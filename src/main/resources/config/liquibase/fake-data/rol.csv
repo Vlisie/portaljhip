@@ -1,4 +1,4 @@
-id;rol_naam;jeugdschaatsen;start_datum_rol;eind_datum_rol
+id;rolnaam;jeugdschaatsen;startdatum_rol;einddatum_rol
 efb3a971-2e1a-4e7c-84e3-22dd6febdbd6;state;false;2021-07-06T22:59:47;2021-07-07T15:27:48
 57a271c8-dedf-4fe7-996b-4c173c2e7a06;Loan straat granular;false;2021-07-07T09:55:51;2021-07-07T19:49:29
 f555ae26-aac1-420b-8f59-4f27cde9558c;invoice dijk directional;false;2021-07-07T04:44:30;2021-07-07T03:09:18

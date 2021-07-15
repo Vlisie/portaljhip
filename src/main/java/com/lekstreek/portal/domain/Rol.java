@@ -24,17 +24,17 @@ public class Rol implements Serializable {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "rol_naam")
-    private String rolNaam;
+    @Column(name = "rolnaam")
+    private String rolnaam;
 
     @Column(name = "jeugdschaatsen")
     private Boolean jeugdschaatsen;
 
-    @Column(name = "start_datum_rol")
-    private Instant startDatumRol;
+    @Column(name = "startdatum_rol")
+    private Instant startdatumRol;
 
-    @Column(name = "eind_datum_rol")
-    private Instant eindDatumRol;
+    @Column(name = "einddatum_rol")
+    private Instant einddatumRol;
 
     @ManyToMany(mappedBy = "rols")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -55,17 +55,17 @@ public class Rol implements Serializable {
         return this;
     }
 
-    public String getRolNaam() {
-        return this.rolNaam;
+    public String getRolnaam() {
+        return this.rolnaam;
     }
 
-    public Rol rolNaam(String rolNaam) {
-        this.rolNaam = rolNaam;
+    public Rol rolnaam(String rolnaam) {
+        this.rolnaam = rolnaam;
         return this;
     }
 
-    public void setRolNaam(String rolNaam) {
-        this.rolNaam = rolNaam;
+    public void setRolnaam(String rolnaam) {
+        this.rolnaam = rolnaam;
     }
 
     public Boolean getJeugdschaatsen() {
@@ -81,30 +81,30 @@ public class Rol implements Serializable {
         this.jeugdschaatsen = jeugdschaatsen;
     }
 
-    public Instant getStartDatumRol() {
-        return this.startDatumRol;
+    public Instant getStartdatumRol() {
+        return this.startdatumRol;
     }
 
-    public Rol startDatumRol(Instant startDatumRol) {
-        this.startDatumRol = startDatumRol;
+    public Rol startdatumRol(Instant startdatumRol) {
+        this.startdatumRol = startdatumRol;
         return this;
     }
 
-    public void setStartDatumRol(Instant startDatumRol) {
-        this.startDatumRol = startDatumRol;
+    public void setStartdatumRol(Instant startdatumRol) {
+        this.startdatumRol = startdatumRol;
     }
 
-    public Instant getEindDatumRol() {
-        return this.eindDatumRol;
+    public Instant getEinddatumRol() {
+        return this.einddatumRol;
     }
 
-    public Rol eindDatumRol(Instant eindDatumRol) {
-        this.eindDatumRol = eindDatumRol;
+    public Rol einddatumRol(Instant einddatumRol) {
+        this.einddatumRol = einddatumRol;
         return this;
     }
 
-    public void setEindDatumRol(Instant eindDatumRol) {
-        this.eindDatumRol = eindDatumRol;
+    public void setEinddatumRol(Instant einddatumRol) {
+        this.einddatumRol = einddatumRol;
     }
 
     public Set<Relatie> getRelaties() {
@@ -162,10 +162,10 @@ public class Rol implements Serializable {
     public String toString() {
         return "Rol{" +
             "id=" + getId() +
-            ", rolNaam='" + getRolNaam() + "'" +
+            ", rolnaam='" + getRolnaam() + "'" +
             ", jeugdschaatsen='" + getJeugdschaatsen() + "'" +
-            ", startDatumRol='" + getStartDatumRol() + "'" +
-            ", eindDatumRol='" + getEindDatumRol() + "'" +
+            ", startdatumRol='" + getStartdatumRol() + "'" +
+            ", einddatumRol='" + getEinddatumRol() + "'" +
             "}";
     }
 }

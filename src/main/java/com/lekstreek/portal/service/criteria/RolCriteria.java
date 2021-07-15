@@ -28,13 +28,13 @@ public class RolCriteria implements Serializable, Criteria {
 
     private UUIDFilter id;
 
-    private StringFilter rolNaam;
+    private StringFilter rolnaam;
 
     private BooleanFilter jeugdschaatsen;
 
-    private InstantFilter startDatumRol;
+    private InstantFilter startdatumRol;
 
-    private InstantFilter eindDatumRol;
+    private InstantFilter einddatumRol;
 
     private UUIDFilter relatieId;
 
@@ -42,10 +42,10 @@ public class RolCriteria implements Serializable, Criteria {
 
     public RolCriteria(RolCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.rolNaam = other.rolNaam == null ? null : other.rolNaam.copy();
+        this.rolnaam = other.rolnaam == null ? null : other.rolnaam.copy();
         this.jeugdschaatsen = other.jeugdschaatsen == null ? null : other.jeugdschaatsen.copy();
-        this.startDatumRol = other.startDatumRol == null ? null : other.startDatumRol.copy();
-        this.eindDatumRol = other.eindDatumRol == null ? null : other.eindDatumRol.copy();
+        this.startdatumRol = other.startdatumRol == null ? null : other.startdatumRol.copy();
+        this.einddatumRol = other.einddatumRol == null ? null : other.einddatumRol.copy();
         this.relatieId = other.relatieId == null ? null : other.relatieId.copy();
     }
 
@@ -69,19 +69,19 @@ public class RolCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getRolNaam() {
-        return rolNaam;
+    public StringFilter getRolnaam() {
+        return rolnaam;
     }
 
-    public StringFilter rolNaam() {
-        if (rolNaam == null) {
-            rolNaam = new StringFilter();
+    public StringFilter rolnaam() {
+        if (rolnaam == null) {
+            rolnaam = new StringFilter();
         }
-        return rolNaam;
+        return rolnaam;
     }
 
-    public void setRolNaam(StringFilter rolNaam) {
-        this.rolNaam = rolNaam;
+    public void setRolnaam(StringFilter rolnaam) {
+        this.rolnaam = rolnaam;
     }
 
     public BooleanFilter getJeugdschaatsen() {
@@ -99,34 +99,34 @@ public class RolCriteria implements Serializable, Criteria {
         this.jeugdschaatsen = jeugdschaatsen;
     }
 
-    public InstantFilter getStartDatumRol() {
-        return startDatumRol;
+    public InstantFilter getStartdatumRol() {
+        return startdatumRol;
     }
 
-    public InstantFilter startDatumRol() {
-        if (startDatumRol == null) {
-            startDatumRol = new InstantFilter();
+    public InstantFilter startdatumRol() {
+        if (startdatumRol == null) {
+            startdatumRol = new InstantFilter();
         }
-        return startDatumRol;
+        return startdatumRol;
     }
 
-    public void setStartDatumRol(InstantFilter startDatumRol) {
-        this.startDatumRol = startDatumRol;
+    public void setStartdatumRol(InstantFilter startdatumRol) {
+        this.startdatumRol = startdatumRol;
     }
 
-    public InstantFilter getEindDatumRol() {
-        return eindDatumRol;
+    public InstantFilter getEinddatumRol() {
+        return einddatumRol;
     }
 
-    public InstantFilter eindDatumRol() {
-        if (eindDatumRol == null) {
-            eindDatumRol = new InstantFilter();
+    public InstantFilter einddatumRol() {
+        if (einddatumRol == null) {
+            einddatumRol = new InstantFilter();
         }
-        return eindDatumRol;
+        return einddatumRol;
     }
 
-    public void setEindDatumRol(InstantFilter eindDatumRol) {
-        this.eindDatumRol = eindDatumRol;
+    public void setEinddatumRol(InstantFilter einddatumRol) {
+        this.einddatumRol = einddatumRol;
     }
 
     public UUIDFilter getRelatieId() {
@@ -155,17 +155,17 @@ public class RolCriteria implements Serializable, Criteria {
         final RolCriteria that = (RolCriteria) o;
         return (
             Objects.equals(id, that.id) &&
-            Objects.equals(rolNaam, that.rolNaam) &&
+            Objects.equals(rolnaam, that.rolnaam) &&
             Objects.equals(jeugdschaatsen, that.jeugdschaatsen) &&
-            Objects.equals(startDatumRol, that.startDatumRol) &&
-            Objects.equals(eindDatumRol, that.eindDatumRol) &&
+            Objects.equals(startdatumRol, that.startdatumRol) &&
+            Objects.equals(einddatumRol, that.einddatumRol) &&
             Objects.equals(relatieId, that.relatieId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rolNaam, jeugdschaatsen, startDatumRol, eindDatumRol, relatieId);
+        return Objects.hash(id, rolnaam, jeugdschaatsen, startdatumRol, einddatumRol, relatieId);
     }
 
     // prettier-ignore
@@ -173,10 +173,10 @@ public class RolCriteria implements Serializable, Criteria {
     public String toString() {
         return "RolCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
-            (rolNaam != null ? "rolNaam=" + rolNaam + ", " : "") +
+            (rolnaam != null ? "rolnaam=" + rolnaam + ", " : "") +
             (jeugdschaatsen != null ? "jeugdschaatsen=" + jeugdschaatsen + ", " : "") +
-            (startDatumRol != null ? "startDatumRol=" + startDatumRol + ", " : "") +
-            (eindDatumRol != null ? "eindDatumRol=" + eindDatumRol + ", " : "") +
+            (startdatumRol != null ? "startdatumRol=" + startdatumRol + ", " : "") +
+            (einddatumRol != null ? "einddatumRol=" + einddatumRol + ", " : "") +
             (relatieId != null ? "relatieId=" + relatieId + ", " : "") +
             "}";
     }
