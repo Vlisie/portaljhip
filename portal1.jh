@@ -1,3 +1,11 @@
+entity Adres {
+	id UUID,
+    straatnaam String,
+    huisnummer Integer,
+    postcode String,
+    woonplaats String,
+    land String
+}
 
 entity Relatie {
 	id UUID,
@@ -9,11 +17,7 @@ entity Relatie {
     geboortedatum LocalDate,
     relatietype RelatieType,
     inschrijvingsdatum Instant,
-    straatnaam String,
-    huisnummer Integer,
-    postcode String,
-    woonplaats String,
-    land String,
+    adres UUID,
     email String,
     email2 String,
     telefoonnummer Integer,
@@ -35,14 +39,19 @@ enum Geslacht {
 
 entity Rol {
 	id UUID,
+    relatie Relatie,
 	rolnaam String,
 	jeugdschaatsen Boolean,
 	startdatumRol Instant,
     einddatumRol Instant
 }
 
-relationship ManyToMany {
-	Relatie{rol(id)} to Rol{relatie(id)}
+relationship ManyToOne {
+	Rol{relatie} to Relatie{rol} 
+}
+
+relationship OneToMany {
+	Relatie{adres} to Adres
 }
 
 filter Relatie, Rol
