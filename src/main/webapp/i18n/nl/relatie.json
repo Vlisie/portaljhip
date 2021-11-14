@@ -18,6 +18,7 @@
         "title": "Relatie"
       },
       "id": "Id",
+      "rol": "Rol",
       "voornaam": "Voornaam",
       "achternaam": "Achternaam",
       "initialen": "Initialen",
@@ -26,11 +27,7 @@
       "geboortedatum": "Geboortedatum",
       "relatietype": "Relatietype",
       "inschrijvingsdatum": "Inschrijvingsdatum",
-      "straatnaam": "Straatnaam",
-      "huisnummer": "Huisnummer",
-      "postcode": "Postcode",
-      "woonplaats": "Woonplaats",
-      "land": "Land",
+      "adres": "Adres",
       "email": "Email",
       "email2": "Email 2",
       "telefoonnummer": "Telefoonnummer",
@@ -40,6 +37,7 @@
       "knsbRelatienummer": "Knsb Relatienummer",
       "pasfoto": "Pasfoto",
       "privacyVerklaring": "Privacy Verklaring",
+      "adres": "Adres",
       "rol": "Rol"
     }
   }

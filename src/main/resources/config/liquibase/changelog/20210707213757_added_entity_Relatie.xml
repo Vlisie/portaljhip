@@ -3,7 +3,7 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
@@ -13,6 +13,9 @@
         <createTable tableName="relatie">
             <column name="id" type="${uuidType}">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="rol" type="${uuidType}">
+                <constraints nullable="true" />
             </column>
             <column name="voornaam" type="varchar(255)">
                 <constraints nullable="true" />
@@ -38,19 +41,7 @@
             <column name="inschrijvingsdatum" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="straatnaam" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="huisnummer" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="postcode" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="woonplaats" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="land" type="varchar(255)">
+            <column name="adres" type="${uuidType}">
                 <constraints nullable="true" />
             </column>
             <column name="email" type="varchar(255)">
@@ -91,20 +82,6 @@
         <dropDefaultValue tableName="relatie" columnName="inschrijvingsdatum" columnDataType="${datetimeType}"/>
     </changeSet>
 
-    <changeSet id="20210707213757-1-relations" author="jhipster">
-
-        <createTable tableName="rel_relatie__rol">
-            <column name="rol_id" type="${uuidType}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="relatie_id" type="${uuidType}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="relatie_id, rol_id" tableName="rel_relatie__rol"/>
-    </changeSet>
-
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
@@ -119,8 +96,10 @@
         <loadData
                   file="config/liquibase/fake-data/relatie.csv"
                   separator=";"
-                  tableName="relatie">
+                  tableName="relatie"
+                  usePreparedStatements="true">
             <column name="id" type="${uuidType}"/>
+            <column name="rol" type="${uuidType}"/>
             <column name="voornaam" type="string"/>
             <column name="achternaam" type="string"/>
             <column name="initialen" type="string"/>
@@ -128,12 +107,8 @@
             <column name="geslacht" type="string"/>
             <column name="geboortedatum" type="date"/>
             <column name="relatietype" type="string"/>
-            <column name="inschrijvingsdatum" type="${datetimeType}"/>
-            <column name="straatnaam" type="string"/>
-            <column name="huisnummer" type="numeric"/>
-            <column name="postcode" type="string"/>
-            <column name="woonplaats" type="string"/>
-            <column name="land" type="string"/>
+            <column name="inschrijvingsdatum" type="date"/>
+            <column name="adres" type="${uuidType}"/>
             <column name="email" type="string"/>
             <column name="email_2" type="string"/>
             <column name="telefoonnummer" type="numeric"/>

@@ -47,24 +47,25 @@ public class RolService {
 
         return rolRepository
             .findById(rol.getId())
-            .map(
-                existingRol -> {
-                    if (rol.getRolnaam() != null) {
-                        existingRol.setRolnaam(rol.getRolnaam());
-                    }
-                    if (rol.getJeugdschaatsen() != null) {
-                        existingRol.setJeugdschaatsen(rol.getJeugdschaatsen());
-                    }
-                    if (rol.getStartdatumRol() != null) {
-                        existingRol.setStartdatumRol(rol.getStartdatumRol());
-                    }
-                    if (rol.getEinddatumRol() != null) {
-                        existingRol.setEinddatumRol(rol.getEinddatumRol());
-                    }
-
-                    return existingRol;
+            .map(existingRol -> {
+                if (rol.getRelatie() != null) {
+                    existingRol.setRelatie(rol.getRelatie());
                 }
-            )
+                if (rol.getRolnaam() != null) {
+                    existingRol.setRolnaam(rol.getRolnaam());
+                }
+                if (rol.getJeugdschaatsen() != null) {
+                    existingRol.setJeugdschaatsen(rol.getJeugdschaatsen());
+                }
+                if (rol.getStartdatumRol() != null) {
+                    existingRol.setStartdatumRol(rol.getStartdatumRol());
+                }
+                if (rol.getEinddatumRol() != null) {
+                    existingRol.setEinddatumRol(rol.getEinddatumRol());
+                }
+
+                return existingRol;
+            })
             .map(rolRepository::save);
     }
 

@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
+import { IAdres } from 'app/shared/model/adres.model';
 import { IRol } from 'app/shared/model/rol.model';
 import { Geslacht } from 'app/shared/model/enumerations/geslacht.model';
 import { RelatieType } from 'app/shared/model/enumerations/relatie-type.model';
 
 export interface IRelatie {
   id?: string;
+  rol?: string | null;
   voornaam?: string | null;
   achternaam?: string | null;
   initialen?: string | null;
@@ -13,11 +15,7 @@ export interface IRelatie {
   geboortedatum?: string | null;
   relatietype?: RelatieType | null;
   inschrijvingsdatum?: string | null;
-  straatnaam?: string | null;
-  huisnummer?: number | null;
-  postcode?: string | null;
-  woonplaats?: string | null;
-  land?: string | null;
+  adres?: string | null;
   email?: string | null;
   email2?: string | null;
   telefoonnummer?: number | null;
@@ -29,6 +27,7 @@ export interface IRelatie {
   pasfoto?: string | null;
   privacyVerklaringContentType?: string | null;
   privacyVerklaring?: string | null;
+  adres?: IAdres[] | null;
   rols?: IRol[] | null;
 }
 

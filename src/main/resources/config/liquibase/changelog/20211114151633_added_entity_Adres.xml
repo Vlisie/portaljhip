@@ -7,26 +7,26 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity Rol.
+        Added the entity Adres.
     -->
-    <changeSet id="20210707213758-1" author="jhipster">
-        <createTable tableName="rol">
+    <changeSet id="20211114151633-1" author="jhipster">
+        <createTable tableName="adres">
             <column name="id" type="${uuidType}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="relatie" type="${uuidType}">
+            <column name="straatnaam" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="rolnaam" type="varchar(255)">
+            <column name="huisnummer" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="jeugdschaatsen" type="boolean">
+            <column name="postcode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="startdatum_rol" type="${datetimeType}">
+            <column name="woonplaats" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="einddatum_rol" type="${datetimeType}">
+            <column name="land" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="relatie_id" type="${uuidType}">
@@ -34,8 +34,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="rol" columnName="startdatum_rol" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="rol" columnName="einddatum_rol" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -48,18 +46,18 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20210707213758-1-data" author="jhipster" context="faker">
+    <changeSet id="20211114151633-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/rol.csv"
+                  file="config/liquibase/fake-data/adres.csv"
                   separator=";"
-                  tableName="rol"
+                  tableName="adres"
                   usePreparedStatements="true">
             <column name="id" type="${uuidType}"/>
-            <column name="relatie" type="${uuidType}"/>
-            <column name="rolnaam" type="string"/>
-            <column name="jeugdschaatsen" type="boolean"/>
-            <column name="startdatum_rol" type="date"/>
-            <column name="einddatum_rol" type="date"/>
+            <column name="straatnaam" type="string"/>
+            <column name="huisnummer" type="numeric"/>
+            <column name="postcode" type="string"/>
+            <column name="woonplaats" type="string"/>
+            <column name="land" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

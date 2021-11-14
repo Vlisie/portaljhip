@@ -5,9 +5,9 @@ import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { getEntity, deleteEntity } from './rol.reducer';
+import { getEntity, deleteEntity } from './adres.reducer';
 
-export const RolDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const AdresDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -16,11 +16,11 @@ export const RolDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
     setLoadModal(true);
   }, []);
 
-  const rolEntity = useAppSelector(state => state.rol.entity);
-  const updateSuccess = useAppSelector(state => state.rol.updateSuccess);
+  const adresEntity = useAppSelector(state => state.adres.entity);
+  const updateSuccess = useAppSelector(state => state.adres.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/rol');
+    props.history.push('/adres');
   };
 
   useEffect(() => {
@@ -31,17 +31,17 @@ export const RolDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
   }, [updateSuccess]);
 
   const confirmDelete = () => {
-    dispatch(deleteEntity(rolEntity.id));
+    dispatch(deleteEntity(adresEntity.id));
   };
 
   return (
     <Modal isOpen toggle={handleClose}>
-      <ModalHeader toggle={handleClose} data-cy="rolDeleteDialogHeading">
+      <ModalHeader toggle={handleClose} data-cy="adresDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="portaljhipApp.rol.delete.question">
-        <Translate contentKey="portaljhipApp.rol.delete.question" interpolate={{ id: rolEntity.id }}>
-          Are you sure you want to delete this Rol?
+      <ModalBody id="portaljhipApp.adres.delete.question">
+        <Translate contentKey="portaljhipApp.adres.delete.question" interpolate={{ id: adresEntity.id }}>
+          Are you sure you want to delete this Adres?
         </Translate>
       </ModalBody>
       <ModalFooter>
@@ -50,7 +50,7 @@ export const RolDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
           &nbsp;
           <Translate contentKey="entity.action.cancel">Cancel</Translate>
         </Button>
-        <Button id="jhi-confirm-delete-rol" data-cy="entityConfirmDeleteButton" color="danger" onClick={confirmDelete}>
+        <Button id="jhi-confirm-delete-adres" data-cy="entityConfirmDeleteButton" color="danger" onClick={confirmDelete}>
           <FontAwesomeIcon icon="trash" />
           &nbsp;
           <Translate contentKey="entity.action.delete">Delete</Translate>
@@ -60,4 +60,4 @@ export const RolDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
   );
 };
 
-export default RolDeleteDialog;
+export default AdresDeleteDialog;

@@ -44,7 +44,7 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "entities": ["Relatie", "Rol"],
-    "lastLiquibaseTimestamp": 1625693878000
+    "entities": ["Relatie", "Rol", "Adres"],
+    "lastLiquibaseTimestamp": 1636902993000
   }
 }

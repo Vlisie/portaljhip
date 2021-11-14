@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntities } from './rol.reducer';
-import { IRol } from 'app/shared/model/rol.model';
+import { getEntities } from './adres.reducer';
+import { IAdres } from 'app/shared/model/adres.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const Rol = (props: RouteComponentProps<{ url: string }>) => {
+export const Adres = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
 
-  const rolList = useAppSelector(state => state.rol.entities);
-  const loading = useAppSelector(state => state.rol.loading);
+  const adresList = useAppSelector(state => state.adres.entities);
+  const loading = useAppSelector(state => state.adres.loading);
 
   useEffect(() => {
     dispatch(getEntities({}));
@@ -27,78 +27,78 @@ export const Rol = (props: RouteComponentProps<{ url: string }>) => {
 
   return (
     <div>
-      <h2 id="rol-heading" data-cy="RolHeading">
-        <Translate contentKey="portaljhipApp.rol.home.title">Rols</Translate>
+      <h2 id="adres-heading" data-cy="AdresHeading">
+        <Translate contentKey="portaljhipApp.adres.home.title">Adres</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="portaljhipApp.rol.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="portaljhipApp.adres.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="portaljhipApp.rol.home.createLabel">Create new Rol</Translate>
+            <Translate contentKey="portaljhipApp.adres.home.createLabel">Create new Adres</Translate>
           </Link>
         </div>
       </h2>
       <div className="table-responsive">
-        {rolList && rolList.length > 0 ? (
+        {adresList && adresList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.id">Id</Translate>
+                  <Translate contentKey="portaljhipApp.adres.id">Id</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.relatie">Relatie</Translate>
+                  <Translate contentKey="portaljhipApp.adres.straatnaam">Straatnaam</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.rolnaam">Rolnaam</Translate>
+                  <Translate contentKey="portaljhipApp.adres.huisnummer">Huisnummer</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.jeugdschaatsen">Jeugdschaatsen</Translate>
+                  <Translate contentKey="portaljhipApp.adres.postcode">Postcode</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.startdatumRol">Startdatum Rol</Translate>
+                  <Translate contentKey="portaljhipApp.adres.woonplaats">Woonplaats</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.einddatumRol">Einddatum Rol</Translate>
+                  <Translate contentKey="portaljhipApp.adres.land">Land</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.rol.relatie">Relatie</Translate>
+                  <Translate contentKey="portaljhipApp.adres.relatie">Relatie</Translate>
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {rolList.map((rol, i) => (
+              {adresList.map((adres, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`${match.url}/${rol.id}`} color="link" size="sm">
-                      {rol.id}
+                    <Button tag={Link} to={`${match.url}/${adres.id}`} color="link" size="sm">
+                      {adres.id}
                     </Button>
                   </td>
-                  <td>{rol.relatie}</td>
-                  <td>{rol.rolnaam}</td>
-                  <td>{rol.jeugdschaatsen ? 'true' : 'false'}</td>
-                  <td>{rol.startdatumRol ? <TextFormat type="date" value={rol.startdatumRol} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{rol.einddatumRol ? <TextFormat type="date" value={rol.einddatumRol} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{rol.relatie ? <Link to={`relatie/${rol.relatie.id}`}>{rol.relatie.id}</Link> : ''}</td>
+                  <td>{adres.straatnaam}</td>
+                  <td>{adres.huisnummer}</td>
+                  <td>{adres.postcode}</td>
+                  <td>{adres.woonplaats}</td>
+                  <td>{adres.land}</td>
+                  <td>{adres.relatie ? <Link to={`relatie/${adres.relatie.id}`}>{adres.relatie.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${rol.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`${match.url}/${adres.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`${match.url}/${rol.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
+                      <Button tag={Link} to={`${match.url}/${adres.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`${match.url}/${rol.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
+                      <Button tag={Link} to={`${match.url}/${adres.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
                         <FontAwesomeIcon icon="trash" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>
@@ -113,7 +113,7 @@ export const Rol = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="portaljhipApp.rol.home.notFound">No Rols found</Translate>
+              <Translate contentKey="portaljhipApp.adres.home.notFound">No Adres found</Translate>
             </div>
           )
         )}
@@ -122,4 +122,4 @@ export const Rol = (props: RouteComponentProps<{ url: string }>) => {
   );
 };
 
-export default Rol;
+export default Adres;

@@ -109,7 +109,7 @@ public class RolResource {
      * or with status {@code 500 (Internal Server Error)} if the rol couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/rols/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/rols/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Rol> partialUpdateRol(@PathVariable(value = "id", required = false) final UUID id, @RequestBody Rol rol)
         throws URISyntaxException {
         log.debug("REST request to partial update Rol partially : {}, {}", id, rol);

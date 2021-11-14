@@ -15,6 +15,8 @@ import passwordReset, { PasswordResetState } from 'app/modules/account/password-
 import relatie from 'app/entities/relatie/relatie.reducer';
 // prettier-ignore
 import rol from 'app/entities/rol/rol.reducer';
+// prettier-ignore
+import adres from 'app/entities/adres/adres.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -30,6 +32,7 @@ const rootReducer = {
   settings,
   relatie,
   rol,
+  adres,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

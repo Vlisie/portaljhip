@@ -30,6 +30,12 @@ export const RolDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{rolEntity.id}</dd>
           <dt>
+            <span id="relatie">
+              <Translate contentKey="portaljhipApp.rol.relatie">Relatie</Translate>
+            </span>
+          </dt>
+          <dd>{rolEntity.relatie}</dd>
+          <dt>
             <span id="rolnaam">
               <Translate contentKey="portaljhipApp.rol.rolnaam">Rolnaam</Translate>
             </span>
@@ -53,6 +59,10 @@ export const RolDetail = (props: RouteComponentProps<{ id: string }>) => {
             </span>
           </dt>
           <dd>{rolEntity.einddatumRol ? <TextFormat value={rolEntity.einddatumRol} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <Translate contentKey="portaljhipApp.rol.relatie">Relatie</Translate>
+          </dt>
+          <dd>{rolEntity.relatie ? rolEntity.relatie.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/rol" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

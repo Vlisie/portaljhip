@@ -4,25 +4,25 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { IRol } from 'app/shared/model/rol.model';
-import { getEntities as getRols } from 'app/entities/rol/rol.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './relatie.reducer';
 import { IRelatie } from 'app/shared/model/relatie.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { Geslacht } from 'app/shared/model/enumerations/geslacht.model';
+import { RelatieType } from 'app/shared/model/enumerations/relatie-type.model';
 
 export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const rols = useAppSelector(state => state.rol.entities);
   const relatieEntity = useAppSelector(state => state.relatie.entity);
   const loading = useAppSelector(state => state.relatie.loading);
   const updating = useAppSelector(state => state.relatie.updating);
   const updateSuccess = useAppSelector(state => state.relatie.updateSuccess);
-
+  const geslachtValues = Object.keys(Geslacht);
+  const relatieTypeValues = Object.keys(RelatieType);
   const handleClose = () => {
     props.history.push('/relatie');
   };
@@ -33,8 +33,6 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
     } else {
       dispatch(getEntity(props.match.params.id));
     }
-
-    dispatch(getRols({}));
   }, []);
 
   useEffect(() => {
@@ -49,7 +47,6 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...relatieEntity,
       ...values,
-      rols: mapIdList(values.rols),
     };
 
     if (isNew) {
@@ -65,11 +62,10 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
           inschrijvingsdatum: displayDefaultDateTime(),
         }
       : {
-          ...relatieEntity,
           geslacht: 'MAN',
           relatietype: 'LID',
+          ...relatieEntity,
           inschrijvingsdatum: convertDateTimeFromServer(relatieEntity.inschrijvingsdatum),
-          rols: relatieEntity?.rols?.map(e => e.id.toString()),
         };
 
   return (
@@ -97,6 +93,7 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
+              <ValidatedField label={translate('portaljhipApp.relatie.rol')} id="relatie-rol" name="rol" data-cy="rol" type="text" />
               <ValidatedField
                 label={translate('portaljhipApp.relatie.voornaam')}
                 id="relatie-voornaam"
@@ -132,9 +129,11 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 data-cy="geslacht"
                 type="select"
               >
-                <option value="MAN">{translate('portaljhipApp.Geslacht.MAN')}</option>
-                <option value="VROUW">{translate('portaljhipApp.Geslacht.VROUW')}</option>
-                <option value="X">{translate('portaljhipApp.Geslacht.X')}</option>
+                {geslachtValues.map(geslacht => (
+                  <option value={geslacht} key={geslacht}>
+                    {translate('portaljhipApp.Geslacht' + geslacht)}
+                  </option>
+                ))}
               </ValidatedField>
               <ValidatedField
                 label={translate('portaljhipApp.relatie.geboortedatum')}
@@ -150,9 +149,11 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 data-cy="relatietype"
                 type="select"
               >
-                <option value="LID">{translate('portaljhipApp.RelatieType.LID')}</option>
-                <option value="JEUGDSCHAATSLID">{translate('portaljhipApp.RelatieType.JEUGDSCHAATSLID')}</option>
-                <option value="DONATEUR">{translate('portaljhipApp.RelatieType.DONATEUR')}</option>
+                {relatieTypeValues.map(relatieType => (
+                  <option value={relatieType} key={relatieType}>
+                    {translate('portaljhipApp.RelatieType' + relatieType)}
+                  </option>
+                ))}
               </ValidatedField>
               <ValidatedField
                 label={translate('portaljhipApp.relatie.inschrijvingsdatum')}
@@ -163,34 +164,12 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('portaljhipApp.relatie.straatnaam')}
-                id="relatie-straatnaam"
-                name="straatnaam"
-                data-cy="straatnaam"
+                label={translate('portaljhipApp.relatie.adres')}
+                id="relatie-adres"
+                name="adres"
+                data-cy="adres"
                 type="text"
               />
-              <ValidatedField
-                label={translate('portaljhipApp.relatie.huisnummer')}
-                id="relatie-huisnummer"
-                name="huisnummer"
-                data-cy="huisnummer"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('portaljhipApp.relatie.postcode')}
-                id="relatie-postcode"
-                name="postcode"
-                data-cy="postcode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('portaljhipApp.relatie.woonplaats')}
-                id="relatie-woonplaats"
-                name="woonplaats"
-                data-cy="woonplaats"
-                type="text"
-              />
-              <ValidatedField label={translate('portaljhipApp.relatie.land')} id="relatie-land" name="land" data-cy="land" type="text" />
               <ValidatedField
                 label={translate('portaljhipApp.relatie.email')}
                 id="relatie-email"
@@ -254,23 +233,6 @@ export const RelatieUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 data-cy="privacyVerklaring"
                 openActionLabel={translate('entity.action.open')}
               />
-              <ValidatedField
-                label={translate('portaljhipApp.relatie.rol')}
-                id="relatie-rol"
-                data-cy="rol"
-                type="select"
-                multiple
-                name="rols"
-              >
-                <option value="" key="0" />
-                {rols
-                  ? rols.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/relatie" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

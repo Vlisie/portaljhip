@@ -1,0 +1,47 @@
+{
+  "name": "Adres",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "straatnaam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "huisnummer",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "postcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "woonplaats",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "land",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "relatie",
+      "otherEntityRelationshipName": "adres",
+      "relationshipName": "relatie"
+    }
+  ],
+  "entityTableName": "adres",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211114151633"
+}

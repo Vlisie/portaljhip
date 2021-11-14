@@ -17,8 +17,11 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210707213757_added_entity_Relatie.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210707213758_added_entity_Rol.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211114151633_added_entity_Adres.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210707213757_added_entity_constraints_Relatie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210707213758_added_entity_constraints_Rol.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211114151633_added_entity_constraints_Adres.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

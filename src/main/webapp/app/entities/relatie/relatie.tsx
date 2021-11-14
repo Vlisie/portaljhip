@@ -50,6 +50,9 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="portaljhipApp.relatie.id">Id</Translate>
                 </th>
                 <th>
+                  <Translate contentKey="portaljhipApp.relatie.rol">Rol</Translate>
+                </th>
+                <th>
                   <Translate contentKey="portaljhipApp.relatie.voornaam">Voornaam</Translate>
                 </th>
                 <th>
@@ -74,19 +77,7 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="portaljhipApp.relatie.inschrijvingsdatum">Inschrijvingsdatum</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="portaljhipApp.relatie.straatnaam">Straatnaam</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="portaljhipApp.relatie.huisnummer">Huisnummer</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="portaljhipApp.relatie.postcode">Postcode</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="portaljhipApp.relatie.woonplaats">Woonplaats</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="portaljhipApp.relatie.land">Land</Translate>
+                  <Translate contentKey="portaljhipApp.relatie.adres">Adres</Translate>
                 </th>
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.email">Email</Translate>
@@ -115,9 +106,6 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                 <th>
                   <Translate contentKey="portaljhipApp.relatie.privacyVerklaring">Privacy Verklaring</Translate>
                 </th>
-                <th>
-                  <Translate contentKey="portaljhipApp.relatie.rol">Rol</Translate>
-                </th>
                 <th />
               </tr>
             </thead>
@@ -129,6 +117,7 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                       {relatie.id}
                     </Button>
                   </td>
+                  <td>{relatie.rol}</td>
                   <td>{relatie.voornaam}</td>
                   <td>{relatie.achternaam}</td>
                   <td>{relatie.initialen}</td>
@@ -147,11 +136,7 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                       <TextFormat type="date" value={relatie.inschrijvingsdatum} format={APP_DATE_FORMAT} />
                     ) : null}
                   </td>
-                  <td>{relatie.straatnaam}</td>
-                  <td>{relatie.huisnummer}</td>
-                  <td>{relatie.postcode}</td>
-                  <td>{relatie.woonplaats}</td>
-                  <td>{relatie.land}</td>
+                  <td>{relatie.adres}</td>
                   <td>{relatie.email}</td>
                   <td>{relatie.email2}</td>
                   <td>{relatie.telefoonnummer}</td>
@@ -188,16 +173,6 @@ export const Relatie = (props: RouteComponentProps<{ url: string }>) => {
                         </span>
                       </div>
                     ) : null}
-                  </td>
-                  <td>
-                    {relatie.rols
-                      ? relatie.rols.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`rol/${val.id}`}>{val.id}</Link>
-                            {j === relatie.rols.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

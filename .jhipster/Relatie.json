@@ -6,6 +6,10 @@
       "fieldType": "UUID"
     },
     {
+      "fieldName": "rol",
+      "fieldType": "UUID"
+    },
+    {
       "fieldName": "voornaam",
       "fieldType": "String"
     },
@@ -40,24 +44,8 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "straatnaam",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "huisnummer",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "postcode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "woonplaats",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "land",
-      "fieldType": "String"
+      "fieldName": "adres",
+      "fieldType": "UUID"
     },
     {
       "fieldName": "email",
@@ -100,12 +88,16 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-many",
+      "relationshipType": "one-to-many",
+      "otherEntityName": "adres",
+      "otherEntityRelationshipName": "relatie",
+      "relationshipName": "adres"
+    },
+    {
+      "relationshipType": "one-to-many",
       "otherEntityName": "rol",
       "otherEntityRelationshipName": "relatie",
-      "relationshipName": "rol",
-      "otherEntityField": "id",
-      "ownerSide": true
+      "relationshipName": "rol"
     }
   ],
   "entityTableName": "relatie",

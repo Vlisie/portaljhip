@@ -6,6 +6,10 @@
       "fieldType": "UUID"
     },
     {
+      "fieldName": "relatie",
+      "fieldType": "UUID"
+    },
+    {
       "fieldName": "rolnaam",
       "fieldType": "String"
     },
@@ -24,12 +28,10 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "relatie",
       "otherEntityRelationshipName": "rol",
-      "relationshipName": "relatie",
-      "otherEntityField": "id",
-      "ownerSide": false
+      "relationshipName": "relatie"
     }
   ],
   "entityTableName": "rol",

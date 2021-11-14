@@ -32,6 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RolResourceIT {
 
+    private static final UUID DEFAULT_RELATIE = UUID.randomUUID();
+    private static final UUID UPDATED_RELATIE = UUID.randomUUID();
+
     private static final String DEFAULT_ROLNAAM = "AAAAAAAAAA";
     private static final String UPDATED_ROLNAAM = "BBBBBBBBBB";
 
@@ -66,6 +69,7 @@ class RolResourceIT {
      */
     public static Rol createEntity(EntityManager em) {
         Rol rol = new Rol()
+            .relatie(DEFAULT_RELATIE)
             .rolnaam(DEFAULT_ROLNAAM)
             .jeugdschaatsen(DEFAULT_JEUGDSCHAATSEN)
             .startdatumRol(DEFAULT_STARTDATUM_ROL)
@@ -81,6 +85,7 @@ class RolResourceIT {
      */
     public static Rol createUpdatedEntity(EntityManager em) {
         Rol rol = new Rol()
+            .relatie(UPDATED_RELATIE)
             .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
             .startdatumRol(UPDATED_STARTDATUM_ROL)
@@ -106,6 +111,7 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeCreate + 1);
         Rol testRol = rolList.get(rolList.size() - 1);
+        assertThat(testRol.getRelatie()).isEqualTo(DEFAULT_RELATIE);
         assertThat(testRol.getRolnaam()).isEqualTo(DEFAULT_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(DEFAULT_JEUGDSCHAATSEN);
         assertThat(testRol.getStartdatumRol()).isEqualTo(DEFAULT_STARTDATUM_ROL);
@@ -142,6 +148,7 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(rol.getId().toString())))
+            .andExpect(jsonPath("$.[*].relatie").value(hasItem(DEFAULT_RELATIE.toString())))
             .andExpect(jsonPath("$.[*].rolnaam").value(hasItem(DEFAULT_ROLNAAM)))
             .andExpect(jsonPath("$.[*].jeugdschaatsen").value(hasItem(DEFAULT_JEUGDSCHAATSEN.booleanValue())))
             .andExpect(jsonPath("$.[*].startdatumRol").value(hasItem(DEFAULT_STARTDATUM_ROL.toString())))
@@ -160,6 +167,7 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(rol.getId().toString()))
+            .andExpect(jsonPath("$.relatie").value(DEFAULT_RELATIE.toString()))
             .andExpect(jsonPath("$.rolnaam").value(DEFAULT_ROLNAAM))
             .andExpect(jsonPath("$.jeugdschaatsen").value(DEFAULT_JEUGDSCHAATSEN.booleanValue()))
             .andExpect(jsonPath("$.startdatumRol").value(DEFAULT_STARTDATUM_ROL.toString()))
@@ -176,6 +184,58 @@ class RolResourceIT {
 
         defaultRolShouldBeFound("id.equals=" + id);
         defaultRolShouldNotBeFound("id.notEquals=" + id);
+    }
+
+    @Test
+    @Transactional
+    void getAllRolsByRelatieIsEqualToSomething() throws Exception {
+        // Initialize the database
+        rolRepository.saveAndFlush(rol);
+
+        // Get all the rolList where relatie equals to DEFAULT_RELATIE
+        defaultRolShouldBeFound("relatie.equals=" + DEFAULT_RELATIE);
+
+        // Get all the rolList where relatie equals to UPDATED_RELATIE
+        defaultRolShouldNotBeFound("relatie.equals=" + UPDATED_RELATIE);
+    }
+
+    @Test
+    @Transactional
+    void getAllRolsByRelatieIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        rolRepository.saveAndFlush(rol);
+
+        // Get all the rolList where relatie not equals to DEFAULT_RELATIE
+        defaultRolShouldNotBeFound("relatie.notEquals=" + DEFAULT_RELATIE);
+
+        // Get all the rolList where relatie not equals to UPDATED_RELATIE
+        defaultRolShouldBeFound("relatie.notEquals=" + UPDATED_RELATIE);
+    }
+
+    @Test
+    @Transactional
+    void getAllRolsByRelatieIsInShouldWork() throws Exception {
+        // Initialize the database
+        rolRepository.saveAndFlush(rol);
+
+        // Get all the rolList where relatie in DEFAULT_RELATIE or UPDATED_RELATIE
+        defaultRolShouldBeFound("relatie.in=" + DEFAULT_RELATIE + "," + UPDATED_RELATIE);
+
+        // Get all the rolList where relatie equals to UPDATED_RELATIE
+        defaultRolShouldNotBeFound("relatie.in=" + UPDATED_RELATIE);
+    }
+
+    @Test
+    @Transactional
+    void getAllRolsByRelatieIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        rolRepository.saveAndFlush(rol);
+
+        // Get all the rolList where relatie is not null
+        defaultRolShouldBeFound("relatie.specified=true");
+
+        // Get all the rolList where relatie is null
+        defaultRolShouldNotBeFound("relatie.specified=false");
     }
 
     @Test
@@ -417,10 +477,17 @@ class RolResourceIT {
     void getAllRolsByRelatieIsEqualToSomething() throws Exception {
         // Initialize the database
         rolRepository.saveAndFlush(rol);
-        Relatie relatie = RelatieResourceIT.createEntity(em);
+        Relatie relatie;
+        if (TestUtil.findAll(em, Relatie.class).isEmpty()) {
+            relatie = RelatieResourceIT.createEntity(em);
+            em.persist(relatie);
+            em.flush();
+        } else {
+            relatie = TestUtil.findAll(em, Relatie.class).get(0);
+        }
         em.persist(relatie);
         em.flush();
-        rol.addRelatie(relatie);
+        rol.setRelatie(relatie);
         rolRepository.saveAndFlush(rol);
         UUID relatieId = relatie.getId();
 
@@ -440,6 +507,7 @@ class RolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(rol.getId().toString())))
+            .andExpect(jsonPath("$.[*].relatie").value(hasItem(DEFAULT_RELATIE.toString())))
             .andExpect(jsonPath("$.[*].rolnaam").value(hasItem(DEFAULT_ROLNAAM)))
             .andExpect(jsonPath("$.[*].jeugdschaatsen").value(hasItem(DEFAULT_JEUGDSCHAATSEN.booleanValue())))
             .andExpect(jsonPath("$.[*].startdatumRol").value(hasItem(DEFAULT_STARTDATUM_ROL.toString())))
@@ -492,6 +560,7 @@ class RolResourceIT {
         // Disconnect from session so that the updates on updatedRol are not directly saved in db
         em.detach(updatedRol);
         updatedRol
+            .relatie(UPDATED_RELATIE)
             .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
             .startdatumRol(UPDATED_STARTDATUM_ROL)
@@ -509,6 +578,7 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
+        assertThat(testRol.getRelatie()).isEqualTo(UPDATED_RELATIE);
         assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(UPDATED_JEUGDSCHAATSEN);
         assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);
@@ -581,7 +651,7 @@ class RolResourceIT {
         Rol partialUpdatedRol = new Rol();
         partialUpdatedRol.setId(rol.getId());
 
-        partialUpdatedRol.rolnaam(UPDATED_ROLNAAM).startdatumRol(UPDATED_STARTDATUM_ROL);
+        partialUpdatedRol.relatie(UPDATED_RELATIE).jeugdschaatsen(UPDATED_JEUGDSCHAATSEN).einddatumRol(UPDATED_EINDDATUM_ROL);
 
         restRolMockMvc
             .perform(
@@ -595,10 +665,11 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
-        assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
-        assertThat(testRol.getJeugdschaatsen()).isEqualTo(DEFAULT_JEUGDSCHAATSEN);
-        assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);
-        assertThat(testRol.getEinddatumRol()).isEqualTo(DEFAULT_EINDDATUM_ROL);
+        assertThat(testRol.getRelatie()).isEqualTo(UPDATED_RELATIE);
+        assertThat(testRol.getRolnaam()).isEqualTo(DEFAULT_ROLNAAM);
+        assertThat(testRol.getJeugdschaatsen()).isEqualTo(UPDATED_JEUGDSCHAATSEN);
+        assertThat(testRol.getStartdatumRol()).isEqualTo(DEFAULT_STARTDATUM_ROL);
+        assertThat(testRol.getEinddatumRol()).isEqualTo(UPDATED_EINDDATUM_ROL);
     }
 
     @Test
@@ -614,6 +685,7 @@ class RolResourceIT {
         partialUpdatedRol.setId(rol.getId());
 
         partialUpdatedRol
+            .relatie(UPDATED_RELATIE)
             .rolnaam(UPDATED_ROLNAAM)
             .jeugdschaatsen(UPDATED_JEUGDSCHAATSEN)
             .startdatumRol(UPDATED_STARTDATUM_ROL)
@@ -631,6 +703,7 @@ class RolResourceIT {
         List<Rol> rolList = rolRepository.findAll();
         assertThat(rolList).hasSize(databaseSizeBeforeUpdate);
         Rol testRol = rolList.get(rolList.size() - 1);
+        assertThat(testRol.getRelatie()).isEqualTo(UPDATED_RELATIE);
         assertThat(testRol.getRolnaam()).isEqualTo(UPDATED_ROLNAAM);
         assertThat(testRol.getJeugdschaatsen()).isEqualTo(UPDATED_JEUGDSCHAATSEN);
         assertThat(testRol.getStartdatumRol()).isEqualTo(UPDATED_STARTDATUM_ROL);

@@ -1,0 +1,29 @@
+{
+  "portaljhipApp": {
+    "adres": {
+      "home": {
+        "title": "Adres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Adres",
+        "createOrEditLabel": "Maak of wijzig een Adres",
+        "notFound": "No Adres found"
+      },
+      "created": "A new Adres is created with identifier {{ param }}",
+      "updated": "A Adres is updated with identifier {{ param }}",
+      "deleted": "A Adres is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Adres {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Adres"
+      },
+      "id": "Id",
+      "straatnaam": "Straatnaam",
+      "huisnummer": "Huisnummer",
+      "postcode": "Postcode",
+      "woonplaats": "Woonplaats",
+      "land": "Land",
+      "relatie": "Relatie"
+    }
+  }
+}
