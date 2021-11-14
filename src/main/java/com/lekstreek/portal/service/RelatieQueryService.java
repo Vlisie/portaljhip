@@ -78,8 +78,15 @@ public class RelatieQueryService extends QueryService<Relatie> {
     protected Specification<Relatie> createSpecification(RelatieCriteria criteria) {
         Specification<Relatie> specification = Specification.where(null);
         if (criteria != null) {
+            // This has to be called first, because the distinct method returns null
+            if (criteria.getDistinct() != null) {
+                specification = specification.and(distinct(criteria.getDistinct()));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Relatie_.id));
+            }
+            if (criteria.getRol() != null) {
+                specification = specification.and(buildSpecification(criteria.getRol(), Relatie_.rol));
             }
             if (criteria.getVoornaam() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getVoornaam(), Relatie_.voornaam));
@@ -105,20 +112,8 @@ public class RelatieQueryService extends QueryService<Relatie> {
             if (criteria.getInschrijvingsdatum() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getInschrijvingsdatum(), Relatie_.inschrijvingsdatum));
             }
-            if (criteria.getStraatnaam() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStraatnaam(), Relatie_.straatnaam));
-            }
-            if (criteria.getHuisnummer() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHuisnummer(), Relatie_.huisnummer));
-            }
-            if (criteria.getPostcode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPostcode(), Relatie_.postcode));
-            }
-            if (criteria.getWoonplaats() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWoonplaats(), Relatie_.woonplaats));
-            }
-            if (criteria.getLand() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLand(), Relatie_.land));
+            if (criteria.getAdres() != null) {
+                specification = specification.and(buildSpecification(criteria.getAdres(), Relatie_.adres));
             }
             if (criteria.getEmail() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEmail(), Relatie_.email));
@@ -140,6 +135,12 @@ public class RelatieQueryService extends QueryService<Relatie> {
             }
             if (criteria.getKnsbRelatienummer() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getKnsbRelatienummer(), Relatie_.knsbRelatienummer));
+            }
+            if (criteria.getAdresId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getAdresId(), root -> root.join(Relatie_.adres, JoinType.LEFT).get(Adres_.id))
+                    );
             }
             if (criteria.getRolId() != null) {
                 specification =

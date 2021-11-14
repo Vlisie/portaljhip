@@ -3,8 +3,6 @@ package com.lekstreek.portal.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -22,7 +20,11 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private UUID id;
+
+    @Column(name = "relatie")
+    private UUID relatie;
 
     @Column(name = "rolnaam")
     private String rolnaam;
@@ -36,23 +38,36 @@ public class Rol implements Serializable {
     @Column(name = "einddatum_rol")
     private Instant einddatumRol;
 
-    @ManyToMany(mappedBy = "rols")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "rols" }, allowSetters = true)
-    private Set<Relatie> relaties = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "adres", "rols" }, allowSetters = true)
+    private Relatie relatie;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public UUID getId() {
-        return id;
+        return this.id;
+    }
+
+    public Rol id(UUID id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(UUID id) {
         this.id = id;
     }
 
-    public Rol id(UUID id) {
-        this.id = id;
+    public UUID getRelatie() {
+        return this.relatie;
+    }
+
+    public Rol relatie(UUID relatie) {
+        this.setRelatie(relatie);
         return this;
+    }
+
+    public void setRelatie(UUID relatie) {
+        this.relatie = relatie;
     }
 
     public String getRolnaam() {
@@ -60,7 +75,7 @@ public class Rol implements Serializable {
     }
 
     public Rol rolnaam(String rolnaam) {
-        this.rolnaam = rolnaam;
+        this.setRolnaam(rolnaam);
         return this;
     }
 
@@ -73,7 +88,7 @@ public class Rol implements Serializable {
     }
 
     public Rol jeugdschaatsen(Boolean jeugdschaatsen) {
-        this.jeugdschaatsen = jeugdschaatsen;
+        this.setJeugdschaatsen(jeugdschaatsen);
         return this;
     }
 
@@ -86,7 +101,7 @@ public class Rol implements Serializable {
     }
 
     public Rol startdatumRol(Instant startdatumRol) {
-        this.startdatumRol = startdatumRol;
+        this.setStartdatumRol(startdatumRol);
         return this;
     }
 
@@ -99,7 +114,7 @@ public class Rol implements Serializable {
     }
 
     public Rol einddatumRol(Instant einddatumRol) {
-        this.einddatumRol = einddatumRol;
+        this.setEinddatumRol(einddatumRol);
         return this;
     }
 
@@ -107,35 +122,17 @@ public class Rol implements Serializable {
         this.einddatumRol = einddatumRol;
     }
 
-    public Set<Relatie> getRelaties() {
-        return this.relaties;
+    public Relatie getRelatie() {
+        return this.relatie;
     }
 
-    public Rol relaties(Set<Relatie> relaties) {
-        this.setRelaties(relaties);
+    public void setRelatie(Relatie relatie) {
+        this.relatie = relatie;
+    }
+
+    public Rol relatie(Relatie relatie) {
+        this.setRelatie(relatie);
         return this;
-    }
-
-    public Rol addRelatie(Relatie relatie) {
-        this.relaties.add(relatie);
-        relatie.getRols().add(this);
-        return this;
-    }
-
-    public Rol removeRelatie(Relatie relatie) {
-        this.relaties.remove(relatie);
-        relatie.getRols().remove(this);
-        return this;
-    }
-
-    public void setRelaties(Set<Relatie> relaties) {
-        if (this.relaties != null) {
-            this.relaties.forEach(i -> i.removeRol(this));
-        }
-        if (relaties != null) {
-            relaties.forEach(i -> i.addRol(this));
-        }
-        this.relaties = relaties;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -162,6 +159,7 @@ public class Rol implements Serializable {
     public String toString() {
         return "Rol{" +
             "id=" + getId() +
+            ", relatie='" + getRelatie() + "'" +
             ", rolnaam='" + getRolnaam() + "'" +
             ", jeugdschaatsen='" + getJeugdschaatsen() + "'" +
             ", startdatumRol='" + getStartdatumRol() + "'" +

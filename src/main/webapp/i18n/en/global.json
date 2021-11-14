@@ -9,6 +9,7 @@
         "main": "Entities",
         "relatie": "Relatie",
         "rol": "Rol",
+        "adres": "Adres",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

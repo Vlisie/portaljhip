@@ -28,6 +28,8 @@ public class RolCriteria implements Serializable, Criteria {
 
     private UUIDFilter id;
 
+    private UUIDFilter relatie;
+
     private StringFilter rolnaam;
 
     private BooleanFilter jeugdschaatsen;
@@ -38,15 +40,19 @@ public class RolCriteria implements Serializable, Criteria {
 
     private UUIDFilter relatieId;
 
+    private Boolean distinct;
+
     public RolCriteria() {}
 
     public RolCriteria(RolCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
+        this.relatie = other.relatie == null ? null : other.relatie.copy();
         this.rolnaam = other.rolnaam == null ? null : other.rolnaam.copy();
         this.jeugdschaatsen = other.jeugdschaatsen == null ? null : other.jeugdschaatsen.copy();
         this.startdatumRol = other.startdatumRol == null ? null : other.startdatumRol.copy();
         this.einddatumRol = other.einddatumRol == null ? null : other.einddatumRol.copy();
         this.relatieId = other.relatieId == null ? null : other.relatieId.copy();
+        this.distinct = other.distinct;
     }
 
     @Override
@@ -67,6 +73,21 @@ public class RolCriteria implements Serializable, Criteria {
 
     public void setId(UUIDFilter id) {
         this.id = id;
+    }
+
+    public UUIDFilter getRelatie() {
+        return relatie;
+    }
+
+    public UUIDFilter relatie() {
+        if (relatie == null) {
+            relatie = new UUIDFilter();
+        }
+        return relatie;
+    }
+
+    public void setRelatie(UUIDFilter relatie) {
+        this.relatie = relatie;
     }
 
     public StringFilter getRolnaam() {
@@ -144,6 +165,14 @@ public class RolCriteria implements Serializable, Criteria {
         this.relatieId = relatieId;
     }
 
+    public Boolean getDistinct() {
+        return distinct;
+    }
+
+    public void setDistinct(Boolean distinct) {
+        this.distinct = distinct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -155,17 +184,19 @@ public class RolCriteria implements Serializable, Criteria {
         final RolCriteria that = (RolCriteria) o;
         return (
             Objects.equals(id, that.id) &&
+            Objects.equals(relatie, that.relatie) &&
             Objects.equals(rolnaam, that.rolnaam) &&
             Objects.equals(jeugdschaatsen, that.jeugdschaatsen) &&
             Objects.equals(startdatumRol, that.startdatumRol) &&
             Objects.equals(einddatumRol, that.einddatumRol) &&
-            Objects.equals(relatieId, that.relatieId)
+            Objects.equals(relatieId, that.relatieId) &&
+            Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rolnaam, jeugdschaatsen, startdatumRol, einddatumRol, relatieId);
+        return Objects.hash(id, relatie, rolnaam, jeugdschaatsen, startdatumRol, einddatumRol, relatieId, distinct);
     }
 
     // prettier-ignore
@@ -173,11 +204,13 @@ public class RolCriteria implements Serializable, Criteria {
     public String toString() {
         return "RolCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
+            (relatie != null ? "relatie=" + relatie + ", " : "") +
             (rolnaam != null ? "rolnaam=" + rolnaam + ", " : "") +
             (jeugdschaatsen != null ? "jeugdschaatsen=" + jeugdschaatsen + ", " : "") +
             (startdatumRol != null ? "startdatumRol=" + startdatumRol + ", " : "") +
             (einddatumRol != null ? "einddatumRol=" + einddatumRol + ", " : "") +
             (relatieId != null ? "relatieId=" + relatieId + ", " : "") +
+            (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }
 }

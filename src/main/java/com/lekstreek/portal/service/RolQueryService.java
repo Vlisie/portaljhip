@@ -78,8 +78,15 @@ public class RolQueryService extends QueryService<Rol> {
     protected Specification<Rol> createSpecification(RolCriteria criteria) {
         Specification<Rol> specification = Specification.where(null);
         if (criteria != null) {
+            // This has to be called first, because the distinct method returns null
+            if (criteria.getDistinct() != null) {
+                specification = specification.and(distinct(criteria.getDistinct()));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Rol_.id));
+            }
+            if (criteria.getRelatie() != null) {
+                specification = specification.and(buildSpecification(criteria.getRelatie(), Rol_.relatie));
             }
             if (criteria.getRolnaam() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRolnaam(), Rol_.rolnaam));
@@ -96,7 +103,7 @@ public class RolQueryService extends QueryService<Rol> {
             if (criteria.getRelatieId() != null) {
                 specification =
                     specification.and(
-                        buildSpecification(criteria.getRelatieId(), root -> root.join(Rol_.relaties, JoinType.LEFT).get(Relatie_.id))
+                        buildSpecification(criteria.getRelatieId(), root -> root.join(Rol_.relatie, JoinType.LEFT).get(Relatie_.id))
                     );
             }
         }

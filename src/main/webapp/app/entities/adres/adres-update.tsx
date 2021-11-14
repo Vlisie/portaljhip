@@ -6,24 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRelatie } from 'app/shared/model/relatie.model';
 import { getEntities as getRelaties } from 'app/entities/relatie/relatie.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './rol.reducer';
-import { IRol } from 'app/shared/model/rol.model';
+import { getEntity, updateEntity, createEntity, reset } from './adres.reducer';
+import { IAdres } from 'app/shared/model/adres.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const AdresUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const relaties = useAppSelector(state => state.relatie.entities);
-  const rolEntity = useAppSelector(state => state.rol.entity);
-  const loading = useAppSelector(state => state.rol.loading);
-  const updating = useAppSelector(state => state.rol.updating);
-  const updateSuccess = useAppSelector(state => state.rol.updateSuccess);
+  const adresEntity = useAppSelector(state => state.adres.entity);
+  const loading = useAppSelector(state => state.adres.loading);
+  const updating = useAppSelector(state => state.adres.updating);
+  const updateSuccess = useAppSelector(state => state.adres.updateSuccess);
   const handleClose = () => {
-    props.history.push('/rol');
+    props.history.push('/adres');
   };
 
   useEffect(() => {
@@ -43,11 +43,8 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
-    values.startdatumRol = convertDateTimeToServer(values.startdatumRol);
-    values.einddatumRol = convertDateTimeToServer(values.einddatumRol);
-
     const entity = {
-      ...rolEntity,
+      ...adresEntity,
       ...values,
       relatie: relaties.find(it => it.id.toString() === values.relatie.toString()),
     };
@@ -61,23 +58,18 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const defaultValues = () =>
     isNew
-      ? {
-          startdatumRol: displayDefaultDateTime(),
-          einddatumRol: displayDefaultDateTime(),
-        }
+      ? {}
       : {
-          ...rolEntity,
-          startdatumRol: convertDateTimeFromServer(rolEntity.startdatumRol),
-          einddatumRol: convertDateTimeFromServer(rolEntity.einddatumRol),
-          relatie: rolEntity?.relatie?.id,
+          ...adresEntity,
+          relatie: adresEntity?.relatie?.id,
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="portaljhipApp.rol.home.createOrEditLabel" data-cy="RolCreateUpdateHeading">
-            <Translate contentKey="portaljhipApp.rol.home.createOrEditLabel">Create or edit a Rol</Translate>
+          <h2 id="portaljhipApp.adres.home.createOrEditLabel" data-cy="AdresCreateUpdateHeading">
+            <Translate contentKey="portaljhipApp.adres.home.createOrEditLabel">Create or edit a Adres</Translate>
           </h2>
         </Col>
       </Row>
@@ -92,54 +84,45 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   name="id"
                   required
                   readOnly
-                  id="rol-id"
-                  label={translate('portaljhipApp.rol.id')}
+                  id="adres-id"
+                  label={translate('portaljhipApp.adres.id')}
                   validate={{ required: true }}
                 />
               ) : null}
               <ValidatedField
-                label={translate('portaljhipApp.rol.relatie')}
-                id="rol-relatie"
-                name="relatie"
-                data-cy="relatie"
+                label={translate('portaljhipApp.adres.straatnaam')}
+                id="adres-straatnaam"
+                name="straatnaam"
+                data-cy="straatnaam"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.rol.rolnaam')}
-                id="rol-rolnaam"
-                name="rolnaam"
-                data-cy="rolnaam"
+                label={translate('portaljhipApp.adres.huisnummer')}
+                id="adres-huisnummer"
+                name="huisnummer"
+                data-cy="huisnummer"
                 type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.rol.jeugdschaatsen')}
-                id="rol-jeugdschaatsen"
-                name="jeugdschaatsen"
-                data-cy="jeugdschaatsen"
-                check
-                type="checkbox"
+                label={translate('portaljhipApp.adres.postcode')}
+                id="adres-postcode"
+                name="postcode"
+                data-cy="postcode"
+                type="text"
               />
               <ValidatedField
-                label={translate('portaljhipApp.rol.startdatumRol')}
-                id="rol-startdatumRol"
-                name="startdatumRol"
-                data-cy="startdatumRol"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
+                label={translate('portaljhipApp.adres.woonplaats')}
+                id="adres-woonplaats"
+                name="woonplaats"
+                data-cy="woonplaats"
+                type="text"
               />
+              <ValidatedField label={translate('portaljhipApp.adres.land')} id="adres-land" name="land" data-cy="land" type="text" />
               <ValidatedField
-                label={translate('portaljhipApp.rol.einddatumRol')}
-                id="rol-einddatumRol"
-                name="einddatumRol"
-                data-cy="einddatumRol"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
-              <ValidatedField
-                id="rol-relatie"
+                id="adres-relatie"
                 name="relatie"
                 data-cy="relatie"
-                label={translate('portaljhipApp.rol.relatie')}
+                label={translate('portaljhipApp.adres.relatie')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -151,7 +134,7 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
                     ))
                   : null}
               </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/rol" replace color="info">
+              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/adres" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">
@@ -172,4 +155,4 @@ export const RolUpdate = (props: RouteComponentProps<{ id: string }>) => {
   );
 };
 
-export default RolUpdate;
+export default AdresUpdate;

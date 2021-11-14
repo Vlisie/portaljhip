@@ -65,6 +65,8 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     private UUIDFilter id;
 
+    private UUIDFilter rol;
+
     private StringFilter voornaam;
 
     private StringFilter achternaam;
@@ -81,15 +83,7 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     private InstantFilter inschrijvingsdatum;
 
-    private StringFilter straatnaam;
-
-    private IntegerFilter huisnummer;
-
-    private StringFilter postcode;
-
-    private StringFilter woonplaats;
-
-    private StringFilter land;
+    private UUIDFilter adres;
 
     private StringFilter email;
 
@@ -105,12 +99,17 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     private LongFilter knsbRelatienummer;
 
+    private UUIDFilter adresId;
+
     private UUIDFilter rolId;
+
+    private Boolean distinct;
 
     public RelatieCriteria() {}
 
     public RelatieCriteria(RelatieCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
+        this.rol = other.rol == null ? null : other.rol.copy();
         this.voornaam = other.voornaam == null ? null : other.voornaam.copy();
         this.achternaam = other.achternaam == null ? null : other.achternaam.copy();
         this.initialen = other.initialen == null ? null : other.initialen.copy();
@@ -119,11 +118,7 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.geboortedatum = other.geboortedatum == null ? null : other.geboortedatum.copy();
         this.relatietype = other.relatietype == null ? null : other.relatietype.copy();
         this.inschrijvingsdatum = other.inschrijvingsdatum == null ? null : other.inschrijvingsdatum.copy();
-        this.straatnaam = other.straatnaam == null ? null : other.straatnaam.copy();
-        this.huisnummer = other.huisnummer == null ? null : other.huisnummer.copy();
-        this.postcode = other.postcode == null ? null : other.postcode.copy();
-        this.woonplaats = other.woonplaats == null ? null : other.woonplaats.copy();
-        this.land = other.land == null ? null : other.land.copy();
+        this.adres = other.adres == null ? null : other.adres.copy();
         this.email = other.email == null ? null : other.email.copy();
         this.email2 = other.email2 == null ? null : other.email2.copy();
         this.telefoonnummer = other.telefoonnummer == null ? null : other.telefoonnummer.copy();
@@ -131,7 +126,9 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.telefoonnummer3 = other.telefoonnummer3 == null ? null : other.telefoonnummer3.copy();
         this.ibancode = other.ibancode == null ? null : other.ibancode.copy();
         this.knsbRelatienummer = other.knsbRelatienummer == null ? null : other.knsbRelatienummer.copy();
+        this.adresId = other.adresId == null ? null : other.adresId.copy();
         this.rolId = other.rolId == null ? null : other.rolId.copy();
+        this.distinct = other.distinct;
     }
 
     @Override
@@ -152,6 +149,21 @@ public class RelatieCriteria implements Serializable, Criteria {
 
     public void setId(UUIDFilter id) {
         this.id = id;
+    }
+
+    public UUIDFilter getRol() {
+        return rol;
+    }
+
+    public UUIDFilter rol() {
+        if (rol == null) {
+            rol = new UUIDFilter();
+        }
+        return rol;
+    }
+
+    public void setRol(UUIDFilter rol) {
+        this.rol = rol;
     }
 
     public StringFilter getVoornaam() {
@@ -274,79 +286,19 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.inschrijvingsdatum = inschrijvingsdatum;
     }
 
-    public StringFilter getStraatnaam() {
-        return straatnaam;
+    public UUIDFilter getAdres() {
+        return adres;
     }
 
-    public StringFilter straatnaam() {
-        if (straatnaam == null) {
-            straatnaam = new StringFilter();
+    public UUIDFilter adres() {
+        if (adres == null) {
+            adres = new UUIDFilter();
         }
-        return straatnaam;
+        return adres;
     }
 
-    public void setStraatnaam(StringFilter straatnaam) {
-        this.straatnaam = straatnaam;
-    }
-
-    public IntegerFilter getHuisnummer() {
-        return huisnummer;
-    }
-
-    public IntegerFilter huisnummer() {
-        if (huisnummer == null) {
-            huisnummer = new IntegerFilter();
-        }
-        return huisnummer;
-    }
-
-    public void setHuisnummer(IntegerFilter huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-
-    public StringFilter getPostcode() {
-        return postcode;
-    }
-
-    public StringFilter postcode() {
-        if (postcode == null) {
-            postcode = new StringFilter();
-        }
-        return postcode;
-    }
-
-    public void setPostcode(StringFilter postcode) {
-        this.postcode = postcode;
-    }
-
-    public StringFilter getWoonplaats() {
-        return woonplaats;
-    }
-
-    public StringFilter woonplaats() {
-        if (woonplaats == null) {
-            woonplaats = new StringFilter();
-        }
-        return woonplaats;
-    }
-
-    public void setWoonplaats(StringFilter woonplaats) {
-        this.woonplaats = woonplaats;
-    }
-
-    public StringFilter getLand() {
-        return land;
-    }
-
-    public StringFilter land() {
-        if (land == null) {
-            land = new StringFilter();
-        }
-        return land;
-    }
-
-    public void setLand(StringFilter land) {
-        this.land = land;
+    public void setAdres(UUIDFilter adres) {
+        this.adres = adres;
     }
 
     public StringFilter getEmail() {
@@ -454,6 +406,21 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.knsbRelatienummer = knsbRelatienummer;
     }
 
+    public UUIDFilter getAdresId() {
+        return adresId;
+    }
+
+    public UUIDFilter adresId() {
+        if (adresId == null) {
+            adresId = new UUIDFilter();
+        }
+        return adresId;
+    }
+
+    public void setAdresId(UUIDFilter adresId) {
+        this.adresId = adresId;
+    }
+
     public UUIDFilter getRolId() {
         return rolId;
     }
@@ -469,6 +436,14 @@ public class RelatieCriteria implements Serializable, Criteria {
         this.rolId = rolId;
     }
 
+    public Boolean getDistinct() {
+        return distinct;
+    }
+
+    public void setDistinct(Boolean distinct) {
+        this.distinct = distinct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -480,6 +455,7 @@ public class RelatieCriteria implements Serializable, Criteria {
         final RelatieCriteria that = (RelatieCriteria) o;
         return (
             Objects.equals(id, that.id) &&
+            Objects.equals(rol, that.rol) &&
             Objects.equals(voornaam, that.voornaam) &&
             Objects.equals(achternaam, that.achternaam) &&
             Objects.equals(initialen, that.initialen) &&
@@ -488,11 +464,7 @@ public class RelatieCriteria implements Serializable, Criteria {
             Objects.equals(geboortedatum, that.geboortedatum) &&
             Objects.equals(relatietype, that.relatietype) &&
             Objects.equals(inschrijvingsdatum, that.inschrijvingsdatum) &&
-            Objects.equals(straatnaam, that.straatnaam) &&
-            Objects.equals(huisnummer, that.huisnummer) &&
-            Objects.equals(postcode, that.postcode) &&
-            Objects.equals(woonplaats, that.woonplaats) &&
-            Objects.equals(land, that.land) &&
+            Objects.equals(adres, that.adres) &&
             Objects.equals(email, that.email) &&
             Objects.equals(email2, that.email2) &&
             Objects.equals(telefoonnummer, that.telefoonnummer) &&
@@ -500,7 +472,9 @@ public class RelatieCriteria implements Serializable, Criteria {
             Objects.equals(telefoonnummer3, that.telefoonnummer3) &&
             Objects.equals(ibancode, that.ibancode) &&
             Objects.equals(knsbRelatienummer, that.knsbRelatienummer) &&
-            Objects.equals(rolId, that.rolId)
+            Objects.equals(adresId, that.adresId) &&
+            Objects.equals(rolId, that.rolId) &&
+            Objects.equals(distinct, that.distinct)
         );
     }
 
@@ -508,6 +482,7 @@ public class RelatieCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
             id,
+            rol,
             voornaam,
             achternaam,
             initialen,
@@ -516,11 +491,7 @@ public class RelatieCriteria implements Serializable, Criteria {
             geboortedatum,
             relatietype,
             inschrijvingsdatum,
-            straatnaam,
-            huisnummer,
-            postcode,
-            woonplaats,
-            land,
+            adres,
             email,
             email2,
             telefoonnummer,
@@ -528,7 +499,9 @@ public class RelatieCriteria implements Serializable, Criteria {
             telefoonnummer3,
             ibancode,
             knsbRelatienummer,
-            rolId
+            adresId,
+            rolId,
+            distinct
         );
     }
 
@@ -537,6 +510,7 @@ public class RelatieCriteria implements Serializable, Criteria {
     public String toString() {
         return "RelatieCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
+            (rol != null ? "rol=" + rol + ", " : "") +
             (voornaam != null ? "voornaam=" + voornaam + ", " : "") +
             (achternaam != null ? "achternaam=" + achternaam + ", " : "") +
             (initialen != null ? "initialen=" + initialen + ", " : "") +
@@ -545,11 +519,7 @@ public class RelatieCriteria implements Serializable, Criteria {
             (geboortedatum != null ? "geboortedatum=" + geboortedatum + ", " : "") +
             (relatietype != null ? "relatietype=" + relatietype + ", " : "") +
             (inschrijvingsdatum != null ? "inschrijvingsdatum=" + inschrijvingsdatum + ", " : "") +
-            (straatnaam != null ? "straatnaam=" + straatnaam + ", " : "") +
-            (huisnummer != null ? "huisnummer=" + huisnummer + ", " : "") +
-            (postcode != null ? "postcode=" + postcode + ", " : "") +
-            (woonplaats != null ? "woonplaats=" + woonplaats + ", " : "") +
-            (land != null ? "land=" + land + ", " : "") +
+            (adres != null ? "adres=" + adres + ", " : "") +
             (email != null ? "email=" + email + ", " : "") +
             (email2 != null ? "email2=" + email2 + ", " : "") +
             (telefoonnummer != null ? "telefoonnummer=" + telefoonnummer + ", " : "") +
@@ -557,7 +527,9 @@ public class RelatieCriteria implements Serializable, Criteria {
             (telefoonnummer3 != null ? "telefoonnummer3=" + telefoonnummer3 + ", " : "") +
             (ibancode != null ? "ibancode=" + ibancode + ", " : "") +
             (knsbRelatienummer != null ? "knsbRelatienummer=" + knsbRelatienummer + ", " : "") +
+            (adresId != null ? "adresId=" + adresId + ", " : "") +
             (rolId != null ? "rolId=" + rolId + ", " : "") +
+            (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }
 }

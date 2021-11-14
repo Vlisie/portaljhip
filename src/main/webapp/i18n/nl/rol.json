@@ -18,6 +18,7 @@
         "title": "Rol"
       },
       "id": "Id",
+      "relatie": "Relatie",
       "rolnaam": "Rolnaam",
       "jeugdschaatsen": "Jeugdschaatsen",
       "startdatumRol": "Startdatum Rol",

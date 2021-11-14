@@ -25,7 +25,11 @@ public class Relatie implements Serializable {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private UUID id;
+
+    @Column(name = "rol")
+    private UUID rol;
 
     @Column(name = "voornaam")
     private String voornaam;
@@ -53,20 +57,8 @@ public class Relatie implements Serializable {
     @Column(name = "inschrijvingsdatum")
     private Instant inschrijvingsdatum;
 
-    @Column(name = "straatnaam")
-    private String straatnaam;
-
-    @Column(name = "huisnummer")
-    private Integer huisnummer;
-
-    @Column(name = "postcode")
-    private String postcode;
-
-    @Column(name = "woonplaats")
-    private String woonplaats;
-
-    @Column(name = "land")
-    private String land;
+    @Column(name = "adres")
+    private UUID adres;
 
     @Column(name = "email")
     private String email;
@@ -103,24 +95,42 @@ public class Relatie implements Serializable {
     @Column(name = "privacy_verklaring_content_type")
     private String privacyVerklaringContentType;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "relatie")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "rel_relatie__rol", joinColumns = @JoinColumn(name = "relatie_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    @JsonIgnoreProperties(value = { "relaties" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "relatie" }, allowSetters = true)
+    private Set<Adres> adres = new HashSet<>();
+
+    @OneToMany(mappedBy = "relatie")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "relatie" }, allowSetters = true)
     private Set<Rol> rols = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public UUID getId() {
-        return id;
+        return this.id;
+    }
+
+    public Relatie id(UUID id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(UUID id) {
         this.id = id;
     }
 
-    public Relatie id(UUID id) {
-        this.id = id;
+    public UUID getRol() {
+        return this.rol;
+    }
+
+    public Relatie rol(UUID rol) {
+        this.setRol(rol);
         return this;
+    }
+
+    public void setRol(UUID rol) {
+        this.rol = rol;
     }
 
     public String getVoornaam() {
@@ -128,7 +138,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie voornaam(String voornaam) {
-        this.voornaam = voornaam;
+        this.setVoornaam(voornaam);
         return this;
     }
 
@@ -141,7 +151,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie achternaam(String achternaam) {
-        this.achternaam = achternaam;
+        this.setAchternaam(achternaam);
         return this;
     }
 
@@ -154,7 +164,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie initialen(String initialen) {
-        this.initialen = initialen;
+        this.setInitialen(initialen);
         return this;
     }
 
@@ -167,7 +177,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie weergavenaam(String weergavenaam) {
-        this.weergavenaam = weergavenaam;
+        this.setWeergavenaam(weergavenaam);
         return this;
     }
 
@@ -180,7 +190,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie geslacht(Geslacht geslacht) {
-        this.geslacht = geslacht;
+        this.setGeslacht(geslacht);
         return this;
     }
 
@@ -193,7 +203,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie geboortedatum(LocalDate geboortedatum) {
-        this.geboortedatum = geboortedatum;
+        this.setGeboortedatum(geboortedatum);
         return this;
     }
 
@@ -206,7 +216,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie relatietype(RelatieType relatietype) {
-        this.relatietype = relatietype;
+        this.setRelatietype(relatietype);
         return this;
     }
 
@@ -219,7 +229,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie inschrijvingsdatum(Instant inschrijvingsdatum) {
-        this.inschrijvingsdatum = inschrijvingsdatum;
+        this.setInschrijvingsdatum(inschrijvingsdatum);
         return this;
     }
 
@@ -227,69 +237,17 @@ public class Relatie implements Serializable {
         this.inschrijvingsdatum = inschrijvingsdatum;
     }
 
-    public String getStraatnaam() {
-        return this.straatnaam;
+    public UUID getAdres() {
+        return this.adres;
     }
 
-    public Relatie straatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
+    public Relatie adres(UUID adres) {
+        this.setAdres(adres);
         return this;
     }
 
-    public void setStraatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
-    }
-
-    public Integer getHuisnummer() {
-        return this.huisnummer;
-    }
-
-    public Relatie huisnummer(Integer huisnummer) {
-        this.huisnummer = huisnummer;
-        return this;
-    }
-
-    public void setHuisnummer(Integer huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-
-    public String getPostcode() {
-        return this.postcode;
-    }
-
-    public Relatie postcode(String postcode) {
-        this.postcode = postcode;
-        return this;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getWoonplaats() {
-        return this.woonplaats;
-    }
-
-    public Relatie woonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
-        return this;
-    }
-
-    public void setWoonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
-    }
-
-    public String getLand() {
-        return this.land;
-    }
-
-    public Relatie land(String land) {
-        this.land = land;
-        return this;
-    }
-
-    public void setLand(String land) {
-        this.land = land;
+    public void setAdres(UUID adres) {
+        this.adres = adres;
     }
 
     public String getEmail() {
@@ -297,7 +255,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie email(String email) {
-        this.email = email;
+        this.setEmail(email);
         return this;
     }
 
@@ -310,7 +268,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie email2(String email2) {
-        this.email2 = email2;
+        this.setEmail2(email2);
         return this;
     }
 
@@ -323,7 +281,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie telefoonnummer(Integer telefoonnummer) {
-        this.telefoonnummer = telefoonnummer;
+        this.setTelefoonnummer(telefoonnummer);
         return this;
     }
 
@@ -336,7 +294,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie telefoonnummer2(Integer telefoonnummer2) {
-        this.telefoonnummer2 = telefoonnummer2;
+        this.setTelefoonnummer2(telefoonnummer2);
         return this;
     }
 
@@ -349,7 +307,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie telefoonnummer3(Integer telefoonnummer3) {
-        this.telefoonnummer3 = telefoonnummer3;
+        this.setTelefoonnummer3(telefoonnummer3);
         return this;
     }
 
@@ -362,7 +320,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie ibancode(String ibancode) {
-        this.ibancode = ibancode;
+        this.setIbancode(ibancode);
         return this;
     }
 
@@ -375,7 +333,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie knsbRelatienummer(Long knsbRelatienummer) {
-        this.knsbRelatienummer = knsbRelatienummer;
+        this.setKnsbRelatienummer(knsbRelatienummer);
         return this;
     }
 
@@ -388,7 +346,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie pasfoto(byte[] pasfoto) {
-        this.pasfoto = pasfoto;
+        this.setPasfoto(pasfoto);
         return this;
     }
 
@@ -414,7 +372,7 @@ public class Relatie implements Serializable {
     }
 
     public Relatie privacyVerklaring(byte[] privacyVerklaring) {
-        this.privacyVerklaring = privacyVerklaring;
+        this.setPrivacyVerklaring(privacyVerklaring);
         return this;
     }
 
@@ -435,8 +393,49 @@ public class Relatie implements Serializable {
         this.privacyVerklaringContentType = privacyVerklaringContentType;
     }
 
+    public Set<Adres> getAdres() {
+        return this.adres;
+    }
+
+    public void setAdres(Set<Adres> adres) {
+        if (this.adres != null) {
+            this.adres.forEach(i -> i.setRelatie(null));
+        }
+        if (adres != null) {
+            adres.forEach(i -> i.setRelatie(this));
+        }
+        this.adres = adres;
+    }
+
+    public Relatie adres(Set<Adres> adres) {
+        this.setAdres(adres);
+        return this;
+    }
+
+    public Relatie addAdres(Adres adres) {
+        this.adres.add(adres);
+        adres.setRelatie(this);
+        return this;
+    }
+
+    public Relatie removeAdres(Adres adres) {
+        this.adres.remove(adres);
+        adres.setRelatie(null);
+        return this;
+    }
+
     public Set<Rol> getRols() {
         return this.rols;
+    }
+
+    public void setRols(Set<Rol> rols) {
+        if (this.rols != null) {
+            this.rols.forEach(i -> i.setRelatie(null));
+        }
+        if (rols != null) {
+            rols.forEach(i -> i.setRelatie(this));
+        }
+        this.rols = rols;
     }
 
     public Relatie rols(Set<Rol> rols) {
@@ -446,18 +445,14 @@ public class Relatie implements Serializable {
 
     public Relatie addRol(Rol rol) {
         this.rols.add(rol);
-        rol.getRelaties().add(this);
+        rol.setRelatie(this);
         return this;
     }
 
     public Relatie removeRol(Rol rol) {
         this.rols.remove(rol);
-        rol.getRelaties().remove(this);
+        rol.setRelatie(null);
         return this;
-    }
-
-    public void setRols(Set<Rol> rols) {
-        this.rols = rols;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -484,6 +479,7 @@ public class Relatie implements Serializable {
     public String toString() {
         return "Relatie{" +
             "id=" + getId() +
+            ", rol='" + getRol() + "'" +
             ", voornaam='" + getVoornaam() + "'" +
             ", achternaam='" + getAchternaam() + "'" +
             ", initialen='" + getInitialen() + "'" +
@@ -492,11 +488,7 @@ public class Relatie implements Serializable {
             ", geboortedatum='" + getGeboortedatum() + "'" +
             ", relatietype='" + getRelatietype() + "'" +
             ", inschrijvingsdatum='" + getInschrijvingsdatum() + "'" +
-            ", straatnaam='" + getStraatnaam() + "'" +
-            ", huisnummer=" + getHuisnummer() +
-            ", postcode='" + getPostcode() + "'" +
-            ", woonplaats='" + getWoonplaats() + "'" +
-            ", land='" + getLand() + "'" +
+            ", adres='" + getAdres() + "'" +
             ", email='" + getEmail() + "'" +
             ", email2='" + getEmail2() + "'" +
             ", telefoonnummer=" + getTelefoonnummer() +

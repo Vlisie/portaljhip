@@ -30,6 +30,12 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{relatieEntity.id}</dd>
           <dt>
+            <span id="rol">
+              <Translate contentKey="portaljhipApp.relatie.rol">Rol</Translate>
+            </span>
+          </dt>
+          <dd>{relatieEntity.rol}</dd>
+          <dt>
             <span id="voornaam">
               <Translate contentKey="portaljhipApp.relatie.voornaam">Voornaam</Translate>
             </span>
@@ -86,35 +92,11 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
             ) : null}
           </dd>
           <dt>
-            <span id="straatnaam">
-              <Translate contentKey="portaljhipApp.relatie.straatnaam">Straatnaam</Translate>
+            <span id="adres">
+              <Translate contentKey="portaljhipApp.relatie.adres">Adres</Translate>
             </span>
           </dt>
-          <dd>{relatieEntity.straatnaam}</dd>
-          <dt>
-            <span id="huisnummer">
-              <Translate contentKey="portaljhipApp.relatie.huisnummer">Huisnummer</Translate>
-            </span>
-          </dt>
-          <dd>{relatieEntity.huisnummer}</dd>
-          <dt>
-            <span id="postcode">
-              <Translate contentKey="portaljhipApp.relatie.postcode">Postcode</Translate>
-            </span>
-          </dt>
-          <dd>{relatieEntity.postcode}</dd>
-          <dt>
-            <span id="woonplaats">
-              <Translate contentKey="portaljhipApp.relatie.woonplaats">Woonplaats</Translate>
-            </span>
-          </dt>
-          <dd>{relatieEntity.woonplaats}</dd>
-          <dt>
-            <span id="land">
-              <Translate contentKey="portaljhipApp.relatie.land">Land</Translate>
-            </span>
-          </dt>
-          <dd>{relatieEntity.land}</dd>
+          <dd>{relatieEntity.adres}</dd>
           <dt>
             <span id="email">
               <Translate contentKey="portaljhipApp.relatie.email">Email</Translate>
@@ -194,19 +176,6 @@ export const RelatieDetail = (props: RouteComponentProps<{ id: string }>) => {
                 </span>
               </div>
             ) : null}
-          </dd>
-          <dt>
-            <Translate contentKey="portaljhipApp.relatie.rol">Rol</Translate>
-          </dt>
-          <dd>
-            {relatieEntity.rols
-              ? relatieEntity.rols.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {relatieEntity.rols && i === relatieEntity.rols.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
           </dd>
         </dl>
         <Button tag={Link} to="/relatie" replace color="info" data-cy="entityDetailsBackButton">

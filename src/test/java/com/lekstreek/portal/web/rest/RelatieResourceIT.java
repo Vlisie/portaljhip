@@ -2,35 +2,28 @@ package com.lekstreek.portal.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.lekstreek.portal.IntegrationTest;
+import com.lekstreek.portal.domain.Adres;
 import com.lekstreek.portal.domain.Relatie;
 import com.lekstreek.portal.domain.Rol;
 import com.lekstreek.portal.domain.enumeration.Geslacht;
 import com.lekstreek.portal.domain.enumeration.RelatieType;
 import com.lekstreek.portal.repository.RelatieRepository;
-import com.lekstreek.portal.service.RelatieService;
 import com.lekstreek.portal.service.criteria.RelatieCriteria;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -41,10 +34,12 @@ import org.springframework.util.Base64Utils;
  * Integration tests for the {@link RelatieResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class RelatieResourceIT {
+
+    private static final UUID DEFAULT_ROL = UUID.randomUUID();
+    private static final UUID UPDATED_ROL = UUID.randomUUID();
 
     private static final String DEFAULT_VOORNAAM = "AAAAAAAAAA";
     private static final String UPDATED_VOORNAAM = "BBBBBBBBBB";
@@ -71,21 +66,8 @@ class RelatieResourceIT {
     private static final Instant DEFAULT_INSCHRIJVINGSDATUM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_INSCHRIJVINGSDATUM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_STRAATNAAM = "AAAAAAAAAA";
-    private static final String UPDATED_STRAATNAAM = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_HUISNUMMER = 1;
-    private static final Integer UPDATED_HUISNUMMER = 2;
-    private static final Integer SMALLER_HUISNUMMER = 1 - 1;
-
-    private static final String DEFAULT_POSTCODE = "AAAAAAAAAA";
-    private static final String UPDATED_POSTCODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_WOONPLAATS = "AAAAAAAAAA";
-    private static final String UPDATED_WOONPLAATS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LAND = "AAAAAAAAAA";
-    private static final String UPDATED_LAND = "BBBBBBBBBB";
+    private static final UUID DEFAULT_ADRES = UUID.randomUUID();
+    private static final UUID UPDATED_ADRES = UUID.randomUUID();
 
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
@@ -128,12 +110,6 @@ class RelatieResourceIT {
     @Autowired
     private RelatieRepository relatieRepository;
 
-    @Mock
-    private RelatieRepository relatieRepositoryMock;
-
-    @Mock
-    private RelatieService relatieServiceMock;
-
     @Autowired
     private EntityManager em;
 
@@ -150,6 +126,7 @@ class RelatieResourceIT {
      */
     public static Relatie createEntity(EntityManager em) {
         Relatie relatie = new Relatie()
+            .rol(DEFAULT_ROL)
             .voornaam(DEFAULT_VOORNAAM)
             .achternaam(DEFAULT_ACHTERNAAM)
             .initialen(DEFAULT_INITIALEN)
@@ -158,11 +135,7 @@ class RelatieResourceIT {
             .geboortedatum(DEFAULT_GEBOORTEDATUM)
             .relatietype(DEFAULT_RELATIETYPE)
             .inschrijvingsdatum(DEFAULT_INSCHRIJVINGSDATUM)
-            .straatnaam(DEFAULT_STRAATNAAM)
-            .huisnummer(DEFAULT_HUISNUMMER)
-            .postcode(DEFAULT_POSTCODE)
-            .woonplaats(DEFAULT_WOONPLAATS)
-            .land(DEFAULT_LAND)
+            .adres(DEFAULT_ADRES)
             .email(DEFAULT_EMAIL)
             .email2(DEFAULT_EMAIL_2)
             .telefoonnummer(DEFAULT_TELEFOONNUMMER)
@@ -185,6 +158,7 @@ class RelatieResourceIT {
      */
     public static Relatie createUpdatedEntity(EntityManager em) {
         Relatie relatie = new Relatie()
+            .rol(UPDATED_ROL)
             .voornaam(UPDATED_VOORNAAM)
             .achternaam(UPDATED_ACHTERNAAM)
             .initialen(UPDATED_INITIALEN)
@@ -193,11 +167,7 @@ class RelatieResourceIT {
             .geboortedatum(UPDATED_GEBOORTEDATUM)
             .relatietype(UPDATED_RELATIETYPE)
             .inschrijvingsdatum(UPDATED_INSCHRIJVINGSDATUM)
-            .straatnaam(UPDATED_STRAATNAAM)
-            .huisnummer(UPDATED_HUISNUMMER)
-            .postcode(UPDATED_POSTCODE)
-            .woonplaats(UPDATED_WOONPLAATS)
-            .land(UPDATED_LAND)
+            .adres(UPDATED_ADRES)
             .email(UPDATED_EMAIL)
             .email2(UPDATED_EMAIL_2)
             .telefoonnummer(UPDATED_TELEFOONNUMMER)
@@ -230,6 +200,7 @@ class RelatieResourceIT {
         List<Relatie> relatieList = relatieRepository.findAll();
         assertThat(relatieList).hasSize(databaseSizeBeforeCreate + 1);
         Relatie testRelatie = relatieList.get(relatieList.size() - 1);
+        assertThat(testRelatie.getRol()).isEqualTo(DEFAULT_ROL);
         assertThat(testRelatie.getVoornaam()).isEqualTo(DEFAULT_VOORNAAM);
         assertThat(testRelatie.getAchternaam()).isEqualTo(DEFAULT_ACHTERNAAM);
         assertThat(testRelatie.getInitialen()).isEqualTo(DEFAULT_INITIALEN);
@@ -238,11 +209,7 @@ class RelatieResourceIT {
         assertThat(testRelatie.getGeboortedatum()).isEqualTo(DEFAULT_GEBOORTEDATUM);
         assertThat(testRelatie.getRelatietype()).isEqualTo(DEFAULT_RELATIETYPE);
         assertThat(testRelatie.getInschrijvingsdatum()).isEqualTo(DEFAULT_INSCHRIJVINGSDATUM);
-        assertThat(testRelatie.getStraatnaam()).isEqualTo(DEFAULT_STRAATNAAM);
-        assertThat(testRelatie.getHuisnummer()).isEqualTo(DEFAULT_HUISNUMMER);
-        assertThat(testRelatie.getPostcode()).isEqualTo(DEFAULT_POSTCODE);
-        assertThat(testRelatie.getWoonplaats()).isEqualTo(DEFAULT_WOONPLAATS);
-        assertThat(testRelatie.getLand()).isEqualTo(DEFAULT_LAND);
+        assertThat(testRelatie.getAdres()).isEqualTo(DEFAULT_ADRES);
         assertThat(testRelatie.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testRelatie.getEmail2()).isEqualTo(DEFAULT_EMAIL_2);
         assertThat(testRelatie.getTelefoonnummer()).isEqualTo(DEFAULT_TELEFOONNUMMER);
@@ -286,6 +253,7 @@ class RelatieResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(relatie.getId().toString())))
+            .andExpect(jsonPath("$.[*].rol").value(hasItem(DEFAULT_ROL.toString())))
             .andExpect(jsonPath("$.[*].voornaam").value(hasItem(DEFAULT_VOORNAAM)))
             .andExpect(jsonPath("$.[*].achternaam").value(hasItem(DEFAULT_ACHTERNAAM)))
             .andExpect(jsonPath("$.[*].initialen").value(hasItem(DEFAULT_INITIALEN)))
@@ -294,11 +262,7 @@ class RelatieResourceIT {
             .andExpect(jsonPath("$.[*].geboortedatum").value(hasItem(DEFAULT_GEBOORTEDATUM.toString())))
             .andExpect(jsonPath("$.[*].relatietype").value(hasItem(DEFAULT_RELATIETYPE.toString())))
             .andExpect(jsonPath("$.[*].inschrijvingsdatum").value(hasItem(DEFAULT_INSCHRIJVINGSDATUM.toString())))
-            .andExpect(jsonPath("$.[*].straatnaam").value(hasItem(DEFAULT_STRAATNAAM)))
-            .andExpect(jsonPath("$.[*].huisnummer").value(hasItem(DEFAULT_HUISNUMMER)))
-            .andExpect(jsonPath("$.[*].postcode").value(hasItem(DEFAULT_POSTCODE)))
-            .andExpect(jsonPath("$.[*].woonplaats").value(hasItem(DEFAULT_WOONPLAATS)))
-            .andExpect(jsonPath("$.[*].land").value(hasItem(DEFAULT_LAND)))
+            .andExpect(jsonPath("$.[*].adres").value(hasItem(DEFAULT_ADRES.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].email2").value(hasItem(DEFAULT_EMAIL_2)))
             .andExpect(jsonPath("$.[*].telefoonnummer").value(hasItem(DEFAULT_TELEFOONNUMMER)))
@@ -310,24 +274,6 @@ class RelatieResourceIT {
             .andExpect(jsonPath("$.[*].pasfoto").value(hasItem(Base64Utils.encodeToString(DEFAULT_PASFOTO))))
             .andExpect(jsonPath("$.[*].privacyVerklaringContentType").value(hasItem(DEFAULT_PRIVACY_VERKLARING_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].privacyVerklaring").value(hasItem(Base64Utils.encodeToString(DEFAULT_PRIVACY_VERKLARING))));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllRelatiesWithEagerRelationshipsIsEnabled() throws Exception {
-        when(relatieServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restRelatieMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(relatieServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllRelatiesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(relatieServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restRelatieMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(relatieServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -342,6 +288,7 @@ class RelatieResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(relatie.getId().toString()))
+            .andExpect(jsonPath("$.rol").value(DEFAULT_ROL.toString()))
             .andExpect(jsonPath("$.voornaam").value(DEFAULT_VOORNAAM))
             .andExpect(jsonPath("$.achternaam").value(DEFAULT_ACHTERNAAM))
             .andExpect(jsonPath("$.initialen").value(DEFAULT_INITIALEN))
@@ -350,11 +297,7 @@ class RelatieResourceIT {
             .andExpect(jsonPath("$.geboortedatum").value(DEFAULT_GEBOORTEDATUM.toString()))
             .andExpect(jsonPath("$.relatietype").value(DEFAULT_RELATIETYPE.toString()))
             .andExpect(jsonPath("$.inschrijvingsdatum").value(DEFAULT_INSCHRIJVINGSDATUM.toString()))
-            .andExpect(jsonPath("$.straatnaam").value(DEFAULT_STRAATNAAM))
-            .andExpect(jsonPath("$.huisnummer").value(DEFAULT_HUISNUMMER))
-            .andExpect(jsonPath("$.postcode").value(DEFAULT_POSTCODE))
-            .andExpect(jsonPath("$.woonplaats").value(DEFAULT_WOONPLAATS))
-            .andExpect(jsonPath("$.land").value(DEFAULT_LAND))
+            .andExpect(jsonPath("$.adres").value(DEFAULT_ADRES.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.email2").value(DEFAULT_EMAIL_2))
             .andExpect(jsonPath("$.telefoonnummer").value(DEFAULT_TELEFOONNUMMER))
@@ -378,6 +321,58 @@ class RelatieResourceIT {
 
         defaultRelatieShouldBeFound("id.equals=" + id);
         defaultRelatieShouldNotBeFound("id.notEquals=" + id);
+    }
+
+    @Test
+    @Transactional
+    void getAllRelatiesByRolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        relatieRepository.saveAndFlush(relatie);
+
+        // Get all the relatieList where rol equals to DEFAULT_ROL
+        defaultRelatieShouldBeFound("rol.equals=" + DEFAULT_ROL);
+
+        // Get all the relatieList where rol equals to UPDATED_ROL
+        defaultRelatieShouldNotBeFound("rol.equals=" + UPDATED_ROL);
+    }
+
+    @Test
+    @Transactional
+    void getAllRelatiesByRolIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        relatieRepository.saveAndFlush(relatie);
+
+        // Get all the relatieList where rol not equals to DEFAULT_ROL
+        defaultRelatieShouldNotBeFound("rol.notEquals=" + DEFAULT_ROL);
+
+        // Get all the relatieList where rol not equals to UPDATED_ROL
+        defaultRelatieShouldBeFound("rol.notEquals=" + UPDATED_ROL);
+    }
+
+    @Test
+    @Transactional
+    void getAllRelatiesByRolIsInShouldWork() throws Exception {
+        // Initialize the database
+        relatieRepository.saveAndFlush(relatie);
+
+        // Get all the relatieList where rol in DEFAULT_ROL or UPDATED_ROL
+        defaultRelatieShouldBeFound("rol.in=" + DEFAULT_ROL + "," + UPDATED_ROL);
+
+        // Get all the relatieList where rol equals to UPDATED_ROL
+        defaultRelatieShouldNotBeFound("rol.in=" + UPDATED_ROL);
+    }
+
+    @Test
+    @Transactional
+    void getAllRelatiesByRolIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        relatieRepository.saveAndFlush(relatie);
+
+        // Get all the relatieList where rol is not null
+        defaultRelatieShouldBeFound("rol.specified=true");
+
+        // Get all the relatieList where rol is null
+        defaultRelatieShouldNotBeFound("rol.specified=false");
     }
 
     @Test
@@ -954,418 +949,54 @@ class RelatieResourceIT {
 
     @Test
     @Transactional
-    void getAllRelatiesByStraatnaamIsEqualToSomething() throws Exception {
+    void getAllRelatiesByAdresIsEqualToSomething() throws Exception {
         // Initialize the database
         relatieRepository.saveAndFlush(relatie);
 
-        // Get all the relatieList where straatnaam equals to DEFAULT_STRAATNAAM
-        defaultRelatieShouldBeFound("straatnaam.equals=" + DEFAULT_STRAATNAAM);
+        // Get all the relatieList where adres equals to DEFAULT_ADRES
+        defaultRelatieShouldBeFound("adres.equals=" + DEFAULT_ADRES);
 
-        // Get all the relatieList where straatnaam equals to UPDATED_STRAATNAAM
-        defaultRelatieShouldNotBeFound("straatnaam.equals=" + UPDATED_STRAATNAAM);
+        // Get all the relatieList where adres equals to UPDATED_ADRES
+        defaultRelatieShouldNotBeFound("adres.equals=" + UPDATED_ADRES);
     }
 
     @Test
     @Transactional
-    void getAllRelatiesByStraatnaamIsNotEqualToSomething() throws Exception {
+    void getAllRelatiesByAdresIsNotEqualToSomething() throws Exception {
         // Initialize the database
         relatieRepository.saveAndFlush(relatie);
 
-        // Get all the relatieList where straatnaam not equals to DEFAULT_STRAATNAAM
-        defaultRelatieShouldNotBeFound("straatnaam.notEquals=" + DEFAULT_STRAATNAAM);
+        // Get all the relatieList where adres not equals to DEFAULT_ADRES
+        defaultRelatieShouldNotBeFound("adres.notEquals=" + DEFAULT_ADRES);
 
-        // Get all the relatieList where straatnaam not equals to UPDATED_STRAATNAAM
-        defaultRelatieShouldBeFound("straatnaam.notEquals=" + UPDATED_STRAATNAAM);
+        // Get all the relatieList where adres not equals to UPDATED_ADRES
+        defaultRelatieShouldBeFound("adres.notEquals=" + UPDATED_ADRES);
     }
 
     @Test
     @Transactional
-    void getAllRelatiesByStraatnaamIsInShouldWork() throws Exception {
+    void getAllRelatiesByAdresIsInShouldWork() throws Exception {
         // Initialize the database
         relatieRepository.saveAndFlush(relatie);
 
-        // Get all the relatieList where straatnaam in DEFAULT_STRAATNAAM or UPDATED_STRAATNAAM
-        defaultRelatieShouldBeFound("straatnaam.in=" + DEFAULT_STRAATNAAM + "," + UPDATED_STRAATNAAM);
+        // Get all the relatieList where adres in DEFAULT_ADRES or UPDATED_ADRES
+        defaultRelatieShouldBeFound("adres.in=" + DEFAULT_ADRES + "," + UPDATED_ADRES);
 
-        // Get all the relatieList where straatnaam equals to UPDATED_STRAATNAAM
-        defaultRelatieShouldNotBeFound("straatnaam.in=" + UPDATED_STRAATNAAM);
+        // Get all the relatieList where adres equals to UPDATED_ADRES
+        defaultRelatieShouldNotBeFound("adres.in=" + UPDATED_ADRES);
     }
 
     @Test
     @Transactional
-    void getAllRelatiesByStraatnaamIsNullOrNotNull() throws Exception {
+    void getAllRelatiesByAdresIsNullOrNotNull() throws Exception {
         // Initialize the database
         relatieRepository.saveAndFlush(relatie);
 
-        // Get all the relatieList where straatnaam is not null
-        defaultRelatieShouldBeFound("straatnaam.specified=true");
-
-        // Get all the relatieList where straatnaam is null
-        defaultRelatieShouldNotBeFound("straatnaam.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByStraatnaamContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where straatnaam contains DEFAULT_STRAATNAAM
-        defaultRelatieShouldBeFound("straatnaam.contains=" + DEFAULT_STRAATNAAM);
-
-        // Get all the relatieList where straatnaam contains UPDATED_STRAATNAAM
-        defaultRelatieShouldNotBeFound("straatnaam.contains=" + UPDATED_STRAATNAAM);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByStraatnaamNotContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where straatnaam does not contain DEFAULT_STRAATNAAM
-        defaultRelatieShouldNotBeFound("straatnaam.doesNotContain=" + DEFAULT_STRAATNAAM);
-
-        // Get all the relatieList where straatnaam does not contain UPDATED_STRAATNAAM
-        defaultRelatieShouldBeFound("straatnaam.doesNotContain=" + UPDATED_STRAATNAAM);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer equals to DEFAULT_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.equals=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer equals to UPDATED_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.equals=" + UPDATED_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer not equals to DEFAULT_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.notEquals=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer not equals to UPDATED_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.notEquals=" + UPDATED_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsInShouldWork() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer in DEFAULT_HUISNUMMER or UPDATED_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.in=" + DEFAULT_HUISNUMMER + "," + UPDATED_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer equals to UPDATED_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.in=" + UPDATED_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer is not null
-        defaultRelatieShouldBeFound("huisnummer.specified=true");
-
-        // Get all the relatieList where huisnummer is null
-        defaultRelatieShouldNotBeFound("huisnummer.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer is greater than or equal to DEFAULT_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.greaterThanOrEqual=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer is greater than or equal to UPDATED_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.greaterThanOrEqual=" + UPDATED_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer is less than or equal to DEFAULT_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.lessThanOrEqual=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer is less than or equal to SMALLER_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.lessThanOrEqual=" + SMALLER_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsLessThanSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer is less than DEFAULT_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.lessThan=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer is less than UPDATED_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.lessThan=" + UPDATED_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByHuisnummerIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where huisnummer is greater than DEFAULT_HUISNUMMER
-        defaultRelatieShouldNotBeFound("huisnummer.greaterThan=" + DEFAULT_HUISNUMMER);
-
-        // Get all the relatieList where huisnummer is greater than SMALLER_HUISNUMMER
-        defaultRelatieShouldBeFound("huisnummer.greaterThan=" + SMALLER_HUISNUMMER);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode equals to DEFAULT_POSTCODE
-        defaultRelatieShouldBeFound("postcode.equals=" + DEFAULT_POSTCODE);
-
-        // Get all the relatieList where postcode equals to UPDATED_POSTCODE
-        defaultRelatieShouldNotBeFound("postcode.equals=" + UPDATED_POSTCODE);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode not equals to DEFAULT_POSTCODE
-        defaultRelatieShouldNotBeFound("postcode.notEquals=" + DEFAULT_POSTCODE);
-
-        // Get all the relatieList where postcode not equals to UPDATED_POSTCODE
-        defaultRelatieShouldBeFound("postcode.notEquals=" + UPDATED_POSTCODE);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeIsInShouldWork() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode in DEFAULT_POSTCODE or UPDATED_POSTCODE
-        defaultRelatieShouldBeFound("postcode.in=" + DEFAULT_POSTCODE + "," + UPDATED_POSTCODE);
-
-        // Get all the relatieList where postcode equals to UPDATED_POSTCODE
-        defaultRelatieShouldNotBeFound("postcode.in=" + UPDATED_POSTCODE);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode is not null
-        defaultRelatieShouldBeFound("postcode.specified=true");
-
-        // Get all the relatieList where postcode is null
-        defaultRelatieShouldNotBeFound("postcode.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode contains DEFAULT_POSTCODE
-        defaultRelatieShouldBeFound("postcode.contains=" + DEFAULT_POSTCODE);
-
-        // Get all the relatieList where postcode contains UPDATED_POSTCODE
-        defaultRelatieShouldNotBeFound("postcode.contains=" + UPDATED_POSTCODE);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByPostcodeNotContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where postcode does not contain DEFAULT_POSTCODE
-        defaultRelatieShouldNotBeFound("postcode.doesNotContain=" + DEFAULT_POSTCODE);
-
-        // Get all the relatieList where postcode does not contain UPDATED_POSTCODE
-        defaultRelatieShouldBeFound("postcode.doesNotContain=" + UPDATED_POSTCODE);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsIsEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats equals to DEFAULT_WOONPLAATS
-        defaultRelatieShouldBeFound("woonplaats.equals=" + DEFAULT_WOONPLAATS);
-
-        // Get all the relatieList where woonplaats equals to UPDATED_WOONPLAATS
-        defaultRelatieShouldNotBeFound("woonplaats.equals=" + UPDATED_WOONPLAATS);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats not equals to DEFAULT_WOONPLAATS
-        defaultRelatieShouldNotBeFound("woonplaats.notEquals=" + DEFAULT_WOONPLAATS);
-
-        // Get all the relatieList where woonplaats not equals to UPDATED_WOONPLAATS
-        defaultRelatieShouldBeFound("woonplaats.notEquals=" + UPDATED_WOONPLAATS);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsIsInShouldWork() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats in DEFAULT_WOONPLAATS or UPDATED_WOONPLAATS
-        defaultRelatieShouldBeFound("woonplaats.in=" + DEFAULT_WOONPLAATS + "," + UPDATED_WOONPLAATS);
-
-        // Get all the relatieList where woonplaats equals to UPDATED_WOONPLAATS
-        defaultRelatieShouldNotBeFound("woonplaats.in=" + UPDATED_WOONPLAATS);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats is not null
-        defaultRelatieShouldBeFound("woonplaats.specified=true");
-
-        // Get all the relatieList where woonplaats is null
-        defaultRelatieShouldNotBeFound("woonplaats.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats contains DEFAULT_WOONPLAATS
-        defaultRelatieShouldBeFound("woonplaats.contains=" + DEFAULT_WOONPLAATS);
-
-        // Get all the relatieList where woonplaats contains UPDATED_WOONPLAATS
-        defaultRelatieShouldNotBeFound("woonplaats.contains=" + UPDATED_WOONPLAATS);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByWoonplaatsNotContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where woonplaats does not contain DEFAULT_WOONPLAATS
-        defaultRelatieShouldNotBeFound("woonplaats.doesNotContain=" + DEFAULT_WOONPLAATS);
-
-        // Get all the relatieList where woonplaats does not contain UPDATED_WOONPLAATS
-        defaultRelatieShouldBeFound("woonplaats.doesNotContain=" + UPDATED_WOONPLAATS);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandIsEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land equals to DEFAULT_LAND
-        defaultRelatieShouldBeFound("land.equals=" + DEFAULT_LAND);
-
-        // Get all the relatieList where land equals to UPDATED_LAND
-        defaultRelatieShouldNotBeFound("land.equals=" + UPDATED_LAND);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land not equals to DEFAULT_LAND
-        defaultRelatieShouldNotBeFound("land.notEquals=" + DEFAULT_LAND);
-
-        // Get all the relatieList where land not equals to UPDATED_LAND
-        defaultRelatieShouldBeFound("land.notEquals=" + UPDATED_LAND);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandIsInShouldWork() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land in DEFAULT_LAND or UPDATED_LAND
-        defaultRelatieShouldBeFound("land.in=" + DEFAULT_LAND + "," + UPDATED_LAND);
-
-        // Get all the relatieList where land equals to UPDATED_LAND
-        defaultRelatieShouldNotBeFound("land.in=" + UPDATED_LAND);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land is not null
-        defaultRelatieShouldBeFound("land.specified=true");
-
-        // Get all the relatieList where land is null
-        defaultRelatieShouldNotBeFound("land.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land contains DEFAULT_LAND
-        defaultRelatieShouldBeFound("land.contains=" + DEFAULT_LAND);
-
-        // Get all the relatieList where land contains UPDATED_LAND
-        defaultRelatieShouldNotBeFound("land.contains=" + UPDATED_LAND);
-    }
-
-    @Test
-    @Transactional
-    void getAllRelatiesByLandNotContainsSomething() throws Exception {
-        // Initialize the database
-        relatieRepository.saveAndFlush(relatie);
-
-        // Get all the relatieList where land does not contain DEFAULT_LAND
-        defaultRelatieShouldNotBeFound("land.doesNotContain=" + DEFAULT_LAND);
-
-        // Get all the relatieList where land does not contain UPDATED_LAND
-        defaultRelatieShouldBeFound("land.doesNotContain=" + UPDATED_LAND);
+        // Get all the relatieList where adres is not null
+        defaultRelatieShouldBeFound("adres.specified=true");
+
+        // Get all the relatieList where adres is null
+        defaultRelatieShouldNotBeFound("adres.specified=false");
     }
 
     @Test
@@ -2020,10 +1651,43 @@ class RelatieResourceIT {
 
     @Test
     @Transactional
+    void getAllRelatiesByAdresIsEqualToSomething() throws Exception {
+        // Initialize the database
+        relatieRepository.saveAndFlush(relatie);
+        Adres adres;
+        if (TestUtil.findAll(em, Adres.class).isEmpty()) {
+            adres = AdresResourceIT.createEntity(em);
+            em.persist(adres);
+            em.flush();
+        } else {
+            adres = TestUtil.findAll(em, Adres.class).get(0);
+        }
+        em.persist(adres);
+        em.flush();
+        relatie.addAdres(adres);
+        relatieRepository.saveAndFlush(relatie);
+        UUID adresId = adres.getId();
+
+        // Get all the relatieList where adres equals to adresId
+        defaultRelatieShouldBeFound("adresId.equals=" + adresId);
+
+        // Get all the relatieList where adres equals to UUID.randomUUID()
+        defaultRelatieShouldNotBeFound("adresId.equals=" + UUID.randomUUID());
+    }
+
+    @Test
+    @Transactional
     void getAllRelatiesByRolIsEqualToSomething() throws Exception {
         // Initialize the database
         relatieRepository.saveAndFlush(relatie);
-        Rol rol = RolResourceIT.createEntity(em);
+        Rol rol;
+        if (TestUtil.findAll(em, Rol.class).isEmpty()) {
+            rol = RolResourceIT.createEntity(em);
+            em.persist(rol);
+            em.flush();
+        } else {
+            rol = TestUtil.findAll(em, Rol.class).get(0);
+        }
         em.persist(rol);
         em.flush();
         relatie.addRol(rol);
@@ -2046,6 +1710,7 @@ class RelatieResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(relatie.getId().toString())))
+            .andExpect(jsonPath("$.[*].rol").value(hasItem(DEFAULT_ROL.toString())))
             .andExpect(jsonPath("$.[*].voornaam").value(hasItem(DEFAULT_VOORNAAM)))
             .andExpect(jsonPath("$.[*].achternaam").value(hasItem(DEFAULT_ACHTERNAAM)))
             .andExpect(jsonPath("$.[*].initialen").value(hasItem(DEFAULT_INITIALEN)))
@@ -2054,11 +1719,7 @@ class RelatieResourceIT {
             .andExpect(jsonPath("$.[*].geboortedatum").value(hasItem(DEFAULT_GEBOORTEDATUM.toString())))
             .andExpect(jsonPath("$.[*].relatietype").value(hasItem(DEFAULT_RELATIETYPE.toString())))
             .andExpect(jsonPath("$.[*].inschrijvingsdatum").value(hasItem(DEFAULT_INSCHRIJVINGSDATUM.toString())))
-            .andExpect(jsonPath("$.[*].straatnaam").value(hasItem(DEFAULT_STRAATNAAM)))
-            .andExpect(jsonPath("$.[*].huisnummer").value(hasItem(DEFAULT_HUISNUMMER)))
-            .andExpect(jsonPath("$.[*].postcode").value(hasItem(DEFAULT_POSTCODE)))
-            .andExpect(jsonPath("$.[*].woonplaats").value(hasItem(DEFAULT_WOONPLAATS)))
-            .andExpect(jsonPath("$.[*].land").value(hasItem(DEFAULT_LAND)))
+            .andExpect(jsonPath("$.[*].adres").value(hasItem(DEFAULT_ADRES.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].email2").value(hasItem(DEFAULT_EMAIL_2)))
             .andExpect(jsonPath("$.[*].telefoonnummer").value(hasItem(DEFAULT_TELEFOONNUMMER)))
@@ -2118,6 +1779,7 @@ class RelatieResourceIT {
         // Disconnect from session so that the updates on updatedRelatie are not directly saved in db
         em.detach(updatedRelatie);
         updatedRelatie
+            .rol(UPDATED_ROL)
             .voornaam(UPDATED_VOORNAAM)
             .achternaam(UPDATED_ACHTERNAAM)
             .initialen(UPDATED_INITIALEN)
@@ -2126,11 +1788,7 @@ class RelatieResourceIT {
             .geboortedatum(UPDATED_GEBOORTEDATUM)
             .relatietype(UPDATED_RELATIETYPE)
             .inschrijvingsdatum(UPDATED_INSCHRIJVINGSDATUM)
-            .straatnaam(UPDATED_STRAATNAAM)
-            .huisnummer(UPDATED_HUISNUMMER)
-            .postcode(UPDATED_POSTCODE)
-            .woonplaats(UPDATED_WOONPLAATS)
-            .land(UPDATED_LAND)
+            .adres(UPDATED_ADRES)
             .email(UPDATED_EMAIL)
             .email2(UPDATED_EMAIL_2)
             .telefoonnummer(UPDATED_TELEFOONNUMMER)
@@ -2155,6 +1813,7 @@ class RelatieResourceIT {
         List<Relatie> relatieList = relatieRepository.findAll();
         assertThat(relatieList).hasSize(databaseSizeBeforeUpdate);
         Relatie testRelatie = relatieList.get(relatieList.size() - 1);
+        assertThat(testRelatie.getRol()).isEqualTo(UPDATED_ROL);
         assertThat(testRelatie.getVoornaam()).isEqualTo(UPDATED_VOORNAAM);
         assertThat(testRelatie.getAchternaam()).isEqualTo(UPDATED_ACHTERNAAM);
         assertThat(testRelatie.getInitialen()).isEqualTo(UPDATED_INITIALEN);
@@ -2163,11 +1822,7 @@ class RelatieResourceIT {
         assertThat(testRelatie.getGeboortedatum()).isEqualTo(UPDATED_GEBOORTEDATUM);
         assertThat(testRelatie.getRelatietype()).isEqualTo(UPDATED_RELATIETYPE);
         assertThat(testRelatie.getInschrijvingsdatum()).isEqualTo(UPDATED_INSCHRIJVINGSDATUM);
-        assertThat(testRelatie.getStraatnaam()).isEqualTo(UPDATED_STRAATNAAM);
-        assertThat(testRelatie.getHuisnummer()).isEqualTo(UPDATED_HUISNUMMER);
-        assertThat(testRelatie.getPostcode()).isEqualTo(UPDATED_POSTCODE);
-        assertThat(testRelatie.getWoonplaats()).isEqualTo(UPDATED_WOONPLAATS);
-        assertThat(testRelatie.getLand()).isEqualTo(UPDATED_LAND);
+        assertThat(testRelatie.getAdres()).isEqualTo(UPDATED_ADRES);
         assertThat(testRelatie.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testRelatie.getEmail2()).isEqualTo(UPDATED_EMAIL_2);
         assertThat(testRelatie.getTelefoonnummer()).isEqualTo(UPDATED_TELEFOONNUMMER);
@@ -2250,16 +1905,15 @@ class RelatieResourceIT {
         partialUpdatedRelatie.setId(relatie.getId());
 
         partialUpdatedRelatie
+            .rol(UPDATED_ROL)
             .voornaam(UPDATED_VOORNAAM)
             .achternaam(UPDATED_ACHTERNAAM)
-            .initialen(UPDATED_INITIALEN)
-            .geslacht(UPDATED_GESLACHT)
-            .straatnaam(UPDATED_STRAATNAAM)
-            .huisnummer(UPDATED_HUISNUMMER)
-            .woonplaats(UPDATED_WOONPLAATS)
-            .land(UPDATED_LAND)
+            .weergavenaam(UPDATED_WEERGAVENAAM)
+            .inschrijvingsdatum(UPDATED_INSCHRIJVINGSDATUM)
+            .adres(UPDATED_ADRES)
             .email2(UPDATED_EMAIL_2)
-            .ibancode(UPDATED_IBANCODE)
+            .telefoonnummer(UPDATED_TELEFOONNUMMER)
+            .telefoonnummer3(UPDATED_TELEFOONNUMMER_3)
             .privacyVerklaring(UPDATED_PRIVACY_VERKLARING)
             .privacyVerklaringContentType(UPDATED_PRIVACY_VERKLARING_CONTENT_TYPE);
 
@@ -2275,25 +1929,22 @@ class RelatieResourceIT {
         List<Relatie> relatieList = relatieRepository.findAll();
         assertThat(relatieList).hasSize(databaseSizeBeforeUpdate);
         Relatie testRelatie = relatieList.get(relatieList.size() - 1);
+        assertThat(testRelatie.getRol()).isEqualTo(UPDATED_ROL);
         assertThat(testRelatie.getVoornaam()).isEqualTo(UPDATED_VOORNAAM);
         assertThat(testRelatie.getAchternaam()).isEqualTo(UPDATED_ACHTERNAAM);
-        assertThat(testRelatie.getInitialen()).isEqualTo(UPDATED_INITIALEN);
-        assertThat(testRelatie.getWeergavenaam()).isEqualTo(DEFAULT_WEERGAVENAAM);
-        assertThat(testRelatie.getGeslacht()).isEqualTo(UPDATED_GESLACHT);
+        assertThat(testRelatie.getInitialen()).isEqualTo(DEFAULT_INITIALEN);
+        assertThat(testRelatie.getWeergavenaam()).isEqualTo(UPDATED_WEERGAVENAAM);
+        assertThat(testRelatie.getGeslacht()).isEqualTo(DEFAULT_GESLACHT);
         assertThat(testRelatie.getGeboortedatum()).isEqualTo(DEFAULT_GEBOORTEDATUM);
         assertThat(testRelatie.getRelatietype()).isEqualTo(DEFAULT_RELATIETYPE);
-        assertThat(testRelatie.getInschrijvingsdatum()).isEqualTo(DEFAULT_INSCHRIJVINGSDATUM);
-        assertThat(testRelatie.getStraatnaam()).isEqualTo(UPDATED_STRAATNAAM);
-        assertThat(testRelatie.getHuisnummer()).isEqualTo(UPDATED_HUISNUMMER);
-        assertThat(testRelatie.getPostcode()).isEqualTo(DEFAULT_POSTCODE);
-        assertThat(testRelatie.getWoonplaats()).isEqualTo(UPDATED_WOONPLAATS);
-        assertThat(testRelatie.getLand()).isEqualTo(UPDATED_LAND);
+        assertThat(testRelatie.getInschrijvingsdatum()).isEqualTo(UPDATED_INSCHRIJVINGSDATUM);
+        assertThat(testRelatie.getAdres()).isEqualTo(UPDATED_ADRES);
         assertThat(testRelatie.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testRelatie.getEmail2()).isEqualTo(UPDATED_EMAIL_2);
-        assertThat(testRelatie.getTelefoonnummer()).isEqualTo(DEFAULT_TELEFOONNUMMER);
+        assertThat(testRelatie.getTelefoonnummer()).isEqualTo(UPDATED_TELEFOONNUMMER);
         assertThat(testRelatie.getTelefoonnummer2()).isEqualTo(DEFAULT_TELEFOONNUMMER_2);
-        assertThat(testRelatie.getTelefoonnummer3()).isEqualTo(DEFAULT_TELEFOONNUMMER_3);
-        assertThat(testRelatie.getIbancode()).isEqualTo(UPDATED_IBANCODE);
+        assertThat(testRelatie.getTelefoonnummer3()).isEqualTo(UPDATED_TELEFOONNUMMER_3);
+        assertThat(testRelatie.getIbancode()).isEqualTo(DEFAULT_IBANCODE);
         assertThat(testRelatie.getKnsbRelatienummer()).isEqualTo(DEFAULT_KNSB_RELATIENUMMER);
         assertThat(testRelatie.getPasfoto()).isEqualTo(DEFAULT_PASFOTO);
         assertThat(testRelatie.getPasfotoContentType()).isEqualTo(DEFAULT_PASFOTO_CONTENT_TYPE);
@@ -2314,6 +1965,7 @@ class RelatieResourceIT {
         partialUpdatedRelatie.setId(relatie.getId());
 
         partialUpdatedRelatie
+            .rol(UPDATED_ROL)
             .voornaam(UPDATED_VOORNAAM)
             .achternaam(UPDATED_ACHTERNAAM)
             .initialen(UPDATED_INITIALEN)
@@ -2322,11 +1974,7 @@ class RelatieResourceIT {
             .geboortedatum(UPDATED_GEBOORTEDATUM)
             .relatietype(UPDATED_RELATIETYPE)
             .inschrijvingsdatum(UPDATED_INSCHRIJVINGSDATUM)
-            .straatnaam(UPDATED_STRAATNAAM)
-            .huisnummer(UPDATED_HUISNUMMER)
-            .postcode(UPDATED_POSTCODE)
-            .woonplaats(UPDATED_WOONPLAATS)
-            .land(UPDATED_LAND)
+            .adres(UPDATED_ADRES)
             .email(UPDATED_EMAIL)
             .email2(UPDATED_EMAIL_2)
             .telefoonnummer(UPDATED_TELEFOONNUMMER)
@@ -2351,6 +1999,7 @@ class RelatieResourceIT {
         List<Relatie> relatieList = relatieRepository.findAll();
         assertThat(relatieList).hasSize(databaseSizeBeforeUpdate);
         Relatie testRelatie = relatieList.get(relatieList.size() - 1);
+        assertThat(testRelatie.getRol()).isEqualTo(UPDATED_ROL);
         assertThat(testRelatie.getVoornaam()).isEqualTo(UPDATED_VOORNAAM);
         assertThat(testRelatie.getAchternaam()).isEqualTo(UPDATED_ACHTERNAAM);
         assertThat(testRelatie.getInitialen()).isEqualTo(UPDATED_INITIALEN);
@@ -2359,11 +2008,7 @@ class RelatieResourceIT {
         assertThat(testRelatie.getGeboortedatum()).isEqualTo(UPDATED_GEBOORTEDATUM);
         assertThat(testRelatie.getRelatietype()).isEqualTo(UPDATED_RELATIETYPE);
         assertThat(testRelatie.getInschrijvingsdatum()).isEqualTo(UPDATED_INSCHRIJVINGSDATUM);
-        assertThat(testRelatie.getStraatnaam()).isEqualTo(UPDATED_STRAATNAAM);
-        assertThat(testRelatie.getHuisnummer()).isEqualTo(UPDATED_HUISNUMMER);
-        assertThat(testRelatie.getPostcode()).isEqualTo(UPDATED_POSTCODE);
-        assertThat(testRelatie.getWoonplaats()).isEqualTo(UPDATED_WOONPLAATS);
-        assertThat(testRelatie.getLand()).isEqualTo(UPDATED_LAND);
+        assertThat(testRelatie.getAdres()).isEqualTo(UPDATED_ADRES);
         assertThat(testRelatie.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testRelatie.getEmail2()).isEqualTo(UPDATED_EMAIL_2);
         assertThat(testRelatie.getTelefoonnummer()).isEqualTo(UPDATED_TELEFOONNUMMER);
